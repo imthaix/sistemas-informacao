@@ -1,5 +1,7 @@
-# sistemas de informacao
+# Sistemas de Informacao
 
 Revisão das matérias do meu curso de sistemas de informação
+
 Atividades de verdadeiro ou falso
-cards para trabalhar a memorização espaçada
+
+Cards para trabalhar a memorização espaçada
