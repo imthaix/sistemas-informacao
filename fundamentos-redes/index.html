@@ -1,0 +1,3689 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Revisão — Redes e Segurança</title>
+
+    <!-- ícone da aba (svg embutido) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232F5BD3' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='16' y='16' width='6' height='6' rx='1'/%3E%3Crect x='2' y='16' width='6' height='6' rx='1'/%3E%3Crect x='9' y='2' width='6' height='6' rx='1'/%3E%3Cpath d='M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8'/%3E%3C/svg%3E"
+    />
+
+    <!-- fontes do Google (Bricolage nos títulos, Atkinson no texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- estilos -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- sprite de ícones e setas: fica escondido e os outros svgs
+     chamam cada um por <use href="#i-nome"> -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <marker
+          id="arr"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="7"
+          markerHeight="7"
+          orient="auto-start-reverse"
+        >
+          <path d="M0 0 L10 5 L0 10z" fill="currentColor" class="mk" />
+        </marker>
+        <marker
+          id="arrb"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="8"
+          markerHeight="8"
+          orient="auto"
+        >
+          <path d="M0 0 L10 5 L0 10z" class="mkb" />
+        </marker>
+      </defs>
+
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-book"
+        viewBox="0 0 24 24"
+      >
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-pencil"
+        viewBox="0 0 24 24"
+      >
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-toggle"
+        viewBox="0 0 24 24"
+      >
+        <rect x="2" y="6" width="20" height="12" rx="6" />
+        <circle cx="16" cy="12" r="3" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-layers"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"
+        />
+        <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+        <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-moon"
+        viewBox="0 0 24 24"
+      >
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-sun"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"
+        />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-bulb"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+        />
+        <path d="M9 18h6" />
+        <path d="M10 22h4" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-alert"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
+        />
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-msg"
+        viewBox="0 0 24 24"
+      >
+        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-check"
+        viewBox="0 0 24 24"
+      >
+        <path d="M20 6 9 17l-5-5" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-checkc"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="m9 12 2 2 4-4" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-x"
+        viewBox="0 0 24 24"
+      >
+        <path d="M18 6 6 18M6 6l12 12" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-left"
+        viewBox="0 0 24 24"
+      >
+        <path d="m15 18-6-6 6-6" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-right"
+        viewBox="0 0 24 24"
+      >
+        <path d="m9 18 6-6-6-6" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-arrow"
+        viewBox="0 0 24 24"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-reset"
+        viewBox="0 0 24 24"
+      >
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-shuffle"
+        viewBox="0 0 24 24"
+      >
+        <path d="m18 14 4 4-4 4M18 2l4 4-4 4" />
+        <path
+          d="M2 18h2a4 4 0 0 0 3.3-1.7l5.4-8.6A4 4 0 0 1 16 6h6M2 6h2a4 4 0 0 1 3.3 1.7l.5.8M22 18h-6a4 4 0 0 1-3.3-1.8l-.4-.5"
+        />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-flip"
+        viewBox="0 0 24 24"
+      >
+        <path d="M17 1l4 4-4 4" />
+        <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+        <path d="m7 23-4-4 4-4" />
+        <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-monitor"
+        viewBox="0 0 24 24"
+      >
+        <rect x="2" y="3" width="20" height="14" rx="2" />
+        <path d="M8 21h8M12 17v4" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-printer"
+        viewBox="0 0 24 24"
+      >
+        <path d="M6 9V2h12v7" />
+        <path
+          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+        />
+        <rect x="6" y="14" width="12" height="8" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-server"
+        viewBox="0 0 24 24"
+      >
+        <rect x="2" y="2" width="20" height="8" rx="2" />
+        <rect x="2" y="14" width="20" height="8" rx="2" />
+        <path d="M6 6h.01M6 18h.01" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-shield"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+        />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-globe"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20" />
+        <path
+          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+        />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-router"
+        viewBox="0 0 24 24"
+      >
+        <rect x="2" y="14" width="20" height="8" rx="2" />
+        <path d="M6.01 18H6M10.01 18H10M15 10v4" />
+        <path d="M17.84 7.17a4 4 0 0 0-5.66 0M20.66 4.34a8 8 0 0 0-11.31 0" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-bell"
+        viewBox="0 0 24 24"
+      >
+        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-ban"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="m4.9 4.9 14.2 14.2" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-database"
+        viewBox="0 0 24 24"
+      >
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M3 5v14a9 3 0 0 0 18 0V5" />
+        <path d="M3 12a9 3 0 0 0 18 0" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-network"
+        viewBox="0 0 24 24"
+      >
+        <rect x="16" y="16" width="6" height="6" rx="1" />
+        <rect x="2" y="16" width="6" height="6" rx="1" />
+        <rect x="9" y="2" width="6" height="6" rx="1" />
+        <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-lock"
+        viewBox="0 0 24 24"
+      >
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-route"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="6" cy="19" r="3" />
+        <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
+        <circle cx="18" cy="5" r="3" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-tree"
+        viewBox="0 0 24 24"
+      >
+        <rect x="9" y="2" width="6" height="5" rx="1" />
+        <rect x="2" y="17" width="6" height="5" rx="1" />
+        <rect x="16" y="17" width="6" height="5" rx="1" />
+        <path d="M12 7v5M5 17v-3h14v3" />
+      </symbol>
+      <symbol
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        id="i-trophy"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"
+        />
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+      </symbol>
+    </svg>
+
+    <!-- barra do topo: abas + botão de tema + barra de leitura -->
+    <header class="topbar">
+      <div class="topbar-in">
+        <span class="brand"
+          ><svg class="i" aria-hidden="true"><use href="#i-network" /></svg
+          >Redes &amp; Segurança</span
+        >
+        <nav class="tabs" role="tablist" aria-label="Seções">
+          <button class="tab" role="tab" aria-selected="true" data-p="conteudo">
+            <svg class="i" aria-hidden="true"><use href="#i-book" /></svg
+            ><span>Conteúdo</span>
+          </button>
+          <button
+            class="tab"
+            role="tab"
+            aria-selected="false"
+            data-p="questoes"
+          >
+            <svg class="i" aria-hidden="true"><use href="#i-pencil" /></svg
+            ><span>Questões</span><span class="n" id="nQ"></span>
+          </button>
+          <button class="tab" role="tab" aria-selected="false" data-p="vf">
+            <svg class="i" aria-hidden="true"><use href="#i-toggle" /></svg
+            ><span>V ou F</span><span class="n" id="nV"></span>
+          </button>
+          <button class="tab" role="tab" aria-selected="false" data-p="flash">
+            <svg class="i" aria-hidden="true"><use href="#i-layers" /></svg
+            ><span>Cards</span><span class="n" id="nF"></span>
+          </button>
+        </nav>
+        <button
+          class="theme"
+          id="themeBtn"
+          aria-label="Alternar tema claro ou escuro"
+        >
+          <svg class="i moon" aria-hidden="true"><use href="#i-moon" /></svg
+          ><svg class="i sun" aria-hidden="true"><use href="#i-sun" /></svg>
+        </button>
+      </div>
+      <div class="readbar"><i id="readbar"></i></div>
+    </header>
+
+    <main>
+      <!-- =================== ABA 1: CONTEÚDO =================== -->
+      <section class="panel" id="conteudo">
+        <!-- cabeçalho com a ilustração animada -->
+        <div class="hero">
+          <div>
+            <h1>Redes e Segurança sem complicação</h1>
+            <p class="lead">
+              Tudo o que o professor destacou para a prova, explicado com
+              analogias e ilustrações. Leia por módulo, marque o que já estudou
+              e depois treine nas outras abas.
+            </p>
+          </div>
+          <svg class="hero-art" viewBox="0 0 300 200" aria-hidden="true">
+            <path class="ln" d="M44 44 C110 44 110 100 150 100" />
+            <path class="ln" d="M44 156 C110 156 110 100 150 100" />
+            <path class="ln" d="M150 100 C190 100 190 44 256 44" />
+            <path class="ln" d="M150 100 C190 100 190 156 256 156" />
+            <rect x="14" y="24" width="40" height="40" rx="10" class="bx" />
+            <use
+              href="#i-monitor"
+              x="22"
+              y="32"
+              width="24"
+              height="24"
+              class="ico"
+            />
+            <rect x="14" y="136" width="40" height="40" rx="10" class="bx" />
+            <use
+              href="#i-printer"
+              x="22"
+              y="144"
+              width="24"
+              height="24"
+              class="ico"
+            />
+            <rect x="246" y="24" width="40" height="40" rx="10" class="bx" />
+            <use
+              href="#i-server"
+              x="254"
+              y="32"
+              width="24"
+              height="24"
+              class="ico"
+            />
+            <rect x="246" y="136" width="40" height="40" rx="10" class="bx" />
+            <use
+              href="#i-shield"
+              x="254"
+              y="144"
+              width="24"
+              height="24"
+              class="ico"
+            />
+            <rect x="120" y="76" width="60" height="48" rx="12" class="hub" />
+            <use
+              href="#i-network"
+              x="136"
+              y="86"
+              width="28"
+              height="28"
+              class="icow"
+            />
+            <circle
+              class="pkt"
+              r="4.5"
+              style="
+                offset-path: path(
+                  &quot;M44 44 C110 44 110 100 150 100 C190 100 190 44 256 44&quot;
+                );
+              "
+            />
+            <circle
+              class="pkt d2"
+              r="4.5"
+              style="
+                offset-path: path(
+                  &quot;M44 156 C110 156 110 100 150 100 C190 100 190 156 256 156&quot;
+                );
+              "
+            />
+            <circle
+              class="pkt d3"
+              r="4.5"
+              style="
+                offset-path: path(
+                  &quot;M256 44 C190 44 190 100 150 100 C110 100 110 156 44 156&quot;
+                );
+              "
+            />
+          </svg>
+        </div>
+
+        <!-- índice (o x/y de cada linha é preenchido pelo js) -->
+        <nav class="index" aria-label="Módulos">
+          <a href="#m1"
+            ><span class="num">1</span
+            ><span class="grow"
+              ><b>Separando a rede</b
+              ><small>VLAN, broadcast, trunk, 802.1Q</small></span
+            ><span class="prog" data-mod="1"></span
+            ><svg class="i ic" aria-hidden="true"><use href="#i-right" /></svg
+          ></a>
+          <a href="#m2"
+            ><span class="num">2</span
+            ><span class="grow"
+              ><b>Endereços e caminhos</b
+              ><small>MAC, switch, sub-redes, gateway</small></span
+            ><span class="prog" data-mod="2"></span
+            ><svg class="i ic" aria-hidden="true"><use href="#i-right" /></svg
+          ></a>
+          <a href="#m3"
+            ><span class="num">3</span
+            ><span class="grow"
+              ><b>Evitando o caos</b
+              ><small>STP, loops, Root Bridge</small></span
+            ><span class="prog" data-mod="3"></span
+            ><svg class="i ic" aria-hidden="true"><use href="#i-right" /></svg
+          ></a>
+          <a href="#m4"
+            ><span class="num">4</span
+            ><span class="grow"
+              ><b>Segurança</b
+              ><small>Firewall, DMZ, ACL, IDS/IPS, 802.1X</small></span
+            ><span class="prog" data-mod="4"></span
+            ><svg class="i ic" aria-hidden="true"><use href="#i-right" /></svg
+          ></a>
+        </nav>
+
+        <!-- legenda dos ícones -->
+        <div class="legend">
+          <span
+            ><svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+            >Analogia do dia a dia</span
+          >
+          <span style="color: var(--warn)"
+            ><svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg
+            ><span style="color: var(--muted)">Dica de prova</span></span
+          >
+          <span style="color: var(--bad)"
+            ><svg class="i" aria-hidden="true"><use href="#i-alert" /></svg
+            ><span style="color: var(--muted)"
+              >Pegadinha (erro comum)</span
+            ></span
+          >
+        </div>
+
+        <!-- ========== MÓDULO 1 ========== -->
+        <section class="module or" id="m1">
+          <div class="module-head">
+            <span class="num">1</span>
+            <div>
+              <span class="k">Módulo 1</span>
+              <h2>Separando a rede</h2>
+            </div>
+          </div>
+
+          <!-- 1.1 VLAN -->
+          <article class="topic">
+            <span class="tn">1.1</span>
+            <h3>VLAN (Rede Local Virtual)</h3>
+            <p class="oneline">
+              Divide <b>um único switch físico</b> em várias redes separadas,
+              sem comprar nenhum equipamento novo.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 180"
+                role="img"
+                aria-label="Um switch, duas VLANs: as portas da TI e do RH não se enxergam."
+              >
+                <use
+                  href="#i-monitor"
+                  x="44"
+                  y="22"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="78"
+                  y="22"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="112"
+                  y="22"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="214"
+                  y="22"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <use
+                  href="#i-monitor"
+                  x="248"
+                  y="22"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <use
+                  href="#i-monitor"
+                  x="282"
+                  y="22"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <line x1="56" y1="48" x2="56" y2="74" class="ln acs" />
+                <line x1="90" y1="48" x2="90" y2="74" class="ln acs" />
+                <line x1="124" y1="48" x2="124" y2="74" class="ln acs" />
+                <line x1="226" y1="48" x2="226" y2="74" class="ln" />
+                <line x1="260" y1="48" x2="260" y2="74" class="ln" />
+                <line x1="294" y1="48" x2="294" y2="74" class="ln" />
+                <rect
+                  x="24"
+                  y="62"
+                  width="312"
+                  height="44"
+                  rx="10"
+                  class="bx"
+                />
+                <rect x="44" y="74" width="24" height="20" rx="3" class="ac" />
+                <rect x="78" y="74" width="24" height="20" rx="3" class="ac" />
+                <rect x="112" y="74" width="24" height="20" rx="3" class="ac" />
+                <rect x="214" y="74" width="24" height="20" rx="3" class="dk" />
+                <rect x="248" y="74" width="24" height="20" rx="3" class="dk" />
+                <rect x="282" y="74" width="24" height="20" rx="3" class="dk" />
+                <line x1="180" y1="58" x2="180" y2="112" class="cut" />
+                <text x="90" y="132" text-anchor="middle" class="tx acf">
+                  VLAN 10 · TI
+                </text>
+                <text x="260" y="132" text-anchor="middle" class="tx">
+                  VLAN 20 · RH
+                </text>
+                <text x="180" y="160" text-anchor="middle" class="tm">
+                  mesmo switch físico, duas redes isoladas
+                </text>
+              </svg>
+              <figcaption>
+                Um switch, duas VLANs: as portas da TI e do RH não se enxergam.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: o prédio de escritórios</b>
+              </div>
+              <p>
+                O switch é um prédio. Sem VLAN, é um grande salão aberto onde
+                todo mundo ouve todo mundo. Com VLAN, você levanta paredes e
+                cria salas: a sala da TI e a sala do RH ficam no mesmo prédio,
+                mas uma não escuta a outra. Pra ir de uma sala para a outra, só
+                passando pela portaria (o roteador).
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Segmentação lógica</dt>
+                <dd>
+                  Separar a rede "no software", por configuração, e não com
+                  cabos e aparelhos diferentes.
+                </dd>
+              </div>
+              <div>
+                <dt>VLAN ID</dt>
+                <dd>
+                  O número que identifica cada VLAN (ex.: 10, 20). É como o
+                  número da sala.
+                </dd>
+              </div>
+              <div>
+                <dt>Isolamento de tráfego</dt>
+                <dd>O que acontece numa VLAN não vaza pra outra.</dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Dica de prova:</strong> se o enunciado falar em
+                "segmentação lógica", "isolamento de tráfego", "mesmo switch,
+                redes separadas" ou "separar departamentos sem comprar
+                equipamento", a resposta é <b>VLAN</b>.
+              </div>
+            </div>
+            <div class="note trap">
+              <svg class="i" aria-hidden="true"><use href="#i-alert" /></svg>
+              <div>
+                <strong>Pegadinha:</strong> achar que PCs em VLANs diferentes
+                conversam direto. <b>Não conversam.</b> Precisa de roteador (ou
+                switch Layer 3).
+              </div>
+            </div>
+          </article>
+
+          <!-- 1.2 domínio de broadcast -->
+          <article class="topic">
+            <span class="tn">1.2</span>
+            <h3>Domínio de broadcast</h3>
+            <p class="oneline">
+              <b>Broadcast</b> é uma mensagem enviada para <b>todos</b> ao mesmo
+              tempo. O <b>domínio de broadcast</b> é até onde esse "grito"
+              consegue chegar.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 192"
+                role="img"
+                aria-label="O “grito” fica dentro da VLAN onde nasceu."
+              >
+                <rect
+                  x="10"
+                  y="14"
+                  width="160"
+                  height="124"
+                  rx="12"
+                  class="room"
+                />
+                <rect
+                  x="190"
+                  y="14"
+                  width="160"
+                  height="124"
+                  rx="12"
+                  class="room"
+                />
+                <text x="22" y="34" class="tx acf">VLAN 10</text>
+                <text x="202" y="34" class="tx">VLAN 20</text>
+                <use
+                  href="#i-monitor"
+                  x="18"
+                  y="58"
+                  width="26"
+                  height="26"
+                  class="ico"
+                />
+                <path
+                  d="M56.0 58 A12 12 0 0 1 56.0 82"
+                  class="ln acs"
+                  opacity="0.8600000000000001"
+                />
+                <path
+                  d="M61.0 48 A22 22 0 0 1 61.0 92"
+                  class="ln acs"
+                  opacity="0.6600000000000001"
+                />
+                <path
+                  d="M66.0 38 A32 32 0 0 1 66.0 102"
+                  class="ln acs"
+                  opacity="0.4600000000000001"
+                />
+                <use
+                  href="#i-monitor"
+                  x="104"
+                  y="42"
+                  width="22"
+                  height="22"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="134"
+                  y="64"
+                  width="22"
+                  height="22"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="104"
+                  y="86"
+                  width="22"
+                  height="22"
+                  class="ico"
+                />
+                <use
+                  href="#i-check"
+                  x="124"
+                  y="38"
+                  width="12"
+                  height="12"
+                  class="okc"
+                />
+                <use
+                  href="#i-check"
+                  x="154"
+                  y="60"
+                  width="12"
+                  height="12"
+                  class="okc"
+                />
+                <use
+                  href="#i-check"
+                  x="124"
+                  y="82"
+                  width="12"
+                  height="12"
+                  class="okc"
+                />
+                <use
+                  href="#i-monitor"
+                  x="214"
+                  y="58"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <use
+                  href="#i-monitor"
+                  x="262"
+                  y="58"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <use
+                  href="#i-monitor"
+                  x="310"
+                  y="58"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <text x="270" y="112" text-anchor="middle" class="tm">
+                  não recebem
+                </text>
+                <text x="90" y="128" text-anchor="middle" class="tm">
+                  todos aqui ouvem
+                </text>
+                <rect
+                  x="128"
+                  y="146"
+                  width="104"
+                  height="26"
+                  rx="13"
+                  class="bx"
+                />
+                <use
+                  href="#i-router"
+                  x="138"
+                  y="150"
+                  width="18"
+                  height="18"
+                  class="ico"
+                />
+                <text x="192" y="164" text-anchor="middle" class="tx">
+                  roteador
+                </text>
+                <text x="180" y="186" text-anchor="middle" class="tm">
+                  o roteador não repassa broadcast
+                </text>
+              </svg>
+              <figcaption>
+                O "grito" fica dentro da VLAN onde nasceu.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: alguém gritando numa sala</b>
+              </div>
+              <p>
+                Se alguém grita "quem tem um carregador?", todo mundo da sala
+                ouve, mas quem está na sala ao lado não. Cada VLAN é uma sala
+                com a porta fechada. O switch não impede o grito dentro da sala.
+                O roteador é a parede grossa entre andares: o grito não passa.
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Cada VLAN = 1 domínio de broadcast</dt>
+                <dd>
+                  Por isso VLANs reduzem tráfego desnecessário: o grito fica só
+                  na sala dele.
+                </dd>
+              </div>
+              <div>
+                <dt>Switch Layer 2</dt>
+                <dd>
+                  Não bloqueia broadcast. Espalha para todas as portas
+                  <i>da mesma VLAN</i>.
+                </dd>
+              </div>
+              <div>
+                <dt>Roteador</dt>
+                <dd>Não repassa broadcast de uma rede para outra.</dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Regra de ouro do professor:</strong> VLANs
+                <b>contêm</b> broadcasts. Roteadores os <b>barram</b>. Na
+                pergunta "quem recebe o broadcast?", a resposta é sempre
+                <b>só quem está na mesma VLAN</b>.
+              </div>
+            </div>
+          </article>
+
+          <!-- 1.3 trunk x access -->
+          <article class="topic">
+            <span class="tn">1.3</span>
+            <h3>Porta trunk × porta access</h3>
+            <p class="oneline">
+              Trunk carrega <b>várias VLANs</b> num cabo só entre switches.
+              Access pertence a <b>uma VLAN só</b> e liga aparelhos finais.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 180"
+                role="img"
+                aria-label="Entre switches, trunk com etiquetas. Na ponta, access para cada aparelho."
+              >
+                <rect x="14" y="54" width="92" height="40" rx="8" class="bx" />
+                <text x="60" y="78" text-anchor="middle" class="tx">
+                  Switch A
+                </text>
+                <rect x="254" y="54" width="92" height="40" rx="8" class="bx" />
+                <text x="300" y="78" text-anchor="middle" class="tx">
+                  Switch B
+                </text>
+                <line x1="106" y1="74" x2="254" y2="74" class="trunk" />
+                <g class="tagg">
+                  <rect x="128" y="62" width="26" height="24" rx="5" />
+                  <rect x="167" y="62" width="26" height="24" rx="5" />
+                  <rect x="206" y="62" width="26" height="24" rx="5" />
+                </g>
+                <text x="141" y="78" text-anchor="middle" class="tw">10</text>
+                <text x="180" y="78" text-anchor="middle" class="tw">20</text>
+                <text x="219" y="78" text-anchor="middle" class="tw">30</text>
+                <text x="180" y="46" text-anchor="middle" class="tx acf">
+                  trunk · várias VLANs, 1 cabo
+                </text>
+                <line x1="40" y1="94" x2="40" y2="124" class="ln" />
+                <line x1="80" y1="94" x2="80" y2="124" class="ln" />
+                <line x1="280" y1="94" x2="280" y2="124" class="ln" />
+                <line x1="320" y1="94" x2="320" y2="124" class="ln" />
+                <use
+                  href="#i-monitor"
+                  x="28"
+                  y="124"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-printer"
+                  x="68"
+                  y="124"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="268"
+                  y="124"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="308"
+                  y="124"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <text x="60" y="166" text-anchor="middle" class="tm">
+                  portas access
+                </text>
+                <text x="300" y="166" text-anchor="middle" class="tm">
+                  portas access
+                </text>
+              </svg>
+              <figcaption>
+                Entre switches, trunk com etiquetas. Na ponta, access para cada
+                aparelho.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: o ônibus de excursão</b>
+              </div>
+              <p>
+                A porta <b>access</b> é a porta de uma sala: só entra gente
+                daquela sala. O <b>trunk</b> é um ônibus que leva gente de
+                várias salas de um prédio para outro. Pra ninguém se perder,
+                cada passageiro usa uma <b>pulseira colorida</b> com o número da
+                sala dele (essa pulseira é a tag 802.1Q).
+              </p>
+            </div>
+            <div class="tablewrap">
+              <table class="mini">
+                <tr>
+                  <th></th>
+                  <th>Trunk</th>
+                  <th>Access</th>
+                </tr>
+                <tr>
+                  <td>Quantas VLANs</td>
+                  <td>Várias</td>
+                  <td>Uma só</td>
+                </tr>
+                <tr>
+                  <td>Liga o quê</td>
+                  <td>Switch ↔ switch</td>
+                  <td>Switch ↔ PC, impressora</td>
+                </tr>
+                <tr>
+                  <td>Usa tag?</td>
+                  <td>Sim (802.1Q)</td>
+                  <td>Não</td>
+                </tr>
+              </table>
+            </div>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Dica:</strong> switch com switch = <b>trunk</b>. Switch
+                com PC ou impressora = <b>access</b>.
+              </div>
+            </div>
+            <div class="note trap">
+              <svg class="i" aria-hidden="true"><use href="#i-alert" /></svg>
+              <div>
+                <strong>Pegadinha:</strong> trunk <b>não</b> tem a ver com
+                velocidade. É sobre transportar várias VLANs.
+              </div>
+            </div>
+          </article>
+
+          <!-- 1.4 802.1Q e VLAN nativa -->
+          <article class="topic">
+            <span class="tn">1.4</span>
+            <h3>Tag 802.1Q e VLAN nativa</h3>
+            <p class="oneline">
+              O <b>802.1Q</b> é o padrão que coloca uma etiqueta de
+              <b>4 bytes</b> no quadro dizendo a qual VLAN ele pertence quando
+              passa por um trunk.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 165"
+                role="img"
+                aria-label="A tag entra no meio do quadro e é retirada antes de chegar ao PC."
+              >
+                <text x="10" y="36" class="tx">Quadro Ethernet</text>
+                <rect x="10" y="50" width="68" height="44" class="cell" />
+                <text x="44.0" y="76" text-anchor="middle" class="ts sm">
+                  MAC destino
+                </text>
+                <rect x="78" y="50" width="66" height="44" class="cell" />
+                <text x="111.0" y="76" text-anchor="middle" class="ts sm">
+                  MAC origem
+                </text>
+                <rect x="144" y="50" width="74" height="44" class="cellh" />
+                <text
+                  x="181.0"
+                  y="76"
+                  text-anchor="middle"
+                  class="tw"
+                  style="font-size: 11px"
+                >
+                  Tag 802.1Q
+                </text>
+                <rect x="218" y="50" width="38" height="44" class="cell" />
+                <text x="237.0" y="76" text-anchor="middle" class="ts sm">
+                  Tipo
+                </text>
+                <rect x="256" y="50" width="60" height="44" class="cell" />
+                <text x="286.0" y="76" text-anchor="middle" class="ts sm">
+                  Dados
+                </text>
+                <rect x="316" y="50" width="34" height="44" class="cell" />
+                <text x="333.0" y="76" text-anchor="middle" class="ts sm">
+                  FCS
+                </text>
+                <path d="M144 102 v10 h74 v-10" class="ln acs" />
+                <text x="181" y="130" text-anchor="middle" class="tx acf">
+                  +4 bytes inseridos no trunk
+                </text>
+                <text x="181" y="150" text-anchor="middle" class="tm">
+                  dentro dela: o VLAN ID (12 bits → até 4094 VLANs)
+                </text>
+              </svg>
+              <figcaption>
+                A tag entra no meio do quadro e é retirada antes de chegar ao
+                PC.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: etiqueta de mala no aeroporto</b>
+              </div>
+              <p>
+                Todas as malas vão na mesma esteira (o trunk). A etiqueta diz o
+                destino de cada uma. Quando a mala chega, a etiqueta é retirada
+                e entregue ao dono (a porta access). A <b>VLAN nativa</b> é a
+                mala que viaja <b>sem etiqueta</b>: o sistema assume que ela vai
+                para um destino padrão, a VLAN 1.
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Quadro (frame)</dt>
+                <dd>
+                  O "pacote" na camada 2. Quando falamos de switch e MAC,
+                  dizemos quadro.
+                </dd>
+              </div>
+              <div>
+                <dt>Tagging / marcação de quadros</dt>
+                <dd>Colocar a etiqueta com o VLAN ID.</dd>
+              </div>
+              <div>
+                <dt>VLAN nativa</dt>
+                <dd>
+                  Tráfego <b>sem tag</b> numa porta trunk. Padrão:
+                  <b>VLAN 1</b>. Se mal configurada, é risco de segurança.
+                </dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Dica de prova:</strong> apareceu "marcação de quadros",
+                "VLAN ID" ou "trunking"? Resposta: <b>802.1Q</b>.
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ========== MÓDULO 2 ========== -->
+        <section class="module gr" id="m2">
+          <div class="module-head">
+            <span class="num">2</span>
+            <div>
+              <span class="k">Módulo 2</span>
+              <h2>Endereços e caminhos</h2>
+            </div>
+          </div>
+
+          <!-- 2.1 MAC -->
+          <article class="topic">
+            <span class="tn">2.1</span>
+            <h3>Endereço MAC</h3>
+            <p class="oneline">
+              A "identidade física" da placa de rede. Serve para achar o
+              aparelho <b>dentro da rede local</b>.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 140"
+                role="img"
+                aria-label="Metade identifica a marca, metade identifica o aparelho."
+              >
+                <rect
+                  x="20"
+                  y="40"
+                  width="156"
+                  height="48"
+                  rx="10"
+                  class="soft"
+                />
+                <rect
+                  x="184"
+                  y="40"
+                  width="156"
+                  height="48"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="98" y="71" text-anchor="middle" class="mono">
+                  00:1A:2B
+                </text>
+                <text x="262" y="71" text-anchor="middle" class="mono">
+                  3C:4D:5E
+                </text>
+                <text x="98" y="110" text-anchor="middle" class="tx acf">
+                  OUI · fabricante
+                </text>
+                <text x="262" y="110" text-anchor="middle" class="tx">
+                  dispositivo
+                </text>
+                <text x="98" y="128" text-anchor="middle" class="tm">
+                  3 bytes
+                </text>
+                <text x="262" y="128" text-anchor="middle" class="tm">
+                  3 bytes
+                </text>
+                <path d="M20 28 v-8 h320 v8" class="ln" />
+                <text x="180" y="14" text-anchor="middle" class="tm">
+                  48 bits no total (hexadecimal)
+                </text>
+              </svg>
+              <figcaption>
+                Metade identifica a marca, metade identifica o aparelho.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: chassi do carro × endereço de entrega</b>
+              </div>
+              <p>
+                O MAC é como o número do chassi: vem de fábrica e identifica
+                aquele aparelho. Os 3 primeiros bytes dizem a
+                <b>montadora</b> (fabricante), os 3 últimos identificam
+                <b>aquele carro</b>. Já o IP é o endereço de entrega, que muda
+                conforme onde você está.
+              </p>
+            </div>
+            <div class="tablewrap">
+              <table class="mini">
+                <tr>
+                  <th>Número</th>
+                  <th>O que é</th>
+                </tr>
+                <tr>
+                  <td><b>48 bits</b> (6 bytes)</td>
+                  <td>
+                    Tamanho total, escrito em hexadecimal. Ex.:
+                    00:1A:2B:3C:4D:5E
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>3 bytes</b> iniciais</td>
+                  <td>
+                    <b>OUI</b> (Organizationally Unique Identifier) = fabricante
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>3 bytes</b> finais</td>
+                  <td>Identificador exclusivo do dispositivo</td>
+                </tr>
+              </table>
+            </div>
+            <div class="note trap">
+              <svg class="i" aria-hidden="true"><use href="#i-alert" /></svg>
+              <div>
+                <strong>Pegadinha:</strong> o MAC
+                <b>não atravessa roteadores</b>. A cada "salto" o roteador troca
+                o MAC do quadro. Ele nunca é usado para rotear entre redes (quem
+                faz isso é o IP).
+              </div>
+            </div>
+          </article>
+
+          <!-- 2.2 switch L2 e tabela CAM -->
+          <article class="topic">
+            <span class="tn">2.2</span>
+            <h3>Switch Layer 2 e tabela CAM</h3>
+            <p class="oneline">
+              Trabalha na <b>camada 2 (enlace)</b>, usa <b>MAC</b>, não entende
+              IP e <b>não roteia</b>.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 170"
+                role="img"
+                aria-label="A tabela CAM é o “caderninho” porta ↔ MAC do switch."
+              >
+                <use
+                  href="#i-monitor"
+                  x="18"
+                  y="20"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="70"
+                  y="20"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="122"
+                  y="20"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <text x="30" y="58" text-anchor="middle" class="ts">A</text>
+                <text x="82" y="58" text-anchor="middle" class="ts">B</text>
+                <text x="134" y="58" text-anchor="middle" class="ts">C</text>
+                <line x1="30" y1="62" x2="30" y2="86" class="ln" />
+                <line x1="82" y1="62" x2="82" y2="86" class="ln" />
+                <line x1="134" y1="62" x2="134" y2="86" class="ln" />
+                <rect x="10" y="86" width="150" height="38" rx="8" class="bx" />
+                <text x="30" y="110" text-anchor="middle" class="ts">1</text>
+                <text x="82" y="110" text-anchor="middle" class="ts">2</text>
+                <text x="134" y="110" text-anchor="middle" class="ts">3</text>
+                <path d="M164 105 h40" class="ln acs" marker-end="url(#arr)" />
+                <rect
+                  x="210"
+                  y="40"
+                  width="140"
+                  height="120"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="226" y="60" class="tx">Porta</text>
+                <text x="270" y="60" class="tx">MAC</text>
+                <line x1="214" y1="66" x2="346" y2="66" class="hair" />
+                <text x="226" y="82" class="ts">1</text>
+                <text x="270" y="82" class="mono s">AA:11</text>
+                <line x1="214" y1="88" x2="346" y2="88" class="hair" />
+                <text x="226" y="108" class="ts">2</text>
+                <text x="270" y="108" class="mono s">BB:22</text>
+                <line x1="214" y1="114" x2="346" y2="114" class="hair" />
+                <text x="226" y="134" class="ts">3</text>
+                <text x="270" y="134" class="mono s">CC:33</text>
+                <line x1="214" y1="140" x2="346" y2="140" class="hair" />
+                <text x="85" y="150" text-anchor="middle" class="tm">
+                  switch aprende sozinho
+                </text>
+              </svg>
+              <figcaption>
+                A tabela CAM é o "caderninho" porta ↔ MAC do switch.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: o carteiro novo do condomínio</b>
+              </div>
+              <p>
+                No primeiro dia, o carteiro não sabe quem mora onde, então bate
+                em todas as portas (isso é o <b>flood</b>). Conforme as pessoas
+                respondem, ele anota num caderninho "fulano mora no 12". Esse
+                caderninho é a <b>tabela CAM</b>. Depois disso, ele entrega
+                direto na porta certa (<b>unicast</b>).
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Tabela CAM</dt>
+                <dd>
+                  Lista que associa <b>porta ↔ endereço MAC</b>. O switch
+                  aprende sozinho.
+                </dd>
+              </div>
+              <div>
+                <dt>Unicast</dt>
+                <dd>
+                  Mensagem para um destinatário só. O switch manda só pela porta
+                  certa.
+                </dd>
+              </div>
+              <div>
+                <dt>Flood (inundação)</dt>
+                <dd>
+                  Mandar por todas as portas. Só acontece em <b>broadcast</b> ou
+                  quando o MAC de destino é <b>desconhecido</b>.
+                </dd>
+              </div>
+              <div>
+                <dt>Switch Layer 3</dt>
+                <dd>Switch que também sabe rotear, como um roteador.</dd>
+              </div>
+            </dl>
+          </article>
+
+          <!-- 2.3 sub-redes -->
+          <article class="topic">
+            <span class="tn">2.3</span>
+            <h3>Sub-redes (subnetting) e máscara</h3>
+            <p class="oneline">
+              Dividir um bloco grande de IPs em grupos menores para organizar e
+              controlar o tráfego.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 172"
+                role="img"
+                aria-label="A máscara diz onde termina a parte da rede e começa a dos hosts."
+              >
+                <text x="10" y="24" class="tx">192.168.1.0/24</text>
+                <rect
+                  x="10"
+                  y="34"
+                  width="232"
+                  height="34"
+                  rx="6"
+                  class="soft"
+                />
+                <rect
+                  x="246"
+                  y="34"
+                  width="104"
+                  height="34"
+                  rx="6"
+                  class="bx"
+                />
+                <text x="126" y="56" text-anchor="middle" class="tx acf">
+                  rede · 24 bits
+                </text>
+                <text x="298" y="56" text-anchor="middle" class="tx">
+                  host · 8 bits
+                </text>
+                <line x1="10" y1="112" x2="350" y2="112" class="ln" />
+                <circle cx="14" cy="112" r="6" class="dk" />
+                <circle cx="346" cy="112" r="6" class="dk" />
+                <rect
+                  x="40"
+                  y="104"
+                  width="280"
+                  height="16"
+                  rx="8"
+                  class="ac"
+                  opacity=".85"
+                />
+                <text x="14" y="98" text-anchor="middle" class="ts">.0</text>
+                <text x="180" y="98" text-anchor="middle" class="ts">
+                  .1 até .254
+                </text>
+                <text x="346" y="98" text-anchor="middle" class="ts">.255</text>
+                <text x="14" y="140" text-anchor="start" class="tm">rede</text>
+                <text x="180" y="140" text-anchor="middle" class="tx acf">
+                  254 hosts úteis
+                </text>
+                <text x="350" y="140" text-anchor="end" class="tm">
+                  broadcast
+                </text>
+                <text x="180" y="164" text-anchor="middle" class="tm">
+                  2⁸ = 256 − 2 (rede e broadcast) = 254
+                </text>
+              </svg>
+              <figcaption>
+                A máscara diz onde termina a parte da rede e começa a dos hosts.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: CEP e quarteirões</b>
+              </div>
+              <p>
+                Um bairro enorme fica difícil de administrar, então você divide
+                em quarteirões. A <b>máscara</b> é a regra que diz "esses
+                endereços aqui são do mesmo quarteirão". O primeiro número do
+                quarteirão é a placa com o <b>nome da rua</b> (endereço de
+                rede), e não uma casa.
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Máscara de sub-rede (ex.: /24)</dt>
+                <dd>
+                  Define quais IPs pertencem à mesma rede. O "/24" diz que 24
+                  bits são da rede e o resto é para hosts.
+                </dd>
+              </div>
+              <div>
+                <dt>Host</dt>
+                <dd>
+                  Qualquer aparelho que recebe um IP: PC, celular, impressora.
+                </dd>
+              </div>
+              <div>
+                <dt>Endereço de rede</dt>
+                <dd>
+                  O <b>primeiro</b> IP do bloco. Identifica a rede, não pode ser
+                  dado a um host.
+                </dd>
+              </div>
+              <div>
+                <dt>Broadcast da sub-rede</dt>
+                <dd>O <b>último</b> IP do bloco. Também não vai para host.</dd>
+              </div>
+            </dl>
+            <div class="tablewrap">
+              <table class="mini">
+                <tr>
+                  <th>Máscara</th>
+                  <th>Conta</th>
+                  <th>Hosts úteis</th>
+                </tr>
+                <tr>
+                  <td>192.168.1.0<b>/24</b></td>
+                  <td>2⁸ − 2</td>
+                  <td><b>254</b></td>
+                </tr>
+                <tr>
+                  <td>192.168.1.0<b>/25</b></td>
+                  <td>2⁷ − 2</td>
+                  <td><b>126</b> por sub-rede</td>
+                </tr>
+                <tr>
+                  <td>/26</td>
+                  <td>2⁶ − 2</td>
+                  <td>62</td>
+                </tr>
+              </table>
+            </div>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Truque da conta:</strong> hosts = 2<sup
+                  >(32 − máscara)</sup
+                >
+                − 2. O "−2" tira o endereço de rede (primeiro) e o de broadcast
+                (último).
+              </div>
+            </div>
+            <div class="note trap">
+              <svg class="i" aria-hidden="true"><use href="#i-alert" /></svg>
+              <div>
+                <strong>Pegadinha:</strong> confundir o endereço de rede (ex.:
+                192.168.1.0) com um endereço de host.
+              </div>
+            </div>
+          </article>
+
+          <!-- 2.4 gateway e roteamento -->
+          <article class="topic">
+            <span class="tn">2.4</span>
+            <h3>Gateway e roteamento</h3>
+            <p class="oneline">
+              O <b>gateway padrão</b> é o endereço do roteador: a "porta de
+              saída" da rede.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 160"
+                role="img"
+                aria-label="Para sair da própria rede, o pacote passa pelo gateway (roteador)."
+              >
+                <rect
+                  x="8"
+                  y="30"
+                  width="118"
+                  height="110"
+                  rx="12"
+                  class="room"
+                />
+                <text x="67" y="50" text-anchor="middle" class="ts">
+                  192.168.1.0/24
+                </text>
+                <use
+                  href="#i-monitor"
+                  x="26"
+                  y="66"
+                  width="26"
+                  height="26"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="76"
+                  y="66"
+                  width="26"
+                  height="26"
+                  class="ico"
+                />
+                <text x="67" y="124" text-anchor="middle" class="tm">
+                  sua rede
+                </text>
+                <rect
+                  x="234"
+                  y="30"
+                  width="118"
+                  height="110"
+                  rx="12"
+                  class="room"
+                />
+                <text x="293" y="50" text-anchor="middle" class="ts">
+                  10.0.0.0/24
+                </text>
+                <use
+                  href="#i-server"
+                  x="280"
+                  y="66"
+                  width="28"
+                  height="28"
+                  class="ico"
+                />
+                <text x="293" y="124" text-anchor="middle" class="tm">
+                  outra rede
+                </text>
+                <circle cx="180" cy="85" r="26" class="acbg" />
+                <use
+                  href="#i-router"
+                  x="166"
+                  y="71"
+                  width="28"
+                  height="28"
+                  class="icow"
+                />
+                <line
+                  x1="126"
+                  y1="85"
+                  x2="154"
+                  y2="85"
+                  class="ln acs"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="206"
+                  y1="85"
+                  x2="232"
+                  y2="85"
+                  class="ln acs"
+                  marker-end="url(#arr)"
+                />
+                <text x="180" y="132" text-anchor="middle" class="tx acf">
+                  gateway
+                </text>
+                <text x="180" y="150" text-anchor="middle" class="tm">
+                  192.168.1.1
+                </text>
+              </svg>
+              <figcaption>
+                Para sair da própria rede, o pacote passa pelo gateway
+                (roteador).
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: a portaria do condomínio + GPS</b>
+              </div>
+              <p>
+                Pra visitar um vizinho do mesmo bloco, você vai a pé (o switch
+                resolve). Pra ir pra outro bairro, precisa passar pela
+                <b>portaria</b> (gateway). Se você não sabe onde fica a
+                portaria, fica preso no condomínio. Lá fora, o
+                <b>roteamento</b> funciona como o GPS: escolhe o melhor caminho
+                olhando o mapa (a <b>tabela de rotas</b>).
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Gateway padrão</dt>
+                <dd>
+                  Roteador que encaminha pacotes para <b>outras redes</b>. Sem
+                  ele, o host não alcança redes externas.
+                </dd>
+              </div>
+              <div>
+                <dt>Roteamento</dt>
+                <dd>Escolher o melhor caminho entre redes diferentes.</dd>
+              </div>
+              <div>
+                <dt>Tabela de rotas</dt>
+                <dd>O "mapa" do roteador com os destinos conhecidos.</dd>
+              </div>
+              <div>
+                <dt>Prefixo</dt>
+                <dd>A parte de rede do IP (definida pela máscara).</dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Regra rápida:</strong> mesmo prefixo →
+                <b>switch resolve</b>. Prefixo diferente →
+                <b>roteador resolve</b>.
+              </div>
+            </div>
+          </article>
+
+          <!-- 2.5 fluxo de comunicação -->
+          <article class="topic">
+            <span class="tn">2.5</span>
+            <h3>Fluxo de comunicação na prática</h3>
+            <p class="oneline">
+              Pra descobrir o caminho de um pacote, pergunte primeiro: os dois
+              estão na mesma sub-rede/VLAN?
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 244"
+                role="img"
+                aria-label="A primeira pergunta é sempre: o destino está na minha rede?"
+              >
+                <rect x="120" y="8" width="120" height="30" rx="8" class="bx" />
+                <text x="180" y="28" text-anchor="middle" class="tx">
+                  PC A envia
+                </text>
+                <line
+                  x1="180"
+                  y1="38"
+                  x2="180"
+                  y2="52"
+                  class="ln"
+                  marker-end="url(#arr)"
+                />
+                <path d="M180 56 L250 82 L180 108 L110 82 Z" class="soft" />
+                <text x="180" y="86" text-anchor="middle" class="tx">
+                  Mesmo prefixo?
+                </text>
+                <path d="M110 82 H60 V122" class="ln" marker-end="url(#arr)" />
+                <text x="80" y="76" text-anchor="middle" class="ts">sim</text>
+                <path d="M250 82 H300 V122" class="ln" marker-end="url(#arr)" />
+                <text x="280" y="76" text-anchor="middle" class="ts">não</text>
+                <rect x="6" y="126" width="108" height="46" rx="8" class="bx" />
+                <text x="60" y="146" text-anchor="middle" class="ts">
+                  Switch entrega
+                </text>
+                <text x="60" y="162" text-anchor="middle" class="tm">
+                  pela tabela CAM
+                </text>
+                <rect
+                  x="236"
+                  y="126"
+                  width="120"
+                  height="46"
+                  rx="8"
+                  class="bx"
+                />
+                <text x="296" y="146" text-anchor="middle" class="ts">
+                  Vai ao gateway
+                </text>
+                <text x="296" y="162" text-anchor="middle" class="tm">
+                  roteador decide
+                </text>
+                <line
+                  x1="300"
+                  y1="172"
+                  x2="300"
+                  y2="186"
+                  class="ln"
+                  marker-end="url(#arr)"
+                />
+                <rect
+                  x="236"
+                  y="190"
+                  width="120"
+                  height="46"
+                  rx="8"
+                  class="bx"
+                />
+                <text x="296" y="210" text-anchor="middle" class="ts">
+                  Tabela de rotas
+                </text>
+                <text x="296" y="226" text-anchor="middle" class="tm">
+                  leva ao destino
+                </text>
+              </svg>
+              <figcaption>
+                A primeira pergunta é sempre: o destino está na minha rede?
+              </figcaption>
+            </figure>
+            <p><b>Mesma VLAN/sub-rede:</b></p>
+            <div class="steps">
+              <span>PC A envia</span><i>→</i
+              ><span>Switch consulta a CAM (MAC)</span><i>→</i
+              ><span>Entrega ao PC B</span>
+            </div>
+            <p><b>Sub-rede diferente:</b></p>
+            <div class="steps">
+              <span>PC A envia ao gateway</span><i>→</i
+              ><span>Roteador consulta tabela de rotas</span><i>→</i
+              ><span>Encaminha à rede de destino</span><i>→</i
+              ><span>Switch de lá entrega</span>
+            </div>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Dica:</strong> em questão de "trace o caminho", desenhe
+                à mão: compare os prefixos e decida se precisa do roteador antes
+                de ler as alternativas.
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ========== MÓDULO 3 ========== -->
+        <section class="module bl" id="m3">
+          <div class="module-head">
+            <span class="num">3</span>
+            <div>
+              <span class="k">Módulo 3</span>
+              <h2>Evitando o caos</h2>
+            </div>
+          </div>
+
+          <!-- 3.1 STP -->
+          <article class="topic">
+            <span class="tn">3.1</span>
+            <h3>STP (Spanning Tree Protocol)</h3>
+            <p class="oneline">
+              Ter cabos reserva é bom, mas cria <b>loops</b>. O STP deixa os
+              caminhos extras <b>desligados como backup</b> e só ativa se o
+              principal cair.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 200"
+                role="img"
+                aria-label="O link reserva continua ligado, só fica parado esperando."
+              >
+                <line x1="180" y1="44" x2="64" y2="140" class="lk" />
+                <line x1="180" y1="44" x2="296" y2="140" class="lk" />
+                <line x1="64" y1="150" x2="296" y2="150" class="blk" />
+                <rect
+                  x="130"
+                  y="22"
+                  width="100"
+                  height="40"
+                  rx="8"
+                  class="acbg"
+                />
+                <text x="180" y="47" text-anchor="middle" class="tw">
+                  Root Bridge
+                </text>
+                <rect x="18" y="130" width="92" height="40" rx="8" class="bx" />
+                <text x="64" y="155" text-anchor="middle" class="tx">
+                  Switch 1
+                </text>
+                <rect
+                  x="250"
+                  y="130"
+                  width="92"
+                  height="40"
+                  rx="8"
+                  class="bx"
+                />
+                <text x="296" y="155" text-anchor="middle" class="tx">
+                  Switch 2
+                </text>
+                <circle cx="180" cy="150" r="11" class="badbg" />
+                <use
+                  href="#i-x"
+                  x="172"
+                  y="142"
+                  width="16"
+                  height="16"
+                  class="icow"
+                />
+                <text x="180" y="132" text-anchor="middle" class="ts bad">
+                  porta bloqueada
+                </text>
+                <text x="180" y="190" text-anchor="middle" class="tm">
+                  linha cheia: encaminhando · tracejada: reserva
+                </text>
+              </svg>
+              <figcaption>
+                O link reserva continua ligado, só fica parado esperando.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: rotas de estrada com cones</b>
+              </div>
+              <p>
+                Entre três cidades existem três estradas formando um triângulo.
+                Se todas ficam abertas, um carro desorientado pode rodar em
+                círculo pra sempre. O STP coloca <b>cones</b> numa das estradas:
+                ela continua lá, pronta, mas ninguém passa até que outra estrada
+                seja interditada.
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Redundância</dt>
+                <dd>
+                  Ter caminhos extras para a rede não parar se um cabo cair.
+                </dd>
+              </div>
+              <div>
+                <dt>Loop de rede</dt>
+                <dd>Quadro que fica circulando sem fim entre switches.</dd>
+              </div>
+              <div>
+                <dt>Root Bridge (ponte raiz)</dt>
+                <dd>
+                  O switch "chefe", ponto de referência. Todos calculam o
+                  caminho até ele.
+                </dd>
+              </div>
+            </dl>
+            <p><b>Estados das portas, nesta ordem:</b></p>
+            <div class="steps">
+              <span>1. Blocking</span><i>→</i><span>2. Listening</span><i>→</i
+              ><span>3. Learning</span><i>→</i><span>4. Forwarding</span>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Blocking</dt>
+                <dd>
+                  Bloqueada: não encaminha dados, só escuta as mensagens do STP.
+                </dd>
+              </div>
+              <div>
+                <dt>Listening</dt>
+                <dd>"Ouvindo" para decidir se deve participar da topologia.</dd>
+              </div>
+              <div>
+                <dt>Learning</dt>
+                <dd>
+                  Aprendendo MACs para preencher a tabela CAM, ainda sem
+                  encaminhar dados.
+                </dd>
+              </div>
+              <div>
+                <dt>Forwarding</dt>
+                <dd>Funcionando normal: encaminha tráfego.</dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Pra decorar a ordem:</strong> "<b>B</b>loqueia,
+                <b>L</b>istens, <b>L</b>earns, <b>F</b>unciona" — primeiro
+                escuta, depois aprende, só então trabalha.
+              </div>
+            </div>
+          </article>
+
+          <!-- 3.2 loop e broadcast storm -->
+          <article class="topic">
+            <span class="tn">3.2</span>
+            <h3>Loop de rede e broadcast storm</h3>
+            <p class="oneline">
+              Sem STP, um único broadcast fica girando e se multiplicando até
+              travar tudo.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 186"
+                role="img"
+                aria-label="Sem STP, o mesmo broadcast gira e se multiplica até derrubar a rede."
+              >
+                <path
+                  d="M180 30 A70 52 0 1 1 179 30"
+                  class="loopc"
+                  marker-end="url(#arrb)"
+                />
+                <rect x="140" y="14" width="80" height="30" rx="7" class="bx" />
+                <text x="180" y="34" text-anchor="middle" class="ts">SW 1</text>
+                <rect x="70" y="108" width="80" height="30" rx="7" class="bx" />
+                <text x="110" y="128" text-anchor="middle" class="ts">
+                  SW 2
+                </text>
+                <rect
+                  x="210"
+                  y="108"
+                  width="80"
+                  height="30"
+                  rx="7"
+                  class="bx"
+                />
+                <text x="250" y="128" text-anchor="middle" class="ts">
+                  SW 3
+                </text>
+                <g class="badf">
+                  <circle cx="118" cy="62" r="5" />
+                  <circle cx="246" cy="66" r="5" />
+                  <circle cx="180" cy="134" r="5" />
+                  <circle cx="228" cy="88" r="4" />
+                  <circle cx="130" cy="86" r="4" />
+                </g>
+                <text x="180" y="82" text-anchor="middle" class="ts bad">
+                  quadro em loop
+                </text>
+                <g class="ts">
+                  <text x="30" y="176">broadcast</text>
+                  <text x="108" y="176">→ multiplica</text>
+                  <text x="200" y="176">→ CPU 100%</text>
+                  <text x="284" y="176" class="bad">→ parada</text>
+                </g>
+              </svg>
+              <figcaption>
+                Sem STP, o mesmo broadcast gira e se multiplica até derrubar a
+                rede.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: microfonia</b>
+              </div>
+              <p>
+                Sabe quando o microfone fica perto da caixa de som e o chiado
+                vai aumentando até ninguém aguentar? O som sai, volta, sai de
+                novo, cada vez mais alto. É isso: broadcast enviado → quadro em
+                loop → CPU dos switches a 100% → rede parada. Um "DDoS interno
+                sem querer".
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Broadcast storm</dt>
+                <dd>
+                  Tempestade de broadcast: o mesmo quadro circulando
+                  infinitamente.
+                </dd>
+              </div>
+              <div>
+                <dt>DDoS</dt>
+                <dd>
+                  Ataque que derruba um serviço afogando-o em tráfego. Aqui
+                  acontece por acidente.
+                </dd>
+              </div>
+            </dl>
+            <div class="note trap">
+              <svg class="i" aria-hidden="true"><use href="#i-alert" /></svg>
+              <div>
+                <strong>Pegadinha:</strong> achar que redundância
+                <b>sempre</b> causa problema. Com STP, ela é segura: o STP
+                resolve sozinho.
+              </div>
+            </div>
+          </article>
+
+          <!-- 3.3 eleição da root bridge -->
+          <article class="topic">
+            <span class="tn">3.3</span>
+            <h3>Eleição da Root Bridge</h3>
+            <p class="oneline">Vence quem tiver o <b>menor Bridge ID</b>.</p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 176"
+                role="img"
+                aria-label="Bridge ID = prioridade + MAC. Menor vence."
+              >
+                <rect
+                  x="12"
+                  y="30"
+                  width="104"
+                  height="92"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="64" y="54" text-anchor="middle" class="tx">SW1</text>
+                <text x="64" y="78" text-anchor="middle" class="ts">
+                  prior. 32768
+                </text>
+                <text x="64" y="98" text-anchor="middle" class="mono s">
+                  MAC …:05
+                </text>
+                <rect
+                  x="128"
+                  y="30"
+                  width="104"
+                  height="92"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="180" y="54" text-anchor="middle" class="tx">SW2</text>
+                <text x="180" y="78" text-anchor="middle" class="ts">
+                  prior. 32768
+                </text>
+                <text x="180" y="98" text-anchor="middle" class="mono s">
+                  MAC …:02
+                </text>
+                <rect
+                  x="244"
+                  y="30"
+                  width="104"
+                  height="92"
+                  rx="10"
+                  class="win"
+                />
+                <text x="296" y="54" text-anchor="middle" class="tx">SW3</text>
+                <text x="296" y="78" text-anchor="middle" class="ts">
+                  prior. 28672
+                </text>
+                <text x="296" y="98" text-anchor="middle" class="mono s">
+                  MAC …:09
+                </text>
+                <rect
+                  x="248"
+                  y="8"
+                  width="88"
+                  height="24"
+                  rx="12"
+                  class="acbg"
+                />
+                <text x="292" y="25" text-anchor="middle" class="tw">
+                  vira Root
+                </text>
+                <text x="180" y="148" text-anchor="middle" class="ts">
+                  1º menor prioridade vence · 2º empate? menor MAC
+                </text>
+                <text x="180" y="168" text-anchor="middle" class="tm">
+                  aqui SW3 vence mesmo com o maior MAC
+                </text>
+              </svg>
+              <figcaption>
+                Bridge ID = prioridade + MAC. Menor vence.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: senha de fila</b>
+              </div>
+              <p>
+                Quem tem a senha com o <b>menor número</b> é chamado primeiro. O
+                Bridge ID é a senha: primeiro compara a <b>prioridade</b>; se
+                empatar, desempata pelo <b>MAC</b> (o menor vence).
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Bridge ID</dt>
+                <dd><b>Prioridade + endereço MAC</b>.</dd>
+              </div>
+              <div>
+                <dt>Prioridade padrão</dt>
+                <dd><b>32768</b>. Menor valor vence.</dd>
+              </div>
+              <div>
+                <dt>Forçar um switch como root</dt>
+                <dd><b>Diminuir</b> a prioridade dele (ex.: 4096).</dd>
+              </div>
+              <div>
+                <dt>Portas da Root Bridge</dt>
+                <dd>Todas ficam em <b>Forwarding</b>.</dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Dica de prova:</strong> "menor vence" vale para tudo
+                aqui. Se todos estão no padrão 32768, ganha o <b>menor MAC</b>.
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ========== MÓDULO 4 ========== -->
+        <section class="module br" id="m4">
+          <div class="module-head">
+            <span class="num">4</span>
+            <div>
+              <span class="k">Módulo 4</span>
+              <h2>Segurança</h2>
+            </div>
+          </div>
+
+          <!-- 4.1 firewall stateful x stateless -->
+          <article class="topic">
+            <span class="tn">4.1</span>
+            <h3>Firewall: stateful × stateless</h3>
+            <p class="oneline">
+              O firewall é o "segurança" entre redes: decide o que entra e o que
+              sai com base em regras.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 168"
+                role="img"
+                aria-label="O stateful guarda uma tabela de conexões; o stateless não lembra de nada."
+              >
+                <rect
+                  x="8"
+                  y="10"
+                  width="166"
+                  height="150"
+                  rx="12"
+                  class="room"
+                />
+                <rect
+                  x="186"
+                  y="10"
+                  width="166"
+                  height="150"
+                  rx="12"
+                  class="room"
+                />
+                <text x="20" y="32" class="tx">Stateless</text>
+                <text x="198" y="32" class="tx acf">Stateful</text>
+                <use
+                  href="#i-shield"
+                  x="72"
+                  y="48"
+                  width="38"
+                  height="38"
+                  class="ico"
+                />
+                <text x="91" y="110" text-anchor="middle" class="ts">
+                  olha cada pacote
+                </text>
+                <text x="91" y="128" text-anchor="middle" class="ts">
+                  sozinho
+                </text>
+                <text x="91" y="148" text-anchor="middle" class="tm">
+                  sem memória
+                </text>
+                <use
+                  href="#i-shield"
+                  x="214"
+                  y="48"
+                  width="38"
+                  height="38"
+                  class="icoa"
+                />
+                <rect x="262" y="48" width="78" height="44" rx="6" class="bx" />
+                <text x="301" y="64" text-anchor="middle" class="tm">
+                  conexões
+                </text>
+                <line x1="270" y1="74" x2="332" y2="74" class="hair" />
+                <line x1="270" y1="84" x2="320" y2="84" class="hair" />
+                <text x="269" y="128" text-anchor="middle" class="ts">
+                  lembra das conexões
+                </text>
+                <text x="269" y="148" text-anchor="middle" class="tm">
+                  mais seguro
+                </text>
+              </svg>
+              <figcaption>
+                O stateful guarda uma tabela de conexões; o stateless não lembra
+                de nada.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: dois porteiros</b>
+              </div>
+              <p>
+                O porteiro <b>stateless</b> não tem memória: olha cada pessoa
+                isoladamente, só pelo crachá. O porteiro <b>stateful</b> lembra:
+                "esse entregador está voltando de uma entrega que um morador
+                pediu, pode passar". Ele sabe se a pessoa faz parte de uma
+                visita legítima. Por isso é <b>mais seguro</b>.
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Stateful</dt>
+                <dd>Rastreia o <b>estado das conexões</b>. Mais seguro.</dd>
+              </div>
+              <div>
+                <dt>Stateless</dt>
+                <dd>
+                  Analisa cada pacote <b>isoladamente</b>. Mais simples, menos
+                  seguro.
+                </dd>
+              </div>
+              <div>
+                <dt>Filtra por</dt>
+                <dd>
+                  IP de origem/destino, porta, protocolo e estado da conexão.
+                </dd>
+              </div>
+              <div>
+                <dt>Porta</dt>
+                <dd>
+                  "Número do serviço": 80 = HTTP (site), 443 = HTTPS (site
+                  seguro), 22 = SSH (acesso remoto).
+                </dd>
+              </div>
+              <div>
+                <dt>TCP × UDP</dt>
+                <dd>
+                  TCP confirma entrega (tipo carta registrada). UDP manda sem
+                  confirmar (tipo panfleto).
+                </dd>
+              </div>
+            </dl>
+          </article>
+
+          <!-- 4.2 regras de firewall -->
+          <article class="topic">
+            <span class="tn">4.2</span>
+            <h3>Regras de firewall: como ler na questão</h3>
+            <p class="oneline">
+              Leia de <b>cima para baixo</b> e <b>pare na primeira</b> que casar
+              com o tráfego.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 176"
+                role="img"
+                aria-label="Leitura de cima para baixo: a primeira regra que casa decide."
+              >
+                <rect
+                  x="62"
+                  y="30"
+                  width="222"
+                  height="34"
+                  rx="8"
+                  class="win"
+                />
+                <text x="76" y="52" class="tx">1</text>
+                <text x="94" y="52" class="ts">Permitir TCP porta 443</text>
+                <rect
+                  x="62"
+                  y="72"
+                  width="222"
+                  height="34"
+                  rx="8"
+                  class="bx dim"
+                />
+                <text x="76" y="94" class="tx">2</text>
+                <text x="94" y="94" class="ts mut">Bloquear IP 10.0.0.5</text>
+                <rect
+                  x="62"
+                  y="114"
+                  width="222"
+                  height="34"
+                  rx="8"
+                  class="bx dim"
+                />
+                <text x="76" y="136" class="tx">3</text>
+                <text x="94" y="136" class="ts mut">Deny all</text>
+                <text x="6" y="20" class="ts">10.0.0.5 → porta 443</text>
+                <path
+                  d="M24 28 V47 H58"
+                  class="ln acs"
+                  marker-end="url(#arr)"
+                />
+                <circle cx="304" cy="47" r="11" class="okbg" />
+                <use
+                  href="#i-check"
+                  x="296"
+                  y="39"
+                  width="16"
+                  height="16"
+                  class="icow"
+                />
+                <path d="M292 76 h8 v58 h-8" class="hair" fill="none" />
+                <text x="306" y="100" class="tm">nem</text>
+                <text x="306" y="114" class="tm">lidas</text>
+                <text x="180" y="168" text-anchor="middle" class="ts">
+                  casou na 1ª → aplica e para de ler
+                </text>
+              </svg>
+              <figcaption>
+                Leitura de cima para baixo: a primeira regra que casa decide.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: lista da festa</b>
+              </div>
+              <p>
+                O segurança lê a lista de cima pra baixo. A primeira linha que
+                bate com você decide se você entra. Se você não aparece em linha
+                nenhuma, a última regra é "<b>ninguém mais entra</b>" (deny
+                all).
+              </p>
+            </div>
+            <div class="tablewrap">
+              <table class="mini">
+                <tr>
+                  <th>#</th>
+                  <th>Regra</th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Permitir TCP porta 443 de qualquer origem</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Bloquear IP 10.0.0.5</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Bloquear tudo (deny all)</td>
+                </tr>
+              </table>
+            </div>
+            <p>
+              O IP 10.0.0.5 acessando a porta 443 <b>entra</b>, porque a regra 1
+              casou primeiro e a 2 nem é lida.
+            </p>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Dica:</strong> em cada regra, sublinhe a
+                <b>ação</b> (permitir/bloquear) e o <b>critério</b> (IP, porta,
+                protocolo).
+              </div>
+            </div>
+            <div class="note trap">
+              <svg class="i" aria-hidden="true"><use href="#i-alert" /></svg>
+              <div>
+                <strong>Pegadinha:</strong> achar que a ordem das regras não
+                importa. <b>A ordem é tudo.</b>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4.3 DMZ -->
+          <article class="topic">
+            <span class="tn">4.3</span>
+            <h3>DMZ (Zona Desmilitarizada)</h3>
+            <p class="oneline">
+              Uma rede no meio do caminho, entre a internet e a rede interna,
+              onde ficam os servidores públicos.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 166"
+                role="img"
+                aria-label="Internet → Firewall → DMZ → Firewall → Rede interna."
+              >
+                <use
+                  href="#i-globe"
+                  x="8"
+                  y="58"
+                  width="34"
+                  height="34"
+                  class="ico"
+                />
+                <text x="25" y="112" text-anchor="middle" class="tm">
+                  Internet
+                </text>
+                <line x1="44" y1="75" x2="66" y2="75" class="ln" />
+                <use
+                  href="#i-shield"
+                  x="66"
+                  y="56"
+                  width="38"
+                  height="38"
+                  class="icoa"
+                />
+                <text x="85" y="112" text-anchor="middle" class="tm">
+                  FW ext.
+                </text>
+                <line x1="104" y1="75" x2="122" y2="75" class="ln" />
+                <rect
+                  x="122"
+                  y="22"
+                  width="116"
+                  height="106"
+                  rx="12"
+                  class="soft"
+                />
+                <text x="180" y="42" text-anchor="middle" class="tx acf">
+                  DMZ
+                </text>
+                <use
+                  href="#i-server"
+                  x="140"
+                  y="54"
+                  width="26"
+                  height="26"
+                  class="ico"
+                />
+                <use
+                  href="#i-server"
+                  x="194"
+                  y="54"
+                  width="26"
+                  height="26"
+                  class="ico"
+                />
+                <text x="153" y="98" text-anchor="middle" class="tm">web</text>
+                <text x="207" y="98" text-anchor="middle" class="tm">
+                  e-mail
+                </text>
+                <line x1="238" y1="75" x2="256" y2="75" class="ln" />
+                <use
+                  href="#i-shield"
+                  x="256"
+                  y="56"
+                  width="38"
+                  height="38"
+                  class="icoa"
+                />
+                <text x="275" y="112" text-anchor="middle" class="tm">
+                  FW int.
+                </text>
+                <line x1="294" y1="75" x2="310" y2="75" class="ln" />
+                <use
+                  href="#i-monitor"
+                  x="314"
+                  y="60"
+                  width="30"
+                  height="30"
+                  class="ico"
+                />
+                <text x="329" y="112" text-anchor="middle" class="tm">
+                  interna
+                </text>
+                <text x="180" y="156" text-anchor="middle" class="tm">
+                  invadiu a DMZ? ainda falta passar pelo firewall interno
+                </text>
+              </svg>
+              <figcaption>
+                Internet → Firewall → DMZ → Firewall → Rede interna.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: a recepção do hotel</b>
+              </div>
+              <p>
+                Qualquer pessoa da rua pode entrar na recepção (DMZ) para falar
+                com o atendente (servidor web, e-mail). Mas pra subir aos
+                quartos (rede interna) precisa passar por mais uma porta com
+                cartão. Se um ladrão entrar na recepção, ainda não chega aos
+                quartos.
+              </p>
+            </div>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Dica de prova:</strong> "onde colocar o servidor
+                web/e-mail acessível pela internet?" → <b>DMZ</b>. E lembre a
+                topologia com os <b>dois firewalls</b>.
+              </div>
+            </div>
+          </article>
+
+          <!-- 4.4 segmentação e menor privilégio -->
+          <article class="topic">
+            <span class="tn">4.4</span>
+            <h3>Segmentação com firewall e menor privilégio</h3>
+            <p class="oneline">
+              <b>VLAN + Firewall</b> = separar logicamente + controlar quem
+              passa entre as partes. Isso é a base da
+              <b>defesa em profundidade</b>.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 168"
+                role="img"
+                aria-label="Menor privilégio na prática: só a porta 443 é liberada."
+              >
+                <rect
+                  x="8"
+                  y="24"
+                  width="100"
+                  height="112"
+                  rx="12"
+                  class="room"
+                />
+                <text x="58" y="44" text-anchor="middle" class="tx">
+                  Usuários
+                </text>
+                <use
+                  href="#i-monitor"
+                  x="22"
+                  y="62"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="62"
+                  y="62"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <use
+                  href="#i-monitor"
+                  x="42"
+                  y="96"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <rect
+                  x="252"
+                  y="24"
+                  width="100"
+                  height="112"
+                  rx="12"
+                  class="room"
+                />
+                <text x="302" y="44" text-anchor="middle" class="tx">
+                  Servidores
+                </text>
+                <use
+                  href="#i-server"
+                  x="288"
+                  y="64"
+                  width="28"
+                  height="28"
+                  class="ico"
+                />
+                <use
+                  href="#i-server"
+                  x="288"
+                  y="98"
+                  width="28"
+                  height="28"
+                  class="ico"
+                />
+                <use
+                  href="#i-shield"
+                  x="161"
+                  y="58"
+                  width="38"
+                  height="38"
+                  class="icoa"
+                />
+                <text x="180" y="114" text-anchor="middle" class="tm">
+                  firewall
+                </text>
+                <line x1="108" y1="66" x2="158" y2="66" class="ln acs" />
+                <line
+                  x1="202"
+                  y1="66"
+                  x2="250"
+                  y2="66"
+                  class="ln acs"
+                  marker-end="url(#arr)"
+                />
+                <text x="226" y="58" text-anchor="middle" class="ts acf">
+                  443 ✓
+                </text>
+                <line x1="108" y1="96" x2="158" y2="96" class="ln dash" />
+                <line x1="202" y1="96" x2="222" y2="96" class="ln bads" />
+                <use
+                  href="#i-x"
+                  x="222"
+                  y="88"
+                  width="16"
+                  height="16"
+                  class="badc"
+                />
+                <text x="180" y="132" text-anchor="middle" class="ts bad">
+                  resto bloqueado
+                </text>
+                <text x="180" y="160" text-anchor="middle" class="tm">
+                  VLAN separa · firewall controla o que passa
+                </text>
+              </svg>
+              <figcaption>
+                Menor privilégio na prática: só a porta 443 é liberada.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: crachá da empresa</b>
+              </div>
+              <p>
+                Cada funcionário recebe um crachá que abre
+                <b>só as portas que ele precisa</b>. O estagiário de marketing
+                não abre a sala do servidor. Isso é o
+                <b>princípio do menor privilégio</b>. E ter várias camadas
+                (portaria, catraca, porta com crachá, cofre) é a
+                <b>defesa em profundidade</b>.
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Defesa em profundidade</dt>
+                <dd>
+                  Várias camadas de proteção: se uma falhar, a próxima segura.
+                </dd>
+              </div>
+              <div>
+                <dt>Menor privilégio</dt>
+                <dd>Liberar apenas o acesso estritamente necessário.</dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Exemplo do professor:</strong> a VLAN de servidores só
+                aceita conexões na porta <b>443</b> vindas da VLAN de usuários.
+                Todo o resto é bloqueado.
+              </div>
+            </div>
+          </article>
+
+          <!-- 4.5 ACL -->
+          <article class="topic">
+            <span class="tn">4.5</span>
+            <h3>ACL (Lista de Controle de Acesso)</h3>
+            <p class="oneline">
+              O filtro nativo dos roteadores. Mais simples que um firewall, mas
+              resolve o controle básico.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 150"
+                role="img"
+                aria-label="Estendida perto da origem, padrão perto do destino."
+              >
+                <use
+                  href="#i-monitor"
+                  x="8"
+                  y="62"
+                  width="30"
+                  height="30"
+                  class="ico"
+                />
+                <text x="23" y="112" text-anchor="middle" class="ts">
+                  origem
+                </text>
+                <line x1="40" y1="77" x2="98" y2="77" class="ln" />
+                <circle cx="118" cy="77" r="20" class="bx" />
+                <use
+                  href="#i-router"
+                  x="106"
+                  y="65"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <line x1="138" y1="77" x2="222" y2="77" class="ln" />
+                <circle cx="242" cy="77" r="20" class="bx" />
+                <use
+                  href="#i-router"
+                  x="230"
+                  y="65"
+                  width="24"
+                  height="24"
+                  class="ico"
+                />
+                <line x1="262" y1="77" x2="318" y2="77" class="ln" />
+                <use
+                  href="#i-server"
+                  x="320"
+                  y="62"
+                  width="30"
+                  height="30"
+                  class="ico"
+                />
+                <text x="335" y="112" text-anchor="middle" class="ts">
+                  destino
+                </text>
+                <rect
+                  x="66"
+                  y="18"
+                  width="104"
+                  height="26"
+                  rx="13"
+                  class="acbg"
+                />
+                <text x="118" y="35" text-anchor="middle" class="tw">
+                  ACL estendida
+                </text>
+                <line x1="118" y1="44" x2="118" y2="56" class="ln acs" />
+                <rect
+                  x="190"
+                  y="18"
+                  width="104"
+                  height="26"
+                  rx="13"
+                  class="soft"
+                />
+                <text x="242" y="35" text-anchor="middle" class="tx acf">
+                  ACL padrão
+                </text>
+                <line x1="242" y1="44" x2="242" y2="56" class="ln acs" />
+                <text x="118" y="122" text-anchor="middle" class="tm">
+                  vê origem, destino,
+                </text>
+                <text x="118" y="138" text-anchor="middle" class="tm">
+                  porta e protocolo
+                </text>
+                <text x="242" y="122" text-anchor="middle" class="tm">
+                  só vê a origem
+                </text>
+              </svg>
+              <figcaption>
+                Estendida perto da origem, padrão perto do destino.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: blitz de trânsito</b>
+              </div>
+              <p>
+                A <b>ACL padrão</b> é uma blitz que só olha
+                <b>de onde o carro veio</b>. Como ela é pouco específica, você
+                coloca perto do destino, senão bloqueia o carro de ir a qualquer
+                outro lugar também. A <b>ACL estendida</b> olha origem, destino,
+                tipo de veículo e motivo da viagem, então pode barrar logo na
+                saída (perto da origem) sem atrapalhar ninguém.
+              </p>
+            </div>
+            <div class="tablewrap">
+              <table class="mini">
+                <tr>
+                  <th></th>
+                  <th>Padrão</th>
+                  <th>Estendida</th>
+                </tr>
+                <tr>
+                  <td>Filtra por</td>
+                  <td>Só <b>IP de origem</b></td>
+                  <td>IP origem/destino, <b>porta</b> e <b>protocolo</b></td>
+                </tr>
+                <tr>
+                  <td>Onde aplicar</td>
+                  <td>Perto do <b>destino</b></td>
+                  <td>Perto da <b>origem</b></td>
+                </tr>
+                <tr>
+                  <td>Nível</td>
+                  <td>Simples</td>
+                  <td>Granular (detalhada)</td>
+                </tr>
+              </table>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Inbound</dt>
+                <dd>Analisa o tráfego que <b>entra</b> na interface.</dd>
+              </div>
+              <div>
+                <dt>Outbound</dt>
+                <dd>Analisa o tráfego que <b>sai</b> da interface.</dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Pra decorar:</strong> "<b>E</b>stendida perto da
+                <b>o</b>rigem, <b>P</b>adrão perto do <b>d</b>estino" — "E.O. /
+                P.D.".
+              </div>
+            </div>
+          </article>
+
+          <!-- 4.6 IDS, IPS, SIEM -->
+          <article class="topic">
+            <span class="tn">4.6</span>
+            <h3>IDS, IPS e SIEM</h3>
+            <p class="oneline">
+              Detectar não é o mesmo que bloquear. Essa diferença é muito
+              cobrada.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 222"
+                role="img"
+                aria-label="IDS avisa, IPS impede, SIEM junta tudo e procura padrões."
+              >
+                <text x="10" y="22" class="tx">IDS · fora do caminho</text>
+                <line
+                  x1="10"
+                  y1="50"
+                  x2="170"
+                  y2="50"
+                  class="ln"
+                  marker-end="url(#arr)"
+                />
+                <circle cx="90" cy="50" r="4" class="dk" />
+                <line x1="90" y1="54" x2="90" y2="76" class="ln dash" />
+                <use
+                  href="#i-bell"
+                  x="78"
+                  y="78"
+                  width="24"
+                  height="24"
+                  class="icoa"
+                />
+                <text x="90" y="118" text-anchor="middle" class="ts">
+                  alerta, não bloqueia
+                </text>
+                <text x="190" y="22" class="tx">IPS · no caminho</text>
+                <line x1="190" y1="50" x2="250" y2="50" class="ln" />
+                <rect
+                  x="250"
+                  y="36"
+                  width="34"
+                  height="28"
+                  rx="6"
+                  class="acbg"
+                />
+                <use
+                  href="#i-ban"
+                  x="257"
+                  y="40"
+                  width="20"
+                  height="20"
+                  class="icow"
+                />
+                <line x1="284" y1="50" x2="318" y2="50" class="ln bads dash" />
+                <use
+                  href="#i-x"
+                  x="320"
+                  y="42"
+                  width="16"
+                  height="16"
+                  class="badc"
+                />
+                <text x="270" y="90" text-anchor="middle" class="ts">
+                  bloqueia na hora
+                </text>
+                <line x1="10" y1="134" x2="350" y2="134" class="hair" />
+                <text x="10" y="156" class="tx">SIEM · centraliza logs</text>
+                <use
+                  href="#i-shield"
+                  x="18"
+                  y="170"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <use
+                  href="#i-server"
+                  x="78"
+                  y="170"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <use
+                  href="#i-router"
+                  x="138"
+                  y="170"
+                  width="24"
+                  height="24"
+                  class="ico2"
+                />
+                <path
+                  d="M44 182 H66 M104 182 H126 M164 182 H234"
+                  class="ln dash"
+                />
+                <rect
+                  x="236"
+                  y="168"
+                  width="114"
+                  height="44"
+                  rx="10"
+                  class="soft"
+                />
+                <use
+                  href="#i-database"
+                  x="244"
+                  y="178"
+                  width="24"
+                  height="24"
+                  class="icoa"
+                />
+                <text
+                  x="314"
+                  y="195"
+                  text-anchor="middle"
+                  class="ts acf"
+                  style="font-weight: 700"
+                >
+                  correlaciona
+                </text>
+              </svg>
+              <figcaption>
+                IDS avisa, IPS impede, SIEM junta tudo e procura padrões.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: segurança de casa</b>
+              </div>
+              <p>
+                <b>IDS</b> é o alarme: toca e avisa, mas não segura o ladrão.
+                <b>IPS</b> é o segurança na porta: vê o ladrão e impede a
+                entrada na hora. <b>SIEM</b> é a central de monitoramento que
+                recebe as imagens de todas as câmeras, alarmes e sensores e
+                cruza tudo pra perceber padrões.
+              </p>
+            </div>
+            <div class="tablewrap">
+              <table class="mini">
+                <tr>
+                  <th></th>
+                  <th>Faz o quê</th>
+                  <th>Tipo</th>
+                </tr>
+                <tr>
+                  <td><b>IDS</b> (Intrusion Detection System)</td>
+                  <td>Detecta e <b>alerta</b></td>
+                  <td>Passivo, não bloqueia</td>
+                </tr>
+                <tr>
+                  <td><b>IPS</b> (Intrusion Prevention System)</td>
+                  <td>Detecta e <b>bloqueia</b> em tempo real</td>
+                  <td>Ativo</td>
+                </tr>
+                <tr>
+                  <td><b>SIEM</b></td>
+                  <td>Coleta e <b>correlaciona logs</b> de vários sistemas</td>
+                  <td>Análise centralizada</td>
+                </tr>
+              </table>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Log</dt>
+                <dd>
+                  Registro do que aconteceu num sistema (quem acessou, quando, o
+                  quê). O "diário" do aparelho.
+                </dd>
+              </div>
+            </dl>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Pra decorar:</strong> IDS = <b>D</b>etecta. IPS =
+                <b>P</b>revine (bloqueia).
+              </div>
+            </div>
+          </article>
+
+          <!-- 4.7 802.1X, RADIUS, AAA -->
+          <article class="topic">
+            <span class="tn">4.7</span>
+            <h3>802.1X, RADIUS e AAA</h3>
+            <p class="oneline">
+              Antes de entrar na rede, o aparelho prova quem é,
+              <b>na camada de enlace</b>, antes mesmo de receber um IP.
+            </p>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 166"
+                role="img"
+                aria-label="Tudo acontece antes do aparelho ganhar um IP."
+              >
+                <rect x="4" y="30" width="104" height="78" rx="12" class="bx" />
+                <use
+                  href="#i-monitor"
+                  x="42"
+                  y="40"
+                  width="28"
+                  height="28"
+                  class="ico"
+                />
+                <text x="54" y="86" text-anchor="middle" class="tx">
+                  Suplicante
+                </text>
+                <text x="54" y="101" text-anchor="middle" class="tm">
+                  cliente
+                </text>
+                <rect
+                  x="128"
+                  y="30"
+                  width="104"
+                  height="78"
+                  rx="12"
+                  class="bx"
+                />
+                <use
+                  href="#i-router"
+                  x="166"
+                  y="40"
+                  width="28"
+                  height="28"
+                  class="ico"
+                />
+                <text x="180" y="86" text-anchor="middle" class="tx">
+                  Autenticador
+                </text>
+                <text x="180" y="101" text-anchor="middle" class="tm">
+                  switch
+                </text>
+                <rect
+                  x="252"
+                  y="30"
+                  width="104"
+                  height="78"
+                  rx="12"
+                  class="soft"
+                />
+                <use
+                  href="#i-database"
+                  x="292"
+                  y="40"
+                  width="28"
+                  height="28"
+                  class="icoa"
+                />
+                <text x="306" y="86" text-anchor="middle" class="tx acf">
+                  RADIUS
+                </text>
+                <text x="306" y="101" text-anchor="middle" class="tm">
+                  valida (AAA)
+                </text>
+                <line
+                  x1="108"
+                  y1="60"
+                  x2="126"
+                  y2="60"
+                  class="ln"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="232"
+                  y1="60"
+                  x2="250"
+                  y2="60"
+                  class="ln"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="250"
+                  y1="82"
+                  x2="234"
+                  y2="82"
+                  class="ln acs"
+                  marker-end="url(#arr)"
+                />
+                <line
+                  x1="126"
+                  y1="82"
+                  x2="110"
+                  y2="82"
+                  class="ln acs"
+                  marker-end="url(#arr)"
+                />
+                <g class="ts">
+                  <text x="10" y="138">1. cliente manda credenciais</text>
+                  <text x="10" y="156">2. switch pergunta ao RADIUS</text>
+                  <text x="196" y="138">3. RADIUS aceita ou nega</text>
+                  <text x="196" y="156">4. porta liberada ou não</text>
+                </g>
+              </svg>
+              <figcaption>
+                Tudo acontece antes do aparelho ganhar um IP.
+              </figcaption>
+            </figure>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia: a balada com lista VIP</b>
+              </div>
+              <p>
+                Você (<b>suplicante</b>) chega e mostra o documento. O segurança
+                da porta (<b>autenticador</b>, o switch) não decide sozinho: ele
+                consulta pelo rádio a produção (<b>servidor RADIUS</b>), que
+                confere a lista. Se a produção disser "pode", o segurança libera
+                a porta.
+              </p>
+            </div>
+            <dl class="terms">
+              <div>
+                <dt>Suplicante</dt>
+                <dd>O dispositivo que pede acesso e envia credenciais.</dd>
+              </div>
+              <div>
+                <dt>Autenticador</dt>
+                <dd>
+                  A porta do switch que bloqueia ou libera conforme a resposta
+                  do servidor.
+                </dd>
+              </div>
+              <div>
+                <dt>Servidor RADIUS</dt>
+                <dd>Valida as credenciais e aplica o AAA.</dd>
+              </div>
+              <div>
+                <dt>AAA</dt>
+                <dd>
+                  <b>Autenticação</b> (quem é você?), <b>Autorização</b> (o que
+                  pode fazer?), <b>Auditoria</b> (o que você fez? fica
+                  registrado).
+                </dd>
+              </div>
+            </dl>
+            <div class="note trap">
+              <svg class="i" aria-hidden="true"><use href="#i-alert" /></svg>
+              <div>
+                <strong>Pegadinha:</strong> achar que 802.1X é só para Wi-Fi.
+                Funciona também em <b>rede cabeada</b>.
+              </div>
+            </div>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Não confunda:</strong> 802.1<b>Q</b> = tag de VLAN
+                (Quadro marcado). 802.1<b>X</b> = autenticação (X de "eXame na
+                porta").
+              </div>
+            </div>
+          </article>
+
+          <!-- 4.8 mapa mental -->
+          <article class="topic">
+            <span class="tn">4.8</span>
+            <h3>Mapa mental: cada tecnologia tem um lado de segurança</h3>
+            <figure class="fig">
+              <svg
+                viewBox="0 0 360 180"
+                role="img"
+                aria-label="Toda tecnologia de rede tem um lado de segurança."
+              >
+                <line x1="180" y1="90" x2="60" y2="36" class="hair" />
+                <line x1="180" y1="90" x2="180" y2="22" class="hair" />
+                <line x1="180" y1="90" x2="300" y2="36" class="hair" />
+                <line x1="180" y1="90" x2="60" y2="140" class="hair" />
+                <line x1="180" y1="90" x2="180" y2="156" class="hair" />
+                <line x1="180" y1="90" x2="300" y2="140" class="hair" />
+                <circle cx="180" cy="90" r="38" class="acbg" />
+                <text
+                  x="180"
+                  y="87"
+                  text-anchor="middle"
+                  class="tw"
+                  style="font-size: 11px"
+                >
+                  Rede +
+                </text>
+                <text
+                  x="180"
+                  y="101"
+                  text-anchor="middle"
+                  class="tw"
+                  style="font-size: 11px"
+                >
+                  Segurança
+                </text>
+                <rect x="8" y="18" width="104" height="38" rx="10" class="bx" />
+                <text x="60" y="34" text-anchor="middle" class="ts">VLAN</text>
+                <text x="60" y="49" text-anchor="middle" class="tm sm">
+                  contenção
+                </text>
+                <rect
+                  x="128"
+                  y="4"
+                  width="104"
+                  height="38"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="180" y="20" text-anchor="middle" class="ts">
+                  Trunk
+                </text>
+                <text x="180" y="35" text-anchor="middle" class="tm sm">
+                  VLAN hopping
+                </text>
+                <rect
+                  x="248"
+                  y="18"
+                  width="104"
+                  height="38"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="300" y="34" text-anchor="middle" class="ts">STP</text>
+                <text x="300" y="49" text-anchor="middle" class="tm sm">
+                  STP spoofing
+                </text>
+                <rect
+                  x="8"
+                  y="122"
+                  width="104"
+                  height="38"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="60" y="138" text-anchor="middle" class="ts">
+                  Firewall/ACL
+                </text>
+                <text x="60" y="153" text-anchor="middle" class="tm sm">
+                  1ª linha
+                </text>
+                <rect
+                  x="128"
+                  y="138"
+                  width="104"
+                  height="38"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="180" y="154" text-anchor="middle" class="ts">DMZ</text>
+                <text x="180" y="169" text-anchor="middle" class="tm sm">
+                  contém danos
+                </text>
+                <rect
+                  x="248"
+                  y="122"
+                  width="104"
+                  height="38"
+                  rx="10"
+                  class="bx"
+                />
+                <text x="300" y="138" text-anchor="middle" class="ts">
+                  IDS/IPS/802.1X
+                </text>
+                <text x="300" y="153" text-anchor="middle" class="tm sm">
+                  visibilidade
+                </text>
+              </svg>
+              <figcaption>
+                Toda tecnologia de rede tem um lado de segurança.
+              </figcaption>
+            </figure>
+            <div class="tablewrap">
+              <table class="mini">
+                <tr>
+                  <th>Tecnologia</th>
+                  <th>Lado de segurança</th>
+                </tr>
+                <tr>
+                  <td><b>VLAN</b></td>
+                  <td>
+                    <b>Contenção de ataques:</b> malware não se espalha entre
+                    VLANs sem passar por um roteador.
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Trunk 802.1Q</b></td>
+                  <td>
+                    <b>Risco de VLAN hopping:</b> se mal configurado, o atacante
+                    manda quadros com <b>tag dupla</b> e "pula" para VLANs não
+                    autorizadas.
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>STP</b></td>
+                  <td>
+                    <b>Risco de STP spoofing:</b> o atacante anuncia
+                    <b>prioridade menor</b>, vira Root Bridge e passa a ver o
+                    tráfego da rede.
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Firewall + ACL</b></td>
+                  <td>
+                    <b>Primeira linha de defesa:</b> bloqueia acessos não
+                    autorizados entre segmentos.
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>DMZ</b></td>
+                  <td>
+                    <b>Contenção de danos:</b> se o servidor público cair, o
+                    atacante não alcança a rede interna.
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>IDS/IPS + 802.1X + AAA</b></td>
+                  <td>
+                    <b>Visibilidade e controle:</b> detecta e bloqueia ataques e
+                    só deixa entrar quem se autenticou.
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="analogy">
+              <div class="ah">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><b>Analogia do VLAN hopping</b>
+              </div>
+              <p>
+                É como um penetra que cola duas pulseiras no braço: a de fora
+                engana o primeiro segurança, que a arranca e deixa a de baixo, e
+                ela leva o penetra para a sala VIP.
+              </p>
+            </div>
+            <div class="note tip">
+              <svg class="i" aria-hidden="true"><use href="#i-bulb" /></svg>
+              <div>
+                <strong>Dica final:</strong> esse slide junta tudo. Se cair uma
+                questão dissertativa, use o formato "tecnologia → para que serve
+                → que risco tem / que proteção oferece".
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- atalhos pras outras abas -->
+        <div class="next-steps">
+          <button class="cta" data-go="questoes">
+            <svg class="i" aria-hidden="true"><use href="#i-pencil" /></svg
+            ><span class="grow">Fazer as questões</span
+            ><svg class="i" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </button>
+          <button class="cta" data-go="vf">
+            <svg class="i" aria-hidden="true"><use href="#i-toggle" /></svg
+            ><span class="grow">Treinar V ou F</span
+            ><svg class="i" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </button>
+          <button class="cta" data-go="flash">
+            <svg class="i" aria-hidden="true"><use href="#i-layers" /></svg
+            ><span class="grow">Revisar com cards</span
+            ><svg class="i" aria-hidden="true"><use href="#i-arrow" /></svg>
+          </button>
+        </div>
+        <p class="foot">Baseado na revisão "Redes e Segurança" do professor.</p>
+      </section>
+
+      <!-- =================== ABA 2: QUESTÕES =================== -->
+      <!-- a lista (#qList) é montada pelo js a partir do array Q -->
+      <section class="panel" id="questoes" hidden>
+        <div class="panel-head">
+          <div class="eyebrow">
+            <svg class="i" aria-hidden="true"><use href="#i-pencil" /></svg>33
+            questões
+          </div>
+          <h2>Questões objetivas</h2>
+          <p class="lead">
+            Toque numa alternativa. A correção e a explicação aparecem logo
+            abaixo.
+          </p>
+          <div class="stats">
+            <div class="stat ok"><b id="qOk">0</b><span>acertos</span></div>
+            <div class="stat no"><b id="qBad">0</b><span>erros</span></div>
+            <div class="stat"><b id="qLeft">0</b><span>faltam</span></div>
+          </div>
+          <div class="bar"><i id="qProg"></i></div>
+          <div class="tools" data-filter="q">
+            <button class="chip" aria-pressed="true" data-f="all">Todas</button>
+            <button class="chip" aria-pressed="false" data-f="or">
+              Módulo 1
+            </button>
+            <button class="chip" aria-pressed="false" data-f="gr">
+              Módulo 2
+            </button>
+            <button class="chip" aria-pressed="false" data-f="bl">
+              Módulo 3
+            </button>
+            <button class="chip" aria-pressed="false" data-f="br">
+              Módulo 4
+            </button>
+            <button class="chip" aria-pressed="false" data-f="wrong">
+              <svg class="i" aria-hidden="true"><use href="#i-x" /></svg>Só as
+              que errei
+            </button>
+            <button class="chip act" data-reset="q">
+              <svg class="i" aria-hidden="true"><use href="#i-reset" /></svg
+              >Refazer
+            </button>
+          </div>
+        </div>
+        <div id="qList"></div>
+        <div class="result" id="qResult"></div>
+      </section>
+
+      <!-- =================== ABA 3: V OU F =================== -->
+      <!-- mesma estrutura da aba de questões, a lista vem do array V -->
+      <section class="panel" id="vf" hidden>
+        <div class="panel-head">
+          <div class="eyebrow">
+            <svg class="i" aria-hidden="true"><use href="#i-toggle" /></svg>20
+            afirmações
+          </div>
+          <h2>Verdadeiro ou falso</h2>
+          <p class="lead">
+            Boa parte delas são as pegadinhas que o professor marcou como erro
+            comum.
+          </p>
+          <div class="stats">
+            <div class="stat ok"><b id="vOk">0</b><span>acertos</span></div>
+            <div class="stat no"><b id="vBad">0</b><span>erros</span></div>
+            <div class="stat"><b id="vLeft">0</b><span>faltam</span></div>
+          </div>
+          <div class="bar"><i id="vProg"></i></div>
+          <div class="tools" data-filter="v">
+            <button class="chip" aria-pressed="true" data-f="all">Todas</button>
+            <button class="chip" aria-pressed="false" data-f="or">
+              Módulo 1
+            </button>
+            <button class="chip" aria-pressed="false" data-f="gr">
+              Módulo 2
+            </button>
+            <button class="chip" aria-pressed="false" data-f="bl">
+              Módulo 3
+            </button>
+            <button class="chip" aria-pressed="false" data-f="br">
+              Módulo 4
+            </button>
+            <button class="chip" aria-pressed="false" data-f="wrong">
+              <svg class="i" aria-hidden="true"><use href="#i-x" /></svg>Só as
+              que errei
+            </button>
+            <button class="chip act" data-reset="v">
+              <svg class="i" aria-hidden="true"><use href="#i-reset" /></svg
+              >Refazer
+            </button>
+          </div>
+        </div>
+        <div id="vList"></div>
+        <div class="result" id="vResult"></div>
+      </section>
+
+      <!-- =================== ABA 4: FLASHCARDS =================== -->
+      <section class="panel" id="flash" hidden>
+        <div class="panel-head">
+          <div class="eyebrow">
+            <svg class="i" aria-hidden="true"><use href="#i-layers" /></svg>37
+            cartões
+          </div>
+          <h2>Flashcards</h2>
+          <p class="lead">
+            Tente lembrar antes de virar. Depois marque se já sabe ou se precisa
+            revisar.
+          </p>
+          <div class="stats">
+            <div class="stat ok"><b id="fYes">0</b><span>já sei</span></div>
+            <div class="stat no"><b id="fNo">0</b><span>revisar</span></div>
+            <div class="stat"><b id="fTot">0</b><span>no total</span></div>
+          </div>
+          <div class="tools" id="fcFilter">
+            <button class="chip" aria-pressed="true" data-m="all">Todos</button>
+            <button class="chip" aria-pressed="false" data-m="or">
+              Módulo 1
+            </button>
+            <button class="chip" aria-pressed="false" data-m="gr">
+              Módulo 2
+            </button>
+            <button class="chip" aria-pressed="false" data-m="bl">
+              Módulo 3
+            </button>
+            <button class="chip" aria-pressed="false" data-m="br">
+              Módulo 4
+            </button>
+            <button class="chip" aria-pressed="false" data-m="review">
+              <svg class="i" aria-hidden="true"><use href="#i-reset" /></svg>Só
+              "revisar"
+            </button>
+            <button class="chip act" id="fcShuffle">
+              <svg class="i" aria-hidden="true"><use href="#i-shuffle" /></svg
+              >Embaralhar
+            </button>
+          </div>
+        </div>
+
+        <!-- cartão: frente = termo, verso = definição + analogia -->
+        <div class="fc-wrap">
+          <button class="fc" id="fc" aria-live="polite">
+            <div class="face front">
+              <div class="mtag">
+                <span id="fcTag"></span><span id="fcCount2"></span>
+              </div>
+              <div class="term" id="fcTerm"></div>
+              <div class="hint">
+                <svg class="i" aria-hidden="true"><use href="#i-flip" /></svg
+                >toque para virar
+              </div>
+            </div>
+            <div class="face back">
+              <div class="def" id="fcDef"></div>
+              <div class="ana">
+                <svg class="i" aria-hidden="true"><use href="#i-msg" /></svg
+                ><span id="fcAna"></span>
+              </div>
+            </div>
+          </button>
+        </div>
+        <div class="judge">
+          <button class="j-no" id="fcNo">
+            <svg class="i" aria-hidden="true"><use href="#i-reset" /></svg
+            >Revisar</button
+          ><button class="j-yes" id="fcYes">
+            <svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Já
+            sei
+          </button>
+        </div>
+        <div class="fc-nav">
+          <button class="navbtn" id="fcPrev" aria-label="Anterior">
+            <svg class="i" aria-hidden="true">
+              <use href="#i-left" />
+            </svg></button
+          ><span class="fc-count" id="fcCount"></span
+          ><button class="navbtn" id="fcNext" aria-label="Próximo">
+            <svg class="i" aria-hidden="true"><use href="#i-right" /></svg>
+          </button>
+        </div>
+        <p class="foot">
+          No computador: setas ← → para navegar e espaço para virar.
+        </p>
+      </section>
+    </main>
+
+    <!-- o script fica no fim do body pra os elementos acima já existirem quando ele rodar -->
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1269 @@
+/* =========================================================
+   Revisão — Redes e Segurança
+   Folha de estilos
+   ========================================================= */
+
+/* ---------- cores (tema claro) ----------
+   tudo que muda entre claro/escuro está aqui em cima,
+   o resto do css só usa as variáveis */
+:root {
+  --bg: #f4f5f7;
+  --paper: #ffffff;
+  --surface2: #f1f3f6;
+  --ink: #1a2230;
+  --muted: #5e6a79;
+  --line: #e3e7ed;
+  --line2: #c9d0da;
+  --accent: #2f5bd3;
+  --accent-soft: #e9eefb;
+  --ok: #18794e;
+  --ok-soft: #e5f4ec;
+  --bad: #c0392b;
+  --bad-soft: #fbebe9;
+  --warn: #b7791f;
+  --shadow:
+    0 1px 2px rgba(26, 34, 48, 0.05), 0 6px 20px -10px rgba(26, 34, 48, 0.15);
+}
+
+/* tema escuro automático (quando o sistema está no escuro
+   e a pessoa não forçou o claro no botão) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1318;
+    --paper: #171c23;
+    --surface2: #1d232b;
+    --ink: #e6eaf0;
+    --muted: #98a2b0;
+    --line: #262d37;
+    --line2: #3a4350;
+    --accent: #7b9cf5;
+    --accent-soft: #1f2942;
+    --ok: #4cc38a;
+    --ok-soft: #15301f;
+    --bad: #f07167;
+    --bad-soft: #3a1d1c;
+    --warn: #e2b04a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* tema escuro forçado pelo botão (mesmas cores do bloco de cima) */
+:root[data-theme="dark"] {
+  --bg: #0f1318;
+  --paper: #171c23;
+  --surface2: #1d232b;
+  --ink: #e6eaf0;
+  --muted: #98a2b0;
+  --line: #262d37;
+  --line2: #3a4350;
+  --accent: #7b9cf5;
+  --accent-soft: #1f2942;
+  --ok: #4cc38a;
+  --ok-soft: #15301f;
+  --bad: #f07167;
+  --bad-soft: #3a1d1c;
+  --warn: #e2b04a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- base ---------- */
+/* o padding com env() evita que o conteúdo fique embaixo do notch no celular */
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+/* scroll-padding compensa a barra fixa do topo quando clica no índice */
+html {
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 84px);
+  scroll-behavior: smooth;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family:
+    "Atkinson Hyperlegible",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.2s;
+}
+h1,
+h2,
+h3 {
+  font-family:
+    "Bricolage Grotesque", "Atkinson Hyperlegible", system-ui, sans-serif;
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+p {
+  margin: 0;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+/* tamanho padrão dos ícones svg */
+.i {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ---------- barra do topo (abas) ---------- */
+.topbar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-in {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+}
+/* o nome só aparece em tela larga, no celular não cabe */
+.brand {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.brand .i {
+  color: var(--accent);
+}
+@media (min-width: 780px) {
+  .brand {
+    display: flex;
+  }
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+  background: var(--surface2);
+  padding: 4px;
+  border-radius: 12px;
+}
+.tab {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 8px 6px;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 14.5px;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.tab .i {
+  width: 17px;
+  height: 17px;
+}
+.tab .n {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.tab[aria-selected="true"] {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.tab[aria-selected="true"] .i {
+  color: var(--accent);
+}
+/* no celular esconde contador e ícone pra caber os 4 nomes */
+@media (max-width: 560px) {
+  .tab .n {
+    display: none;
+  }
+  .tab .i {
+    display: none;
+  }
+  .tab {
+    font-size: 13.5px;
+  }
+}
+
+/* botão de tema: mostra a lua ou o sol dependendo do modo (o js seta data-dark) */
+.theme {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  flex: 0 0 auto;
+}
+.theme .sun {
+  display: none;
+}
+:root[data-dark="1"] .theme .sun {
+  display: block;
+}
+:root[data-dark="1"] .theme .moon {
+  display: none;
+}
+
+/* barrinha fina de progresso de leitura */
+.readbar {
+  height: 2px;
+}
+.readbar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+}
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 16px 90px;
+}
+.panel[hidden] {
+  display: none;
+}
+
+/* ---------- hero (cabeçalho da aba Conteúdo) ---------- */
+.hero {
+  margin-top: 22px;
+  background: var(--paper);
+  border-radius: 22px;
+  padding: 28px 22px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 22px;
+}
+@media (min-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr 300px;
+    align-items: center;
+    padding: 40px;
+  }
+}
+.hero h1 {
+  font-size: clamp(30px, 6.5vw, 46px);
+  font-weight: 800;
+}
+.hero .lead {
+  color: var(--muted);
+  margin-top: 12px;
+  max-width: 50ch;
+}
+.hero-art {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  height: auto;
+  color: var(--ink);
+}
+.hero-art .ln {
+  stroke: var(--line2);
+  stroke-width: 2;
+  fill: none;
+}
+.hero-art .hub {
+  fill: var(--accent);
+}
+
+/* bolinhas que "viajam" pelos cabos do desenho; desliga se a pessoa
+   pediu menos movimento no sistema */
+.pkt {
+  fill: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pkt {
+    animation: travel 4s linear infinite;
+  }
+  .pkt.d2 {
+    animation-delay: 1.33s;
+  }
+  .pkt.d3 {
+    animation-delay: 2.66s;
+  }
+}
+@keyframes travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+/* ---------- índice dos módulos ---------- */
+.index {
+  margin-top: 16px;
+  background: var(--paper);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.index a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+}
+.index a:first-child {
+  border-top: 0;
+}
+.index a:hover {
+  background: var(--surface2);
+}
+.index .num {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--surface2);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-family: "Bricolage Grotesque", sans-serif;
+  flex: 0 0 auto;
+}
+.index .i.ic {
+  color: var(--accent);
+}
+.index b {
+  display: block;
+}
+.index small {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+  display: block;
+}
+.index b {
+  line-height: 1.3;
+}
+.index .grow {
+  flex: 1;
+}
+.index .prog {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* legenda dos ícones (analogia / dica / pegadinha) */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 18px 4px 0;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---------- módulos e tópicos ---------- */
+.module {
+  margin-top: 56px;
+}
+.module-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+.module-head .num {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  flex: 0 0 auto;
+}
+.module-head .k {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.module-head h2 {
+  font-size: clamp(22px, 4.5vw, 28px);
+}
+
+/* cada tópico é um cartão branco */
+.topic {
+  background: var(--paper);
+  border-radius: 20px;
+  padding: 24px 20px;
+  margin-top: 18px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .topic {
+    padding: 32px 34px;
+  }
+}
+.topic .tn {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.topic h3 {
+  font-size: 24px;
+  margin-top: -10px;
+}
+.topic .oneline {
+  font-size: 18.5px;
+  max-width: 62ch;
+}
+.topic > p {
+  max-width: 66ch;
+}
+
+/* figura (svg) de cada tópico */
+.fig {
+  margin: 0;
+  background: var(--surface2);
+  border-radius: 16px;
+  padding: 16px 12px 12px;
+}
+.fig svg {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  margin: 0 auto;
+  color: var(--ink);
+  overflow: visible;
+}
+.fig figcaption {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* caixa da analogia */
+.analogy {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+.analogy .ah {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.analogy .ah .i {
+  color: var(--accent);
+}
+.analogy .ah b {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 16.5px;
+}
+.analogy p {
+  color: var(--ink);
+}
+
+/* lista de termos (dl) */
+dl.terms {
+  margin: 0;
+  display: grid;
+}
+dl.terms div {
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+}
+dl.terms div:last-child {
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 640px) {
+  dl.terms div {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 18px;
+  }
+}
+dl.terms dt {
+  font-weight: 700;
+}
+dl.terms dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* dica e pegadinha: mesma caixa, só muda a cor da borda (--nc) */
+.note {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: var(--surface2);
+  font-size: 16px;
+  border-left: 3px solid var(--nc);
+}
+.note .i {
+  color: var(--nc);
+  margin-top: 2px;
+}
+.note strong {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+.tip {
+  --nc: var(--warn);
+}
+.trap {
+  --nc: var(--bad);
+}
+
+/* passo a passo em "pílulas" */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.steps span {
+  background: var(--surface2);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 15px;
+}
+.steps i {
+  font-style: normal;
+  color: var(--muted);
+}
+
+/* tabelinhas dos tópicos (rolam na horizontal se não couberem) */
+.tablewrap {
+  overflow-x: auto;
+}
+table.mini {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 15.5px;
+}
+table.mini th,
+table.mini td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 8px;
+  text-align: left;
+  vertical-align: top;
+}
+table.mini tr:first-child th {
+  border-bottom: 2px solid var(--line2);
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+table.mini td:first-child {
+  white-space: nowrap;
+}
+
+/* botão "marcar como estudado" (criado pelo js no fim de cada tópico) */
+.done-btn {
+  justify-self: start;
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 999px;
+  padding: 7px 14px 7px 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.done-btn .i {
+  width: 18px;
+  height: 18px;
+}
+.done-btn[aria-pressed="true"] {
+  background: var(--ok-soft);
+  border-color: transparent;
+  color: var(--ok);
+}
+
+/* botões do fim da página que levam pras outras abas */
+.next-steps {
+  margin-top: 48px;
+  display: grid;
+  gap: 10px;
+}
+@media (min-width: 640px) {
+  .next-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.cta {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 16px;
+  padding: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+.cta .i {
+  color: var(--accent);
+}
+.cta .grow {
+  flex: 1;
+}
+
+/* ---------- classes usadas dentro dos svgs ---------- */
+/* ícones */
+.ico {
+  color: var(--ink);
+}
+.ico2 {
+  color: var(--muted);
+}
+.icoa {
+  color: var(--accent);
+}
+.icow {
+  color: #fff;
+}
+.okc {
+  color: var(--ok);
+}
+.badc {
+  color: var(--bad);
+}
+/* caixas e preenchimentos */
+.bx {
+  fill: var(--paper);
+  stroke: var(--line2);
+  stroke-width: 1.5;
+}
+.dim {
+  opacity: 0.6;
+}
+.room {
+  fill: var(--paper);
+  stroke: var(--line2);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+}
+.soft {
+  fill: var(--accent-soft);
+}
+.ac {
+  fill: var(--accent);
+}
+.dk {
+  fill: var(--muted);
+}
+.acbg {
+  fill: var(--accent);
+}
+.okbg {
+  fill: var(--ok);
+}
+.badbg {
+  fill: var(--bad);
+}
+.badf {
+  fill: var(--bad);
+}
+.win {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+/* linhas */
+.ln {
+  stroke: var(--muted);
+  stroke-width: 1.6;
+  fill: none;
+}
+.acs {
+  stroke: var(--accent);
+}
+.bads {
+  stroke: var(--bad);
+}
+.dash {
+  stroke-dasharray: 4 4;
+}
+.cut {
+  stroke: var(--bad);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 5;
+}
+.trunk {
+  stroke: var(--ink);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.tagg rect {
+  fill: var(--accent);
+}
+/* links do STP: lk = ativo, blk = bloqueado */
+.lk {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.blk {
+  stroke: var(--muted);
+  stroke-width: 3;
+  stroke-dasharray: 8 6;
+}
+.loopc {
+  fill: none;
+  stroke: var(--bad);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 5;
+}
+/* células do quadro ethernet */
+.cell {
+  fill: var(--paper);
+  stroke: var(--line2);
+}
+.cellh {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.hair {
+  stroke: var(--line2);
+  stroke-width: 1;
+}
+/* pontas de seta */
+.mk {
+  fill: var(--muted);
+}
+.mkb {
+  fill: var(--bad);
+}
+/* textos */
+.fig text {
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+.tx {
+  fill: var(--ink);
+  font-weight: 700;
+  font-size: 12.5px;
+}
+.ts {
+  fill: var(--ink);
+  font-size: 12px;
+}
+.tm {
+  fill: var(--muted);
+  font-size: 11.5px;
+}
+.sm {
+  font-size: 9.5px;
+}
+.tw {
+  fill: #fff;
+  font-weight: 700;
+  font-size: 12px;
+}
+.acf {
+  fill: var(--accent);
+}
+.bad {
+  fill: var(--bad);
+}
+.mut {
+  fill: var(--muted);
+}
+.mono {
+  fill: var(--ink);
+  font-family: ui-monospace, Menlo, Consolas, monospace !important;
+  font-weight: 700;
+  font-size: 17px;
+}
+.mono.s {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ---------- abas de prática: cabeçalho, placar e filtros ---------- */
+.panel-head {
+  margin-top: 22px;
+  background: var(--paper);
+  border-radius: 22px;
+  padding: 24px 22px;
+  box-shadow: var(--shadow);
+}
+@media (min-width: 640px) {
+  .panel-head {
+    padding: 30px 34px;
+  }
+}
+.panel-head .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.panel-head h2 {
+  font-size: clamp(26px, 5vw, 34px);
+}
+.panel-head .lead {
+  color: var(--muted);
+  margin-top: 6px;
+}
+.stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.stat b {
+  display: block;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 28px;
+  line-height: 1;
+}
+.stat span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.stat.ok b {
+  color: var(--ok);
+}
+.stat.no b {
+  color: var(--bad);
+}
+.bar {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 99px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+.tools {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.chip {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 999px;
+  padding: 6px 13px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chip .i {
+  width: 16px;
+  height: 16px;
+}
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.chip.act {
+  color: var(--ink);
+}
+
+/* ---------- questões e V ou F ---------- */
+.q {
+  background: var(--paper);
+  border-radius: 18px;
+  padding: 20px;
+  margin-top: 14px;
+  box-shadow: var(--shadow);
+}
+@media (min-width: 640px) {
+  .q {
+    padding: 24px 28px;
+  }
+}
+.q .qtop {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.q .stem {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 16px;
+  max-width: 64ch;
+}
+.opts {
+  display: grid;
+  gap: 8px;
+}
+.opt {
+  text-align: left;
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 11px 12px;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.opt .l {
+  font-weight: 800;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--surface2);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  flex: 0 0 auto;
+}
+.opt .l .i {
+  width: 16px;
+  height: 16px;
+}
+.opt:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+.opt:disabled {
+  cursor: default;
+}
+/* estados depois de responder */
+.opt.right {
+  background: var(--ok-soft);
+  border-color: var(--ok);
+}
+.opt.right .l {
+  background: var(--ok);
+  color: #fff;
+}
+.opt.wrong {
+  background: var(--bad-soft);
+  border-color: var(--bad);
+}
+.opt.wrong .l {
+  background: var(--bad);
+  color: #fff;
+}
+.opt.fade {
+  opacity: 0.55;
+}
+/* botões verdadeiro / falso lado a lado */
+.vf {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.vf .opt {
+  justify-content: center;
+  font-weight: 800;
+  padding: 13px;
+}
+/* "acertou" / "não foi dessa vez" (começa escondido) */
+.verdict {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-weight: 800;
+}
+.verdict.ok {
+  display: flex;
+  color: var(--ok);
+}
+.verdict.no {
+  display: flex;
+  color: var(--bad);
+}
+/* caixa com a explicação */
+details.ans {
+  margin-top: 10px;
+  background: var(--surface2);
+  border-radius: 12px;
+  padding: 11px 14px;
+}
+details.ans summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--accent);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+details.ans summary::-webkit-details-marker {
+  display: none;
+}
+details.ans summary .i {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s;
+}
+details.ans[open] summary .i {
+  transform: rotate(90deg);
+}
+details.ans .exp {
+  margin-top: 8px;
+}
+details.ans .exp b.k {
+  color: var(--ok);
+}
+/* cartão de resultado final */
+.result {
+  display: none;
+  background: var(--paper);
+  border-radius: 20px;
+  padding: 26px;
+  margin-top: 18px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.result.show {
+  display: block;
+}
+.result .i {
+  width: 36px;
+  height: 36px;
+  color: var(--accent);
+}
+.result .big {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 6px;
+}
+.result p {
+  color: var(--muted);
+  margin-top: 6px;
+}
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 36px 10px;
+}
+
+/* ---------- flashcards ---------- */
+/* o cartão vira em 3d: duas faces com backface-visibility escondido */
+.fc-wrap {
+  perspective: 1400px;
+  margin-top: 18px;
+}
+.fc {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  border: 0;
+  background: transparent;
+  padding: 0;
+  display: block;
+}
+.fc.flip {
+  transform: rotateY(180deg);
+}
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 22px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+.face.back {
+  transform: rotateY(180deg);
+  text-align: left;
+  align-items: stretch;
+  overflow: auto;
+}
+.face .mtag {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  right: 22px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.face .term {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(30px, 7vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.face .hint {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.face .hint .i {
+  width: 16px;
+  height: 16px;
+}
+.face .def {
+  font-size: 19px;
+}
+.face .ana {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+.face .ana .i {
+  color: var(--accent);
+}
+/* setas e contador */
+.fc-nav {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+.navbtn {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow);
+}
+.fc-count {
+  font-weight: 800;
+  color: var(--muted);
+}
+/* botões "revisar" / "já sei" */
+.judge {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+.judge button {
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  border-radius: 14px;
+  padding: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.j-no {
+  color: var(--bad);
+}
+.j-yes {
+  color: var(--ok);
+}
+.j-no:hover {
+  border-color: var(--bad);
+}
+.j-yes:hover {
+  border-color: var(--ok);
+}
+.foot {
+  color: var(--muted);
+  text-align: center;
+  font-size: 14px;
+  margin-top: 36px;
+}
+
+/* sem animação de virar o cartão pra quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .fc {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
