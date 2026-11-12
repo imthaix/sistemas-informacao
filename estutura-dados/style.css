@@ -1,0 +1,484 @@
+/* =========================================================
+   Guia de Estudos — Estrutura de Dados
+   Folha de estilos
+   ========================================================= */
+
+/* ---------- cores (tema claro) ----------
+   o resto do css só usa essas variáveis, então pra mudar
+   a paleta é só mexer aqui */
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --ink: #1b2340;
+  --sub: #52608a;
+  --accent: #4338ca;
+  --accent2: #0891b2;
+  --accent3: #ea580c;
+  --accent4: #16a34a;
+  --line: #dfe4f3;
+  --code-bg: #1e2235;
+  --code-ink: #d7dcff;
+  /* respeita a área segura do celular (notch / barra de baixo) */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* tema escuro automático, a menos que a página force o claro */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11131f;
+    --card: #181c2d;
+    --ink: #edf0ff;
+    --sub: #a8b1d6;
+    --line: #2a2f49;
+    --code-bg: #0e1020;
+    --code-ink: #c9d0ff;
+  }
+}
+
+/* tema escuro forçado via atributo (mesmas cores do bloco acima) */
+:root[data-theme="dark"] {
+  --bg: #11131f;
+  --card: #181c2d;
+  --ink: #edf0ff;
+  --sub: #a8b1d6;
+  --line: #2a2f49;
+  --code-bg: #0e1020;
+  --code-ink: #c9d0ff;
+}
+
+/* ---------- base ---------- */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 18px 80px;
+}
+
+/* ---------- cabeçalho com degradê ---------- */
+header.top {
+  background: linear-gradient(135deg, #4338ca, #0891b2);
+  color: #fff;
+  padding: 34px 18px;
+  text-align: center;
+}
+header.top h1 {
+  margin: 0 0 6px;
+  font-size: 1.7rem;
+}
+header.top p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+/* ---------- índice ---------- */
+nav.toc {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 24px 0;
+}
+nav.toc h2 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  color: var(--accent);
+}
+/* lista em duas colunas (vira uma só no celular, ver media query mais abaixo) */
+nav.toc ol {
+  margin: 0;
+  padding-left: 20px;
+  columns: 2;
+  gap: 6px;
+}
+nav.toc a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+nav.toc a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- seções ---------- */
+section {
+  margin: 40px 0;
+  scroll-margin-top: 16px;
+}
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+/* quadradinho com o número da seção */
+.sec-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex: none;
+}
+h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+h3 {
+  font-size: 1.05rem;
+  color: var(--accent);
+  margin: 22px 0 8px;
+}
+
+/* ---------- cartões e grade ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 14px 0;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+/* no celular tudo empilha em uma coluna */
+@media (max-width: 640px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+  .toc ol {
+    columns: 1;
+  }
+}
+
+/* ---------- etiquetas coloridas (LIFO, FIFO, etc.) ---------- */
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.tag.lifo {
+  background: var(--accent3);
+}
+.tag.fifo {
+  background: var(--accent2);
+}
+.tag.tree {
+  background: var(--accent4);
+}
+.tag.search {
+  background: #9333ea;
+}
+.tag.sort {
+  background: #be123c;
+}
+.tag.hash {
+  background: #0d9488;
+}
+
+/* ---------- código ---------- */
+code,
+pre {
+  font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+}
+pre {
+  background: var(--code-bg);
+  color: var(--code-ink);
+  padding: 14px 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+/* código dentro de parágrafo */
+code.inline {
+  background: rgba(67, 56, 202, 0.1);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-size: 0.88em;
+}
+
+/* ---------- tabelas ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+th,
+td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+}
+th {
+  background: rgba(67, 56, 202, 0.08);
+  color: var(--accent);
+}
+
+/* ---------- caixas de destaque ----------
+   padrão (laranja) = atenção/pegadinha, .ok = verde, .info = azul */
+.callout {
+  border-left: 4px solid var(--accent3);
+  background: rgba(234, 88, 12, 0.08);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 12px 0;
+  font-size: 0.92rem;
+}
+.callout.ok {
+  border-color: var(--accent4);
+  background: rgba(22, 163, 74, 0.08);
+}
+.callout.info {
+  border-color: var(--accent2);
+  background: rgba(8, 145, 178, 0.08);
+}
+
+/* ---------- ilustrações svg ---------- */
+svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 12px 0;
+}
+
+/* (sobrou do layout antigo, nenhum elemento usa mais) */
+.flow-step {
+  background: var(--card);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ---------- caixa de autoteste e rodapé ---------- */
+.quiz-box {
+  background: rgba(67, 56, 202, 0.06);
+  border: 1px dashed var(--accent);
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 14px;
+  font-size: 0.9rem;
+}
+footer {
+  text-align: center;
+  color: var(--sub);
+  font-size: 0.85rem;
+  margin-top: 50px;
+}
+
+/* ---------- "dica final" (details/summary) ---------- */
+details {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: 8px 0;
+}
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* deixa a tabela rolar na horizontal se não couber na tela */
+.overflow {
+  overflow-x: auto;
+}
+
+/* =========================================================
+   Flashcards e Verdadeiro/Falso (usados pelo script.js)
+   ========================================================= */
+
+/* botões genéricos */
+.btn {
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+}
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+.btn.ok {
+  color: var(--accent4);
+}
+.btn.no {
+  color: #dc2626;
+}
+
+/* "chips" de filtro */
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.chip {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 5px 13px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--sub);
+}
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--card);
+  border-color: var(--ink);
+}
+
+/* ---------- flashcard ----------
+   o cartão gira em 3d: duas faces com backface-visibility escondido */
+.fc-wrap {
+  perspective: 1200px;
+  margin: 14px 0;
+}
+.fc {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 230px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+.fc.flip {
+  transform: rotateY(180deg);
+}
+.fc-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  text-align: center;
+  overflow: auto;
+}
+.fc-back {
+  transform: rotateY(180deg);
+  border-color: var(--accent);
+}
+.fc-face strong {
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+.fc-face small,
+.fc-face em {
+  font-size: 0.8rem;
+  color: var(--sub);
+}
+.fc-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+.fc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.fc-stat {
+  font-size: 0.85rem;
+  color: var(--sub);
+  text-align: center;
+  margin: 10px 0 0;
+}
+
+/* ---------- verdadeiro ou falso ---------- */
+.vf-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  background: var(--card);
+}
+.vf-item p {
+  margin: 0 0 12px;
+  font-weight: 600;
+}
+.vf-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.vf-btns .btn.right {
+  background: rgba(22, 163, 74, 0.12);
+  border-color: var(--accent4);
+}
+.vf-btns .btn.wrong {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: #dc2626;
+}
+.vf-exp {
+  display: none;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+.vf-item.done .vf-exp {
+  display: block;
+}
+.vf-score {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fc {
+    transition: none;
+  }
+}

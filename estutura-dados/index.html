@@ -1,0 +1,1204 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Guia de Estudos — Estrutura de Dados</title>
+
+    <!-- estilos -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>📚 Guia de Estudos — Estrutura de Dados</h1>
+      <p>Pilhas · Filas · Listas · Árvores · Busca · Ordenação · Hash</p>
+    </header>
+
+    <div class="wrap">
+      <!-- índice (os links apontam pros ids das seções) -->
+      <nav class="toc">
+        <h2>Índice</h2>
+        <ol>
+          <li><a href="#pilhas">Pilhas (LIFO)</a></li>
+          <li><a href="#filas">Filas (FIFO)</a></li>
+          <li><a href="#listas">Listas Encadeadas</a></li>
+          <li><a href="#arvores">Árvores Binárias</a></li>
+          <li><a href="#bst">Árvore Binária de Busca (BST)</a></li>
+          <li><a href="#caminhamentos">Caminhamentos em Árvore</a></li>
+          <li><a href="#busca">Métodos de Busca</a></li>
+          <li><a href="#ordenacao">Métodos de Ordenação</a></li>
+          <li><a href="#hash">Tabela Hash</a></li>
+          <li><a href="#resumo">Tabela-resumo geral</a></li>
+          <li><a href="#flashcards">Flashcards</a></li>
+          <li><a href="#vf">Verdadeiro ou Falso</a></li>
+        </ol>
+      </nav>
+
+      <!-- ============ PILHAS ============ -->
+      <section id="pilhas">
+        <div class="sec-head">
+          <div class="sec-num">1</div>
+          <h2>Pilhas (Stack)</h2>
+        </div>
+        <span class="tag lifo">LIFO — Last In, First Out</span>
+
+        <div class="card">
+          <p>
+            Uma pilha é uma estrutura linear com acesso restrito a
+            <b>uma única extremidade: o topo</b>. O último elemento que entra é
+            o primeiro a sair — pense numa pilha de pratos.
+          </p>
+
+          <svg viewBox="0 0 420 180">
+            <rect
+              x="140"
+              y="20"
+              width="140"
+              height="35"
+              rx="4"
+              fill="#ea580c"
+            />
+            <text
+              x="210"
+              y="43"
+              text-anchor="middle"
+              fill="#fff"
+              font-size="16"
+              font-weight="700"
+            >
+              30
+            </text>
+            <text
+              x="300"
+              y="43"
+              font-size="13"
+              fill="#ea580c"
+              font-weight="700"
+            >
+              ← TOPO
+            </text>
+            <rect x="140" y="58" width="140" height="35" fill="#0891b2" />
+            <text
+              x="210"
+              y="81"
+              text-anchor="middle"
+              fill="#fff"
+              font-size="16"
+              font-weight="700"
+            >
+              20
+            </text>
+            <rect x="140" y="96" width="140" height="35" fill="#4338ca" />
+            <text
+              x="210"
+              y="119"
+              text-anchor="middle"
+              fill="#fff"
+              font-size="16"
+              font-weight="700"
+            >
+              10
+            </text>
+            <text
+              x="300"
+              y="119"
+              font-size="13"
+              fill="#4338ca"
+              font-weight="700"
+            >
+              ← BASE
+            </text>
+          </svg>
+
+          <h3>Operações essenciais</h3>
+          <table>
+            <tr>
+              <th>Operação</th>
+              <th>O que faz</th>
+            </tr>
+            <tr>
+              <td><code class="inline">push(item)</code></td>
+              <td>Insere um item no topo</td>
+            </tr>
+            <tr>
+              <td><code class="inline">pop()</code></td>
+              <td>Remove e retorna o item do topo</td>
+            </tr>
+            <tr>
+              <td><code class="inline">peek()</code></td>
+              <td>Consulta o topo sem remover</td>
+            </tr>
+            <tr>
+              <td><code class="inline">isEmpty()</code></td>
+              <td>Retorna True/False se está vazia</td>
+            </tr>
+            <tr>
+              <td><code class="inline">size()</code></td>
+              <td>Retorna a quantidade de itens</td>
+            </tr>
+          </table>
+
+          <div class="callout">
+            <b>Regra fundamental:</b> acessar <u>sempre</u> pelo topo. Nunca se
+            mexe na base diretamente.
+          </div>
+
+          <h3>Exemplo visual: push(10) → push(20) → push(30) → pop()</h3>
+          <svg viewBox="0 0 560 150">
+            <g font-size="12" text-anchor="middle">
+              <rect x="10" y="90" width="50" height="30" fill="#4338ca" />
+              <text x="35" y="110" fill="#fff">10</text>
+              <text x="35" y="140">push(10)</text>
+              <path
+                d="M70 100 L100 100"
+                stroke="#999"
+                stroke-width="2"
+                marker-end="url(#a)"
+              />
+              <rect x="110" y="60" width="50" height="30" fill="#0891b2" />
+              <text x="135" y="80" fill="#fff">20</text>
+              <rect x="110" y="90" width="50" height="30" fill="#4338ca" />
+              <text x="135" y="110" fill="#fff">10</text>
+              <text x="135" y="140">push(20)</text>
+              <path
+                d="M170 100 L200 100"
+                stroke="#999"
+                stroke-width="2"
+                marker-end="url(#a)"
+              />
+              <rect x="210" y="30" width="50" height="30" fill="#ea580c" />
+              <text x="235" y="50" fill="#fff">30</text>
+              <rect x="210" y="60" width="50" height="30" fill="#0891b2" />
+              <text x="235" y="80" fill="#fff">20</text>
+              <rect x="210" y="90" width="50" height="30" fill="#4338ca" />
+              <text x="235" y="110" fill="#fff">10</text>
+              <text x="235" y="140">push(30)</text>
+              <path
+                d="M270 100 L320 100"
+                stroke="#999"
+                stroke-width="2"
+                marker-end="url(#a)"
+              />
+              <rect x="330" y="60" width="50" height="30" fill="#0891b2" />
+              <text x="355" y="80" fill="#fff">20</text>
+              <rect x="330" y="90" width="50" height="30" fill="#4338ca" />
+              <text x="355" y="110" fill="#fff">10</text>
+              <text x="355" y="140">pop() → retorna 30</text>
+            </g>
+            <!-- ponta de seta usada pelos caminhos acima -->
+            <defs>
+              <marker
+                id="a"
+                markerWidth="8"
+                markerHeight="8"
+                refX="4"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0,0 L8,4 L0,8 Z" fill="#999" />
+              </marker>
+            </defs>
+          </svg>
+
+          <div class="grid2">
+            <div>
+              <h3>Pilha sequencial</h3>
+              <ul>
+                <li>Armazenamento contíguo (vetor/lista)</li>
+                <li>Tamanho fixo (pode "estourar")</li>
+                <li>Acesso direto por índice</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Pilha encadeada</h3>
+              <ul>
+                <li>Nós alocados dinamicamente</li>
+                <li>Tamanho cresce/diminui livremente</li>
+                <li>Cada nó aponta para o anterior</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Código em Python (lista nativa)</h3>
+          <pre>
+pilha = [1, 1, 2, 3, 5]
+pilha.append(8)      # push → insere no FIM
+pilha.append(13)
+# [1, 1, 2, 3, 5, 8, 13]
+pilha.pop()           # pop → remove do FIM
+# [1, 1, 2, 3, 5, 8]</pre
+          >
+          <div class="callout info">
+            Repare: em Python, <code class="inline">append()</code> insere no
+            <b>final</b> da lista e <code class="inline">pop()</code> remove do
+            <b>final</b> — por isso o final da lista representa o "topo" da
+            pilha.
+          </div>
+
+          <h3>Aplicações reais (pegadinha de prova!)</h3>
+          <table>
+            <tr>
+              <th>Situação</th>
+              <th>Por que é LIFO</th>
+            </tr>
+            <tr>
+              <td>Pilha de pratos/bandejas</td>
+              <td>O último colocado é o primeiro retirado</td>
+            </tr>
+            <tr>
+              <td>Botão "Voltar" do navegador</td>
+              <td>A página atual fica no topo; volta na ordem inversa</td>
+            </tr>
+            <tr>
+              <td>Desfazer (Ctrl+Z)</td>
+              <td>A ação mais recente é desfeita primeiro</td>
+            </tr>
+            <tr>
+              <td>Pilha de chamadas de função</td>
+              <td>A última função chamada retorna primeiro</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ FILAS ============ -->
+      <section id="filas">
+        <div class="sec-head">
+          <div class="sec-num">2</div>
+          <h2>Filas (Queue)</h2>
+        </div>
+        <span class="tag fifo">FIFO — First In, First Out</span>
+
+        <div class="card">
+          <p>
+            Na fila, a inserção ocorre sempre no <b>fim (rear)</b> e a remoção
+            sempre no <b>início (front)</b>. É exatamente como uma fila de
+            banco.
+          </p>
+
+          <svg viewBox="0 0 480 130">
+            <g font-size="13" font-weight="700" text-anchor="middle">
+              <text x="20" y="70" fill="#dc2626">← sai</text>
+              <rect x="60" y="45" width="60" height="40" fill="#1e3a5f" />
+              <text x="90" y="70" fill="#fff">A</text>
+              <rect x="130" y="45" width="60" height="40" fill="#0891b2" />
+              <text x="160" y="70" fill="#fff">B</text>
+              <rect x="200" y="45" width="60" height="40" fill="#ea580c" />
+              <text x="230" y="70" fill="#fff">C</text>
+              <rect x="270" y="45" width="60" height="40" fill="#7c3aed" />
+              <text x="300" y="70" fill="#fff">D</text>
+              <text x="420" y="70" fill="#16a34a">entra →</text>
+            </g>
+            <text x="90" y="105" font-size="11" text-anchor="middle">
+              INÍCIO / FRONT
+            </text>
+            <text x="300" y="105" font-size="11" text-anchor="middle">
+              FIM / REAR
+            </text>
+          </svg>
+          <p style="text-align: center; font-size: 0.85rem; color: var(--sub)">
+            Ordem de remoção: A → B → C → D
+          </p>
+
+          <h3>Operações fundamentais</h3>
+          <table>
+            <tr>
+              <th>Operação</th>
+              <th>O que faz</th>
+            </tr>
+            <tr>
+              <td><code class="inline">enqueue(x)</code></td>
+              <td>Insere x no final</td>
+            </tr>
+            <tr>
+              <td><code class="inline">dequeue()</code></td>
+              <td>Remove e retorna o item do início</td>
+            </tr>
+            <tr>
+              <td><code class="inline">isEmpty()</code></td>
+              <td>Testa se está vazia</td>
+            </tr>
+            <tr>
+              <td><code class="inline">size()</code></td>
+              <td>Retorna a quantidade</td>
+            </tr>
+          </table>
+
+          <h3>Código em Python</h3>
+          <pre>
+class Fila:
+    def __init__(self):
+        self.itens = []
+
+    def enqueue(self, item):
+        self.itens.append(item)      # insere no FINAL
+
+    def dequeue(self):
+        if self.isEmpty():
+            return None
+        return self.itens.pop(0)     # remove do INÍCIO
+
+    def isEmpty(self):
+        return len(self.itens) == 0</pre
+          >
+          <div class="callout">
+            ⚠️ Atenção: <code class="inline">pop(0)</code> desloca todos os
+            elementos da lista uma posição — é um ponto clássico de pegadinha
+            sobre custo computacional (O(n) nessa implementação simples).
+          </div>
+
+          <h3>Variações de fila</h3>
+          <table>
+            <tr>
+              <th>Tipo</th>
+              <th>Armazenamento</th>
+              <th>Ponto forte</th>
+              <th>Cuidado</th>
+            </tr>
+            <tr>
+              <td>Sequencial</td>
+              <td>Vetor/lista</td>
+              <td>Simplicidade</td>
+              <td>Remoção pode deslocar elementos</td>
+            </tr>
+            <tr>
+              <td>Prioridade</td>
+              <td>Heap</td>
+              <td>Seleciona por prioridade</td>
+              <td><b>Não é FIFO global</b></td>
+            </tr>
+            <tr>
+              <td>Circular</td>
+              <td>Vetor fixo</td>
+              <td>Reaproveita espaço livre</td>
+              <td>Capacidade limitada</td>
+            </tr>
+            <tr>
+              <td>Encadeada</td>
+              <td>Nós (ponteiros)</td>
+              <td>Crescimento dinâmico</td>
+              <td>Gasto extra de memória</td>
+            </tr>
+          </table>
+          <div class="callout info">
+            <b>Pegadinha clássica:</b> "A fila encadeada pode se comportar como
+            FIFO ou LIFO?" → <b>FALSO.</b> Fila é SEMPRE FIFO, independente de
+            como é implementada (sequencial, encadeada, circular). O que muda é
+            só a forma de armazenamento na memória.
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ LISTAS ============ -->
+      <section id="listas">
+        <div class="sec-head">
+          <div class="sec-num">3</div>
+          <h2>Listas Encadeadas</h2>
+        </div>
+        <div class="card">
+          <p>
+            Estrutura composta por <b>nodos</b>, cada um guardando um dado e uma
+            referência ao próximo (ou anterior) nodo.
+          </p>
+          <svg viewBox="0 0 480 90">
+            <g font-size="13" text-anchor="middle">
+              <rect x="10" y="20" width="60" height="40" fill="#4338ca" />
+              <text x="40" y="45" fill="#fff">10</text>
+              <path
+                d="M70 40 L110 40"
+                stroke="#999"
+                stroke-width="2"
+                marker-end="url(#b)"
+              />
+              <rect x="120" y="20" width="60" height="40" fill="#0891b2" />
+              <text x="150" y="45" fill="#fff">20</text>
+              <path
+                d="M180 40 L220 40"
+                stroke="#999"
+                stroke-width="2"
+                marker-end="url(#b)"
+              />
+              <rect x="230" y="20" width="60" height="40" fill="#ea580c" />
+              <text x="260" y="45" fill="#fff">30</text>
+              <path
+                d="M290 40 L330 40"
+                stroke="#999"
+                stroke-width="2"
+                marker-end="url(#b)"
+              />
+              <text x="370" y="45" fill="#52608a">None</text>
+            </g>
+            <defs>
+              <marker
+                id="b"
+                markerWidth="8"
+                markerHeight="8"
+                refX="4"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0,0 L8,4 L0,8 Z" fill="#999" />
+              </marker>
+            </defs>
+          </svg>
+
+          <div class="callout">
+            <b>Pegadinha muito comum:</b> um método chamado
+            <code class="inline">insere()</code> pode inserir no
+            <u>início</u> (mais comum em exercícios de pilha/lista simples) ou
+            no <u>fim</u> (mais comum em filas).
+            <b>Sempre leia o código da implementação</b> — nunca assuma pelo
+            nome do método!
+          </div>
+          <ul>
+            <li>
+              Inserção no início →
+              <code class="inline"
+                >novoNodo.proximo = head; head = novoNodo</code
+              >
+            </li>
+            <li>
+              Inserção no fim → percorre até o último nodo e liga o
+              <code class="inline">proximo</code> dele ao novo nodo
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ ÁRVORES ============ -->
+      <section id="arvores">
+        <div class="sec-head">
+          <div class="sec-num">4</div>
+          <h2>Árvores Binárias</h2>
+        </div>
+        <span class="tag tree">Estrutura hierárquica</span>
+        <div class="card">
+          <p>
+            <b>Por que usar árvores?</b> Listas, filas e pilhas são sequenciais
+            — quanto mais elementos, mais difícil manuseá-los, e não representam
+            relações hierárquicas entre dados.
+          </p>
+
+          <svg viewBox="0 0 420 220">
+            <g font-size="13" text-anchor="middle">
+              <circle cx="210" cy="30" r="22" fill="#4338ca" />
+              <text x="210" y="35" fill="#fff">1</text>
+              <text x="260" y="35" font-size="11" fill="#52608a">
+                Raiz (nível 0)
+              </text>
+              <line
+                x1="195"
+                y1="48"
+                x2="130"
+                y2="88"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <line
+                x1="225"
+                y1="48"
+                x2="290"
+                y2="88"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <circle cx="130" cy="105" r="22" fill="#0891b2" />
+              <text x="130" y="110" fill="#fff">2</text>
+              <circle cx="290" cy="105" r="22" fill="#0891b2" />
+              <text x="290" y="110" fill="#fff">3</text>
+              <text x="340" y="110" font-size="11" fill="#52608a">Nível 1</text>
+              <line
+                x1="118"
+                y1="123"
+                x2="80"
+                y2="163"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <line
+                x1="142"
+                y1="123"
+                x2="180"
+                y2="163"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <line
+                x1="278"
+                y1="123"
+                x2="240"
+                y2="163"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <line
+                x1="302"
+                y1="123"
+                x2="340"
+                y2="163"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <circle cx="80" cy="180" r="20" fill="#ea580c" />
+              <text x="80" y="185" fill="#fff">4</text>
+              <circle cx="180" cy="180" r="20" fill="#ea580c" />
+              <text x="180" y="185" fill="#fff">5</text>
+              <circle cx="240" cy="180" r="20" fill="#ea580c" />
+              <text x="240" y="185" fill="#fff">6</text>
+              <circle cx="340" cy="180" r="20" fill="#ea580c" />
+              <text x="340" y="185" fill="#fff">7</text>
+              <text x="390" y="185" font-size="11" fill="#52608a">
+                Folhas (nível 2)
+              </text>
+            </g>
+          </svg>
+
+          <h3>Terminologia essencial</h3>
+          <table>
+            <tr>
+              <th>Termo</th>
+              <th>Significado</th>
+            </tr>
+            <tr>
+              <td><b>Raiz (Root)</b></td>
+              <td>Primeiro nodo (nível 0), no topo. Não tem pai.</td>
+            </tr>
+            <tr>
+              <td><b>Nodo (Node)</b></td>
+              <td>Elemento da árvore, ligado por arestas aos filhos</td>
+            </tr>
+            <tr>
+              <td><b>Folha (Leaf)</b></td>
+              <td>Nodo sem filhos (fim de um caminho)</td>
+            </tr>
+            <tr>
+              <td><b>Grau</b></td>
+              <td>Número de filhos que um nodo possui</td>
+            </tr>
+            <tr>
+              <td><b>Altura</b></td>
+              <td>Distância máxima entre a raiz e o nodo mais profundo</td>
+            </tr>
+          </table>
+
+          <h3>Regra da árvore binária</h3>
+          <div class="callout ok">
+            Cada nodo pode ter <b>no máximo 2 filhos</b>: um à esquerda e outro
+            à direita. Se não houver filho em algum lado, o apontador é
+            <code class="inline">None</code>.
+          </div>
+          <div class="callout">
+            <b>Pegadinhas de identificação (ex.: árvore 1-2-3-4-5-6-7):</b>
+            <ul>
+              <li>Nodo 1 = raiz ✔</li>
+              <li>Nodo 4 é filho <b>esquerdo</b> de 2 (não direito!)</li>
+              <li>Subárvore esquerda da raiz = nodos {2, 4, 5}</li>
+              <li>Nodo 7 (folha) nunca é a raiz</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BST ============ -->
+      <section id="bst">
+        <div class="sec-head">
+          <div class="sec-num">5</div>
+          <h2>Árvore Binária de Busca (BST)</h2>
+        </div>
+        <div class="card">
+          <p>
+            Transforma a árvore em um mecanismo de busca rápido, seguindo uma
+            regra inflexível:
+          </p>
+          <ol>
+            <li>Nodos à <b>esquerda</b> são sempre <b>menores</b> que o pai</li>
+            <li>Nodos à <b>direita</b> são sempre <b>maiores</b> que o pai</li>
+            <li>Valores repetidos <b>não são permitidos</b></li>
+          </ol>
+
+          <!-- à esquerda a árvore válida, à direita a inválida (o segundo grupo é deslocado 260px) -->
+          <svg viewBox="0 0 420 140">
+            <g font-size="14" text-anchor="middle">
+              <circle cx="100" cy="30" r="20" fill="#16a34a" />
+              <text x="100" y="35" fill="#fff">8</text>
+              <line
+                x1="88"
+                y1="47"
+                x2="55"
+                y2="78"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <line
+                x1="112"
+                y1="47"
+                x2="150"
+                y2="78"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <circle cx="45" cy="95" r="20" fill="#0891b2" />
+              <text x="45" y="100" fill="#fff">3</text>
+              <circle cx="160" cy="95" r="20" fill="#0891b2" />
+              <text x="160" y="100" fill="#fff">10</text>
+              <text x="220" y="40" fill="#16a34a" font-size="13">✓ válida</text>
+            </g>
+            <g font-size="14" text-anchor="middle" transform="translate(260,0)">
+              <circle cx="100" cy="30" r="20" fill="#dc2626" />
+              <text x="100" y="35" fill="#fff">8</text>
+              <line
+                x1="88"
+                y1="47"
+                x2="55"
+                y2="78"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <line
+                x1="112"
+                y1="47"
+                x2="150"
+                y2="78"
+                stroke="#999"
+                stroke-width="2"
+              />
+              <circle cx="45" cy="95" r="20" fill="#dc2626" />
+              <text x="45" y="100" fill="#fff">3</text>
+              <circle cx="160" cy="95" r="20" fill="#dc2626" />
+              <text x="160" y="100" fill="#fff">10</text>
+              <text x="30" y="135" fill="#dc2626" font-size="12">
+                ✗ inválida (valores diferentes à dir.)
+              </text>
+            </g>
+          </svg>
+
+          <h3>Busca na BST — eliminação de metade a cada passo</h3>
+          <p style="font-size: 0.9rem">
+            Procurando o valor <b>4</b> na árvore abaixo — a cada comparação,
+            metade da árvore é descartada:
+          </p>
+          <pre>
+        8
+       / \
+      3   10
+     / \
+    1   6
+       /
+      4
+
+4 &lt; 8  → vai para subárvore esquerda (nodo 3)
+4 &gt; 3  → vai para subárvore direita (nodo 6)
+4 &lt; 6  → vai para subárvore esquerda → Encontrado!</pre
+          >
+
+          <h3>Árvore AVL (auto-balanceada)</h3>
+          <div class="callout">
+            <b>Problema:</b> se inserirmos dados já ordenados (1, 2, 3, 4...), a
+            BST <b>degenera numa linha reta</b> (como uma lista encadeada) —
+            perde a hierarquia e a busca vira O(n), lenta como busca sequencial.
+          </div>
+          <p>
+            <b>Solução — Árvore AVL:</b> mantém o
+            <i>fator de balanceamento</i> de cada nodo entre -1, 0 ou +1:
+          </p>
+          <pre>Fator = Nível da Esquerda (NE) − Nível da Direita (ND)</pre>
+          <p>
+            Quando o fator sai desse intervalo, a árvore faz
+            <b>rotações</b> (para a direita ou para a esquerda) para se
+            reequilibrar.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ CAMINHAMENTOS ============ -->
+      <section id="caminhamentos">
+        <div class="sec-head">
+          <div class="sec-num">6</div>
+          <h2>Caminhamentos em Árvore</h2>
+        </div>
+        <div class="card">
+          <p>Usando a árvore de exemplo:</p>
+          <pre>
+        A
+       / \
+      B   C
+     /   / \
+    D   E   F
+       / \   \
+      G   H   I</pre
+          >
+
+          <div class="grid2">
+            <div class="card">
+              <h3>🔵 Pré-ordem (NLR)</h3>
+              <p><b>Raiz → Esquerda → Direita</b></p>
+              <p>Visita o nodo <u>antes</u> de ir para os filhos.</p>
+              <p><code class="inline">A, B, D, C, E, G, H, F, I</code></p>
+            </div>
+            <div class="card">
+              <h3>🟢 Em-ordem (LNR)</h3>
+              <p><b>Esquerda → Raiz → Direita</b></p>
+              <p>
+                Primeiro desce todo à esquerda, depois visita o nodo atual,
+                depois vai à direita.
+              </p>
+              <p><code class="inline">D, B, A, G, E, H, C, F, I</code></p>
+              <div class="callout info">
+                Em uma <b>BST</b>, o percurso em-ordem sempre retorna os valores
+                em <b>ordem crescente</b>!
+              </div>
+            </div>
+            <div class="card">
+              <h3>🟠 Pós-ordem (LRN)</h3>
+              <p><b>Esquerda → Direita → Raiz</b></p>
+              <p>A raiz só é visitada <u>depois</u> de todos os seus filhos.</p>
+              <p><code class="inline">D, G, H, E, I, F, C, B, A</code></p>
+            </div>
+            <div class="card">
+              <h3>🟣 Por nível (BFS)</h3>
+              <p><b>Largura — nível por nível, esquerda → direita</b></p>
+              <p><code class="inline">A, B, C, D, E, F, G, H, I</code></p>
+            </div>
+          </div>
+
+          <h3>Algoritmo recursivo — em-ordem</h3>
+          <pre>
+def em_ordem(no):
+    if no is not None:
+        em_ordem(no.esquerda)   # 1º: esquerda
+        visita(no)               # 2º: nodo atual
+        em_ordem(no.direita)     # 3º: direita</pre
+          >
+
+          <div class="callout">
+            <b>Pegadinha clássica de prova:</b> "A visita inicia no nodo da
+            esquerda" → tecnicamente <b>FALSO</b>. O algoritmo é
+            <u>chamado</u> a partir da raiz (é o ponto de entrada da recursão);
+            só depois ele desce recursivamente até o nodo mais à esquerda antes
+            de fazer a primeira visita efetiva.
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BUSCA ============ -->
+      <section id="busca">
+        <div class="sec-head">
+          <div class="sec-num">7</div>
+          <h2>Métodos de Busca</h2>
+        </div>
+        <span class="tag search">Localizar elementos</span>
+        <div class="card">
+          <p>
+            <b>Fatores que influenciam o algoritmo de busca:</b> tamanho da
+            lista, organização dos dados (ordenados ou não) e estrutura
+            utilizada (vetor, lista encadeada, hash...).
+          </p>
+
+          <h3>🔎 Busca Sequencial</h3>
+          <p>
+            Percorre a lista elemento por elemento, comparando cada item com a
+            chave procurada, até encontrar ou acabar a lista.
+          </p>
+          <pre>
+int busca_sequencial(int v[], int n, int chave) {
+    for (int i = 0; i &lt; n; i++) {
+        if (v[i] == chave)
+            return i;      // posição encontrada
+    }
+    return -1;             // não encontrado
+}</pre
+          >
+          <table>
+            <tr>
+              <th>✅ Prós</th>
+              <th>❌ Contras</th>
+            </tr>
+            <tr>
+              <td>
+                Fácil de implementar · não precisa ordenação · funciona em
+                qualquer estrutura
+              </td>
+              <td>Ineficiente para grandes volumes de dados</td>
+            </tr>
+          </table>
+          <div class="callout">
+            <b>Exemplo de contagem (muito cobrado!):</b> array
+            <code class="inline">[11, 10, 2, 19, 18, 0, 8, 14, 20, 7]</code>,
+            buscando 18.<br />
+            Índices 0,1,2,3 → não bate (11,10,2,19). Índice 4 → bate (18).<br />
+            <b>São necessárias 5 comparações</b> (1ª até 5ª posição, índice 0 a
+            4).
+          </div>
+
+          <h3>🔎 Busca Binária</h3>
+          <p>
+            <b>Dividir para conquistar:</b> a cada iteração, metade dos
+            elementos é descartada. <b>Exige que a lista esteja ordenada!</b>
+          </p>
+          <pre>
+int busca_binaria(int v[], int n, int chave) {
+    int ini = 0, fim = n - 1;
+    while (ini &lt;= fim) {
+        int meio = (ini + fim) / 2;
+        if (v[meio] == chave) return meio;
+        else if (chave &lt; v[meio]) fim = meio - 1;
+        else ini = meio + 1;
+    }
+    return -1;
+}</pre
+          >
+          <p style="font-size: 0.9rem">
+            Exemplo: lista <code class="inline">[3, 7, 9, 12, 18, 25]</code>,
+            buscando 18 → meio=(0+5)/2=2 (elemento 9 &lt; 18) → meio=(3+5)/2=4
+            (elemento 18, encontrado!)
+          </p>
+          <table>
+            <tr>
+              <th>✅ Prós</th>
+              <th>❌ Contras</th>
+            </tr>
+            <tr>
+              <td>Muito eficiente para grandes volumes</td>
+              <td>
+                Exige dados ordenados · pouco eficiente com inserções/remoções
+                frequentes
+              </td>
+            </tr>
+          </table>
+
+          <h3>🔎 Busca em Tabela Hash</h3>
+          <p>
+            Estrutura que associa <b>chaves</b> a <b>valores</b> usando uma
+            <b>função hash</b> para calcular diretamente o índice de
+            armazenamento.
+          </p>
+          <pre>Dado (chave) → Função Hash → Índice na tabela</pre>
+          <div class="callout">
+            <b>Colisão:</b> quando duas chaves diferentes geram o mesmo índice.
+            Uma solução comum é o <b>encadeamento separado</b> — cada posição da
+            tabela guarda uma lista de pares
+            <code class="inline">(chave, valor)</code>.
+          </div>
+          <pre>
+def inserir(tabelaHash, id, valor):
+    idHash = hash(id) % len(tabelaHash)
+    lista = tabelaHash[idHash]
+    for i, (c, v) in enumerate(lista):
+        if id == c:
+            lista[i] = (id, valor)   # ATUALIZA se já existe
+            return
+    lista.append((id, valor))        # senão, insere novo</pre
+          >
+          <div class="callout ok">
+            <b>Pegadinha:</b> se o <code class="inline">id</code> já existe na
+            tabela, o elemento é <b>atualizado</b> (substituído), e não
+            duplicado nem excluído com <code class="inline">del</code>.
+          </div>
+          <table>
+            <tr>
+              <th>✅ Prós</th>
+              <th>❌ Contras</th>
+            </tr>
+            <tr>
+              <td>Busca, inserção e remoção muito rápidas (idealmente O(1))</td>
+              <td>
+                Depende de uma "boa" função hash; colisões podem degradar a
+                performance
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ ORDENAÇÃO ============ -->
+      <section id="ordenacao">
+        <div class="sec-head">
+          <div class="sec-num">8</div>
+          <h2>Métodos de Ordenação</h2>
+        </div>
+        <span class="tag sort">Organizar dados</span>
+        <div class="card">
+          <h3>🫧 Bubble Sort (Ordenação por Bolha)</h3>
+          <p>
+            Compara <b>elementos adjacentes</b> e os troca se estiverem fora de
+            ordem. O maior "borbulha" até o final a cada passagem.
+          </p>
+          <pre>
+for i in range(len(array)):
+    for j in range(0, len(array) - i - 1):
+        if array[j] > array[j + 1]:
+            array[j], array[j+1] = array[j+1], array[j]</pre
+          >
+          <p>
+            <b>Identificação:</b> comparação de pares vizinhos + troca (swap) →
+            é Bubble Sort.
+          </p>
+
+          <h3>📥 Insertion Sort (Ordenação por Inserção)</h3>
+          <p>
+            Divide a lista em parte <b>ordenada</b> e parte <b>não ordenada</b>.
+            Pega o próximo elemento não ordenado e o insere na
+            <b>posição correta</b> dentro da parte já ordenada.
+          </p>
+          <div class="callout">
+            Exemplo decrescente: <code class="inline">[8,15,1,-5,-9,2]</code> →
+            <code class="inline">[15, 8, 2, 1, -5, -9]</code>. Custo
+            computacional: <b>O(n²)</b> no pior/médio caso.
+          </div>
+
+          <h3>🎯 Selection Sort (Ordenação por Seleção)</h3>
+          <p>
+            Busca o menor (ou maior) elemento da lista não ordenada e faz
+            <b>apenas uma troca por iteração</b>.
+          </p>
+
+          <h3>⚡ Quick Sort</h3>
+          <p>
+            Escolhe um <b>elemento pivô</b> e particiona o array: menores à
+            esquerda, maiores à direita do pivô. Repete recursivamente.
+          </p>
+
+          <h3>🔀 Merge Sort</h3>
+          <p>
+            "Dividir para conquistar": quebra a sequência em subsequências
+            menores, ordena cada uma e depois <b>combina (merge)</b> tudo no
+            final.
+          </p>
+
+          <h3>Tabela comparativa — Identifique pelo padrão!</h3>
+          <table>
+            <tr>
+              <th>Algoritmo</th>
+              <th>Ideia-chave</th>
+              <th>Complexidade típica</th>
+            </tr>
+            <tr>
+              <td>Bubble Sort</td>
+              <td>Compara pares adjacentes e troca</td>
+              <td>O(n²)</td>
+            </tr>
+            <tr>
+              <td>Insertion Sort</td>
+              <td>Insere na posição certa em relação ao já ordenado</td>
+              <td>O(n²) médio, O(n) melhor caso</td>
+            </tr>
+            <tr>
+              <td>Selection Sort</td>
+              <td>Busca o mínimo/máximo, 1 troca por rodada</td>
+              <td>O(n²)</td>
+            </tr>
+            <tr>
+              <td>Quick Sort</td>
+              <td>Pivô + partição esquerda/direita</td>
+              <td>O(n log n) médio</td>
+            </tr>
+            <tr>
+              <td>Merge Sort</td>
+              <td>Divide, ordena partes, combina (merge)</td>
+              <td>O(n log n)</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ HASH (resumo) ============ -->
+      <section id="hash">
+        <div class="sec-head">
+          <div class="sec-num">9</div>
+          <h2>Tabela Hash — Resumo rápido</h2>
+        </div>
+        <span class="tag hash">Acesso quase O(1)</span>
+        <div class="card">
+          <p>
+            Já detalhada na seção de busca acima. Pontos-chave para memorizar:
+          </p>
+          <ul>
+            <li>Função hash transforma a <b>chave</b> em um <b>índice</b>.</li>
+            <li>
+              <b>Colisão</b> = duas chaves caem no mesmo índice → resolvida
+              geralmente com listas encadeadas (chaining).
+            </li>
+            <li>
+              Inserir uma chave já existente <b>atualiza</b> o valor, não
+              duplica.
+            </li>
+            <li>
+              Performance depende diretamente da qualidade da função hash.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ RESUMO GERAL ============ -->
+      <section id="resumo">
+        <div class="sec-head">
+          <div class="sec-num">🏁</div>
+          <h2>Tabela-resumo geral (cola rápida)</h2>
+        </div>
+        <div class="card overflow">
+          <table>
+            <tr>
+              <th>Estrutura</th>
+              <th>Princípio</th>
+              <th>Inserção</th>
+              <th>Remoção</th>
+            </tr>
+            <tr>
+              <td>Pilha</td>
+              <td>LIFO</td>
+              <td>Topo (push)</td>
+              <td>Topo (pop)</td>
+            </tr>
+            <tr>
+              <td>Fila</td>
+              <td>FIFO</td>
+              <td>Fim (enqueue)</td>
+              <td>Início (dequeue)</td>
+            </tr>
+            <tr>
+              <td>Lista encadeada</td>
+              <td>Depende da implementação</td>
+              <td>Início <b>ou</b> fim (ler o código!)</td>
+              <td>Qualquer posição</td>
+            </tr>
+            <tr>
+              <td>Árvore binária</td>
+              <td>Hierárquica</td>
+              <td>Conforme regra da árvore (BST: esq&lt;pai&lt;dir)</td>
+              <td>Rebalanceamento pode ser necessário</td>
+            </tr>
+            <tr>
+              <td>Tabela Hash</td>
+              <td>Chave→índice</td>
+              <td>Via função hash</td>
+              <td>Via função hash</td>
+            </tr>
+          </table>
+
+          <div class="quiz-box">
+            <b>🧠 Perguntas para se testar antes da prova:</b>
+            <ul>
+              <li>
+                Qual a diferença entre LIFO e FIFO? Dê um exemplo de cada no dia
+                a dia.
+              </li>
+              <li>
+                Em uma pilha encadeada, o que acontece quando chamo
+                <code class="inline">pop()</code> numa pilha vazia?
+              </li>
+              <li>
+                Simule push/pop e enqueue/dequeue numa sequência de 5 operações
+                — desenhe o estado final.
+              </li>
+              <li>
+                Qual é a ordem de visita em-ordem, pré-ordem e pós-ordem de uma
+                árvore que você desenhar?
+              </li>
+              <li>
+                Por que uma BST pode degenerar em uma lista? Qual estrutura
+                resolve isso?
+              </li>
+              <li>
+                Conte manualmente quantas comparações uma busca sequencial faz
+                até achar um valor numa lista de 10 elementos.
+              </li>
+              <li>
+                Diferencie Bubble Sort de Selection Sort pela quantidade de
+                trocas por iteração.
+              </li>
+              <li>
+                O que é uma colisão em tabela hash e como ela costuma ser
+                resolvida?
+              </li>
+            </ul>
+          </div>
+
+          <details>
+            <summary>💡 Dica final de prova</summary>
+            <p style="margin-top: 8px">
+              Questões de "julgue as afirmações" costumam testar se você
+              <b>leu o código/definição com atenção</b>, não só se decorou o
+              conceito. Sempre: (1) simule passo a passo quando houver código,
+              (2) desconfie de afirmações que parecem "óbvias demais", (3)
+              relembre que o nome do método (ex: "insere") nem sempre indica
+              onde a operação ocorre — confira a implementação.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- ============ FLASHCARDS ============ -->
+      <!-- o conteúdo do cartão é preenchido pelo script.js a partir do array F -->
+      <section id="flashcards">
+        <div class="sec-head">
+          <div class="sec-num">🃏</div>
+          <h2>Flashcards</h2>
+        </div>
+        <div class="card">
+          <p>
+            Tente lembrar a definição antes de virar o cartão. Depois marque se
+            já sabe ou se precisa revisar.
+          </p>
+          <div class="chips">
+            <button class="chip" id="fcAll" aria-pressed="true">Todos</button>
+            <button class="chip" id="fcRev" aria-pressed="false">
+              Só "revisar"
+            </button>
+            <button class="chip" id="fcShuffle">Embaralhar</button>
+          </div>
+          <div class="fc-wrap">
+            <button class="fc" id="fc" aria-live="polite">
+              <span class="fc-face fc-front"
+                ><small id="fcCount"></small><strong id="fcTerm"></strong
+                ><em>toque para virar</em></span
+              >
+              <span class="fc-face fc-back"><span id="fcDef"></span></span>
+            </button>
+          </div>
+          <div class="fc-nav">
+            <button class="btn no" id="fcNo">Revisar</button>
+            <button class="btn ok" id="fcYes">Já sei</button>
+          </div>
+          <div class="fc-row">
+            <button class="btn" id="fcPrev" aria-label="Cartão anterior">
+              ←
+            </button>
+            <span class="fc-stat" id="fcStat"></span>
+            <button class="btn" id="fcNext" aria-label="Próximo cartão">
+              →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ VERDADEIRO OU FALSO ============ -->
+      <!-- a lista é montada pelo script.js a partir do array V -->
+      <section id="vf">
+        <div class="sec-head">
+          <div class="sec-num">✔✖</div>
+          <h2>Verdadeiro ou Falso</h2>
+        </div>
+        <div class="card">
+          <p>
+            Muitas dessas afirmações são as pegadinhas marcadas no guia.
+            Responda e veja a explicação.
+          </p>
+          <p class="vf-score" id="vfScore"></p>
+          <div id="vfList"></div>
+          <button class="btn" id="vfReset">Refazer</button>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      Guia gerado a partir dos slides da disciplina Estrutura de Dados — bons
+      estudos! 🎓
+    </footer>
+
+    <!-- no fim do body pra os elementos acima já existirem quando o script rodar -->
+    <script src="script.js"></script>
+  </body>
+</html>
