@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página interativa para estudar Arquitetura de Sistemas e DevOps.">
+  <title>Estudos | Arquitetura de Sistemas & DevOps</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Página inicial">
+      <span class="brand-mark">A</span>
+      <span>ESTUDA<span class="brand-light">+</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="#conteudo">Conteúdo</a>
+      <a href="#flashcards">Flashcards</a>
+      <a href="#quiz">Verdadeiro ou Falso</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow">ÁREA DE ESTUDOS · REVISÃO PARA A PROVA</p>
+        <h1>Arquitetura de Sistemas <span>& DevOps</span></h1>
+        <p class="hero-text">Aprenda os conceitos, teste o que entendeu e acompanhe sua evolução. Um assunto de cada vez.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#conteudo">Começar a estudar <span>→</span></a>
+          <a class="text-link" href="#quiz">Ir direto ao quiz</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Resumo do material">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="hero-symbol">∞</div>
+        <p class="hero-card-label">SEU MATERIAL</p>
+        <strong>7 assuntos</strong>
+        <span>Conceitos + prática</span>
+        <div class="hero-card-bottom"><span class="dot"></span> Aprenda no seu ritmo</div>
+      </div>
+    </section>
+
+    <section class="progress-strip" aria-label="Seu progresso">
+      <div>
+        <span class="metric-label">QUESTÕES RESPONDIDAS</span>
+        <strong id="answeredCount">0</strong>
+      </div>
+      <div>
+        <span class="metric-label">ACERTOS</span>
+        <strong id="correctCount">0</strong>
+      </div>
+      <div class="progress-area">
+        <div class="progress-heading"><span>Seu desempenho</span><strong id="accuracy">0%</strong></div>
+        <div class="progress-track"><span id="progressBar"></span></div>
+      </div>
+      <button class="reset-button" id="resetProgress" type="button">Zerar progresso ↺</button>
+    </section>
+
+    <section class="section content-section" id="conteudo">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 — APRENDA</p>
+          <h2>Explore os assuntos</h2>
+        </div>
+        <p>Escolha um tópico para revisar os pontos mais importantes antes de praticar.</p>
+      </div>
+      <div class="topic-layout">
+        <aside class="topic-menu" id="topicMenu" aria-label="Tópicos de estudo"></aside>
+        <article class="topic-detail" id="topicDetail" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section class="section flashcard-section" id="flashcards">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">02 — MEMORIZE</p>
+          <h2>Flashcards</h2>
+        </div>
+        <p>Tente responder mentalmente antes de virar o cartão. A repetição ajuda a fixar os conceitos.</p>
+      </div>
+      <div class="flashcard-toolbar">
+        <label for="flashcardTopic">Estudar assunto</label>
+        <select id="flashcardTopic"></select>
+        <span id="flashcardPosition">Cartão 1 de 1</span>
+      </div>
+      <div class="flashcard-stage">
+        <button class="flashcard" id="flashcard" type="button" aria-label="Virar flashcard">
+          <span class="card-face card-front">
+            <span class="card-kicker">PERGUNTA</span>
+            <span class="card-content" id="cardQuestion"></span>
+            <span class="card-hint">Clique para revelar a resposta ↻</span>
+          </span>
+          <span class="card-face card-back">
+            <span class="card-kicker">RESPOSTA</span>
+            <span class="card-content" id="cardAnswer"></span>
+            <span class="card-hint">Clique para voltar ↻</span>
+          </span>
+        </button>
+      </div>
+      <div class="flashcard-controls">
+        <button class="button button-secondary" id="previousCard" type="button">← Anterior</button>
+        <button class="button button-primary" id="nextCard" type="button">Próximo cartão →</button>
+      </div>
+    </section>
+
+    <section class="section quiz-section" id="quiz">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">03 — TESTE SEU CONHECIMENTO</p>
+          <h2>Verdadeiro ou falso?</h2>
+        </div>
+        <p>Leia com atenção. Algumas afirmações foram construídas para testar detalhes que costumam confundir na prova.</p>
+      </div>
+      <div class="quiz-panel">
+        <div class="quiz-topline">
+          <span class="quiz-category" id="quizCategory">INTERFACES</span>
+          <span id="questionPosition">Questão 1</span>
+        </div>
+        <div class="quiz-progress"><span id="quizProgressBar"></span></div>
+        <h3 id="questionText">Carregando pergunta...</h3>
+        <div class="answer-buttons" id="answerButtons">
+          <button class="answer-button" data-answer="true" type="button"><span>V</span> Verdadeiro</button>
+          <button class="answer-button" data-answer="false" type="button"><span>F</span> Falso</button>
+        </div>
+        <div class="feedback" id="feedback" aria-live="polite" hidden></div>
+        <div class="quiz-footer">
+          <span id="quizScore">Acertos nesta rodada: 0</span>
+          <button class="button button-primary" id="nextQuestion" type="button" disabled>Próxima questão →</button>
+        </div>
+      </div>
+      <p class="quiz-note">Dica: procure entender por que uma afirmação está certa ou errada. Decorar sem compreender pode atrapalhar na hora da prova.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>ESTUDA<span class="brand-light">+</span></span>
+    <p>Material de revisão · Arquitetura de Sistemas & DevOps</p>
+    <a href="#inicio">Voltar ao topo ↑</a>
+  </footer>
+</body>
+</html>
