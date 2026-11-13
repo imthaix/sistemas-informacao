@@ -1,0 +1,53 @@
+{% extends "estoque/base.html" %}
+{% block titulo %}Produtos{% endblock %}
+
+{% block conteudo %}
+<div class="barra">
+    <h1>Produtos</h1>
+    <a class="btn" href="{% url 'estoque:produto_criar' %}">+ Novo produto</a>
+</div>
+
+{# Formulário de busca/filtro (método GET -> parâmetros na URL) #}
+<form method="get" class="filtros">
+    <input type="text" name="q" value="{{ busca }}" placeholder="Buscar por nome ou SKU">
+    <select name="categoria">
+        <option value="">Todas as categorias</option>
+        {% for c in categorias %}
+            <option value="{{ c.pk }}" {% if categoria_id == c.pk|stringformat:"s" %}selected{% endif %}>{{ c.nome }}</option>
+        {% endfor %}
+    </select>
+    <label><input type="checkbox" name="alerta" value="1" {% if somente_alerta %}checked{% endif %}> Só estoque baixo</label>
+    <button class="btn" type="submit">Filtrar</button>
+</form>
+
+{% if produtos %}
+<table>
+    <thead>
+        <tr><th>SKU</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Estoque</th><th>Status</th><th>Ações</th></tr>
+    </thead>
+    <tbody>
+    {% for p in produtos %}
+        <tr>
+            <td>{{ p.sku }}</td>
+            <td><a href="{% url 'estoque:produto_detalhe' p.pk %}">{{ p.nome }}</a></td>
+            <td>{{ p.categoria.nome }}</td>
+            <td>R$ {{ p.preco|floatformat:2 }}</td>
+            <td class="{% if p.estoque_baixo %}negativo{% endif %}">{{ p.quantidade }}</td>
+            <td>
+                {% if not p.ativo %}<span class="selo">Inativo</span>
+                {% elif p.estoque_baixo %}<span class="selo selo-saida">Baixo</span>
+                {% else %}<span class="selo selo-entrada">OK</span>{% endif %}
+            </td>
+            <td class="acoes">
+                <a href="{% url 'estoque:produto_editar' p.pk %}">Editar</a>
+                <a class="perigo" href="{% url 'estoque:produto_excluir' p.pk %}">Excluir</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p class="vazio">{{ produtos|length }} produto{{ produtos|length|pluralize }} encontrado{{ produtos|length|pluralize }}.</p>
+{% else %}
+    <p class="vazio">Nenhum produto encontrado.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{# Template parcial reutilizado com {% include %} no dashboard e na lista #}
+{% if movimentacoes %}
+<table>
+    <thead><tr><th>Data</th><th>Produto</th><th>Tipo</th><th>Qtd</th><th>Observação</th></tr></thead>
+    <tbody>
+    {% for m in movimentacoes %}
+        <tr>
+            <td>{{ m.data|date:"d/m/Y H:i" }}</td>
+            <td>{{ m.produto.nome }}</td>
+            <td>
+                {% if m.tipo == "E" %}
+                    <span class="selo selo-entrada">Entrada</span>
+                {% else %}
+                    <span class="selo selo-saida">Saída</span>
+                {% endif %}
+            </td>
+            <td>{{ m.quantidade }}</td>
+            <td>{{ m.observacao|default:"—" }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p class="vazio">Nenhuma movimentação registrada.</p>
+{% endif %}

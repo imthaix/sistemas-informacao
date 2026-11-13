@@ -1,0 +1,37 @@
+{% load static %}
+{# Template BASE: todas as outras páginas herdam deste com {% extends %} #}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}Controle de Estoque{% endblock %}</title>
+    {# Arquivo estático (CSS) carregado com a tag {% static %} #}
+    <link rel="stylesheet" href="{% static 'estoque/style.css' %}">
+</head>
+<body>
+    <header class="topo">
+        <a class="marca" href="{% url 'estoque:dashboard' %}">📦 Controle de Estoque</a>
+        <nav>
+            <a href="{% url 'estoque:dashboard' %}">Dashboard</a>
+            <a href="{% url 'estoque:produto_lista' %}">Produtos</a>
+            <a href="{% url 'estoque:categoria_lista' %}">Categorias</a>
+            <a href="{% url 'estoque:movimentacao_lista' %}">Movimentações</a>
+            <a href="{% url 'admin:index' %}">Admin</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {# Exibe mensagens de sucesso/erro enviadas pelas views (messages framework) #}
+        {% if messages %}
+            {% for mensagem in messages %}
+                <div class="alerta {{ mensagem.tags }}">{{ mensagem }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <footer class="rodape">Sistema de Controle de Estoque — Django</footer>
+</body>
+</html>

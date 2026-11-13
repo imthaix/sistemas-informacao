@@ -1,0 +1,36 @@
+{% extends "estoque/base.html" %}
+{% block titulo %}{{ produto.nome }}{% endblock %}
+
+{% block conteudo %}
+<div class="barra">
+    <h1>{{ produto.nome }}</h1>
+    <div>
+        <a class="btn" href="{% url 'estoque:produto_editar' produto.pk %}">Editar</a>
+        <a class="btn btn-perigo" href="{% url 'estoque:produto_excluir' produto.pk %}">Excluir</a>
+    </div>
+</div>
+
+<dl class="detalhes">
+    <dt>SKU</dt><dd>{{ produto.sku }}</dd>
+    <dt>Categoria</dt><dd>{{ produto.categoria }}</dd>
+    <dt>Descrição</dt><dd>{{ produto.descricao|default:"—" }}</dd>
+    <dt>Preço</dt><dd>R$ {{ produto.preco|floatformat:2 }}</dd>
+    <dt>Estoque</dt>
+    <dd class="{% if produto.estoque_baixo %}negativo{% endif %}">
+        {{ produto.quantidade }} (mínimo: {{ produto.estoque_minimo }})
+        {% if produto.estoque_baixo %}⚠️ estoque baixo{% endif %}
+    </dd>
+    <dt>Valor em estoque</dt><dd>R$ {{ produto.valor_total_em_estoque|floatformat:2 }}</dd>
+    <dt>Fornecedores</dt>
+    <dd>
+        {% for f in produto.fornecedores.all %}{{ f.nome }}{% if not forloop.last %}, {% endif %}
+        {% empty %}—{% endfor %}
+    </dd>
+    <dt>Status</dt><dd>{% if produto.ativo %}Ativo{% else %}Inativo{% endif %}</dd>
+    <dt>Cadastrado em</dt><dd>{{ produto.data_cadastro|date:"d/m/Y H:i" }}</dd>
+</dl>
+
+<h2>Últimas movimentações</h2>
+{% include "estoque/_tabela_movimentacoes.html" with movimentacoes=movimentacoes %}
+<p><a href="{% url 'estoque:produto_lista' %}">← Voltar para a lista</a></p>
+{% endblock %}

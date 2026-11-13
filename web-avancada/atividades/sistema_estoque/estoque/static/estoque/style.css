@@ -1,0 +1,70 @@
+/* Estilo do Sistema de Controle de Estoque */
+:root {
+    --azul: #1f4e8c;
+    --azul-escuro: #163a69;
+    --vermelho: #c0392b;
+    --verde: #1e8449;
+    --cinza: #f4f6f9;
+    --borda: #d9dee5;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--cinza); color: #222; }
+a { color: var(--azul); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Cabeçalho e navegação */
+.topo { background: var(--azul-escuro); display: flex; flex-wrap: wrap; justify-content: space-between;
+        align-items: center; padding: 12px 24px; }
+.topo .marca { color: #fff; font-weight: bold; font-size: 1.2rem; }
+.topo nav a { color: #dbe6f5; margin-left: 18px; }
+.container { max-width: 1050px; margin: 24px auto; padding: 0 16px; }
+.rodape { text-align: center; color: #777; padding: 24px; font-size: .85rem; }
+
+/* Mensagens */
+.alerta { padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; }
+.alerta.success { background: #d5f5e3; color: #145a32; }
+.alerta.error { background: #fadbd8; color: #7b241c; }
+
+/* Cards do dashboard */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.card { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid var(--borda); }
+.card span { display: block; color: #666; font-size: .85rem; }
+.card strong { font-size: 1.6rem; color: var(--azul); }
+.card-alerta strong { color: var(--vermelho); }
+
+/* Tabelas */
+table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--borda); border-radius: 8px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--borda); }
+th { background: #eaeef5; font-size: .85rem; }
+.acoes a { margin-right: 10px; }
+.perigo, .negativo { color: var(--vermelho); font-weight: 600; }
+.vazio { color: #777; font-style: italic; }
+
+/* Botões */
+.btn { display: inline-block; background: var(--azul); color: #fff; padding: 8px 16px; border: 0;
+       border-radius: 6px; cursor: pointer; font-size: .95rem; }
+.btn:hover { background: var(--azul-escuro); text-decoration: none; }
+.btn-perigo { background: var(--vermelho); }
+.btn-pequeno { padding: 4px 10px; font-size: .8rem; }
+
+/* Selos */
+.selo { padding: 2px 8px; border-radius: 10px; background: #e5e7eb; font-size: .8rem; }
+.selo-entrada { background: #d5f5e3; color: var(--verde); }
+.selo-saida { background: #fadbd8; color: var(--vermelho); }
+
+/* Formulários e filtros */
+.barra { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.filtros { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 12px 0; }
+input[type=text], input[type=number], input[type=email], select, textarea {
+    padding: 8px; border: 1px solid var(--borda); border-radius: 6px; width: 100%; max-width: 420px; }
+.filtros input[type=text], .filtros select { width: auto; }
+.formulario { background: #fff; padding: 20px; border-radius: 8px; border: 1px solid var(--borda); max-width: 520px; }
+.formulario p { display: flex; flex-direction: column; gap: 4px; }
+.errorlist { color: var(--vermelho); list-style: none; padding: 0; margin: 4px 0; }
+.helptext { color: #777; font-size: .8rem; }
+
+/* Detalhes do produto */
+.detalhes { display: grid; grid-template-columns: 180px 1fr; gap: 8px 16px; background: #fff;
+            padding: 16px; border-radius: 8px; border: 1px solid var(--borda); }
+.detalhes dt { font-weight: 600; color: #555; }
+.detalhes dd { margin: 0; }

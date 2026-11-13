@@ -1,0 +1,16 @@
+{% extends "estoque/base.html" %}
+{% block titulo %}Registrar movimentação{% endblock %}
+
+{% block conteudo %}
+<h1>Registrar movimentação</h1>
+<p>Entradas aumentam o estoque; saídas diminuem (e não podem passar do saldo disponível).</p>
+
+<form method="post" class="formulario">
+    {% csrf_token %}
+    {# Erros que não pertencem a um campo (ex.: "Estoque insuficiente") #}
+    {{ form.non_field_errors }}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Registrar</button>
+    <a href="{% url 'estoque:movimentacao_lista' %}">Cancelar</a>
+</form>
+{% endblock %}

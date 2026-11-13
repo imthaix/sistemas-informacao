@@ -1,0 +1,14 @@
+{% extends "estoque/base.html" %}
+{% block titulo %}{{ titulo }}{% endblock %}
+
+{% block conteudo %}
+<h1>{{ titulo }}</h1>
+
+{# csrf_token é obrigatório em formulários POST (proteção contra CSRF) #}
+<form method="post" class="formulario">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn" type="submit">Salvar</button>
+    <a href="{% url 'estoque:produto_lista' %}">Cancelar</a>
+</form>
+{% endblock %}

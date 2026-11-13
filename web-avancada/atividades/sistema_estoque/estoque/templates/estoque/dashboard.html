@@ -1,0 +1,38 @@
+{% extends "estoque/base.html" %}
+{% block titulo %}Dashboard — Estoque{% endblock %}
+
+{% block conteudo %}
+<h1>Dashboard</h1>
+
+<section class="cards">
+    <div class="card"><span>Produtos ativos</span><strong>{{ total_produtos }}</strong></div>
+    <div class="card"><span>Categorias</span><strong>{{ total_categorias }}</strong></div>
+    {# floatformat:2 mostra 2 casas decimais #}
+    <div class="card"><span>Valor em estoque</span><strong>R$ {{ valor_total|floatformat:2 }}</strong></div>
+    <div class="card {% if produtos_em_alerta %}card-alerta{% endif %}">
+        <span>Produtos em alerta</span><strong>{{ produtos_em_alerta|length }}</strong>
+    </div>
+</section>
+
+<h2>⚠️ Estoque baixo</h2>
+{% if produtos_em_alerta %}
+<table>
+    <thead><tr><th>Produto</th><th>Atual</th><th>Mínimo</th><th></th></tr></thead>
+    <tbody>
+    {% for p in produtos_em_alerta %}
+        <tr>
+            <td><a href="{% url 'estoque:produto_detalhe' p.pk %}">{{ p.nome }}</a></td>
+            <td class="negativo">{{ p.quantidade }}</td>
+            <td>{{ p.estoque_minimo }}</td>
+            <td><a class="btn btn-pequeno" href="{% url 'estoque:movimentacao_criar' %}">Repor</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p class="vazio">Nenhum produto abaixo do estoque mínimo. 👍</p>
+{% endif %}
+
+<h2>Últimas movimentações</h2>
+{% include "estoque/_tabela_movimentacoes.html" with movimentacoes=ultimas_movimentacoes %}
+{% endblock %}

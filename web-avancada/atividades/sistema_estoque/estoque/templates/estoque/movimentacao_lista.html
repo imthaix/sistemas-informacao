@@ -1,0 +1,18 @@
+{% extends "estoque/base.html" %}
+{% block titulo %}Movimentações{% endblock %}
+
+{% block conteudo %}
+<div class="barra">
+    <h1>Movimentações</h1>
+    <a class="btn" href="{% url 'estoque:movimentacao_criar' %}">+ Registrar movimentação</a>
+</div>
+
+<p class="filtros">
+    Filtrar:
+    <a href="{% url 'estoque:movimentacao_lista' %}">Todas</a> |
+    <a href="?tipo=E">Entradas</a> |
+    <a href="?tipo=S">Saídas</a>
+</p>
+
+{% include "estoque/_tabela_movimentacoes.html" %}
+{% endblock %}
