@@ -66,6 +66,7 @@ class FluxoWebTest(TestCase):
                          {"produto": p.pk, "tipo": "S", "quantidade": 3})
         p.refresh_from_db()
         self.assertEqual(p.quantidade, 5)
+        
         # DELETE bloqueado (tem histórico)
         self.client.post(reverse("estoque:produto_excluir", args=[p.pk]))
         self.assertTrue(Produto.objects.filter(pk=p.pk).exists())
