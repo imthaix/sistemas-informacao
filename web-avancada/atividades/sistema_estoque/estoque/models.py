@@ -1,11 +1,6 @@
 """
 Modelos do Sistema de Controle de Estoque.
 
-Relacionamentos:
-    Categoria  1 ---- N  Produto          (ForeignKey)
-    Fornecedor N ---- N  Produto          (ManyToManyField)
-    Produto    1 ---- N  Movimentacao     (ForeignKey)
-
 Regras de negócio implementadas aqui (lado do servidor):
     RN1 - Não é possível registrar uma SAÍDA maior que o estoque disponível.
     RN2 - Toda movimentação (entrada/saída) atualiza AUTOMATICAMENTE o estoque
@@ -19,7 +14,7 @@ from django.db import models, transaction
 
 
 class Categoria(models.Model):
-    """Agrupa produtos semelhantes (ex.: Bebidas, Limpeza, Eletrônicos)."""
+    # Agrupa produtos semelhantes (ex.: Bebidas, Limpeza, Eletrônicos).
 
     # A chave primária (id, AutoField) é criada automaticamente pelo Django.
     nome = models.CharField("Nome", max_length=80, unique=True)
@@ -52,7 +47,7 @@ class Fornecedor(models.Model):
 
 
 class Produto(models.Model):
-    """Item controlado no estoque."""
+    # Item controlado no estoque
 
     nome = models.CharField("Nome", max_length=120)
     sku = models.CharField("Código (SKU)", max_length=30, unique=True)
@@ -142,16 +137,17 @@ class Movimentacao(models.Model):
     def __str__(self):
         return f"{self.get_tipo_display()} de {self.quantidade}x {self.produto.nome}"
 
-    # ------------------------------------------------------------------
     # RN1 - Validação: impede saída maior que o estoque disponível.
     # O ModelForm (e também o Django Admin) chama clean() automaticamente,
     # então a regra vale tanto na tela do sistema quanto no painel admin.
-    # ------------------------------------------------------------------
+
     def clean(self):
         super().clean()
+        
         # Se produto/tipo/quantidade falharam na validação de campo, ignora.
         if not (self.produto_id and self.tipo and self.quantidade):
             return
+            
         # Só valida na criação (movimentações antigas não são alteradas).
         if self.pk is None and self.tipo == self.SAIDA:
             if self.quantidade > self.produto.quantidade:
@@ -160,9 +156,7 @@ class Movimentacao(models.Model):
                     f"unidade(s), mas foram solicitadas {self.quantidade}."
                 )
 
-    # ------------------------------------------------------------------
     # RN2 - Atualização automática do estoque.
-    # ------------------------------------------------------------------
     def save(self, *args, **kwargs):
         # Movimentação já existente: apenas salva (não mexe no estoque de novo).
         if self.pk is not None:
