@@ -1,8 +1,4 @@
-"""
-Comando para popular o banco com dados de exemplo (útil na apresentação).
 
-Uso:  python manage.py popular_dados
-"""
 from decimal import Decimal
 
 from django.core.management.base import BaseCommand
