@@ -1,10 +1,13 @@
 """
 Formulários do sistema (forms.ModelForm).
 
-Fluxo completo exigido na atividade:
+Fluxo que a ativiaade exige:
     Formulário -> Validação -> Processamento -> Persistência -> Retorno ao usuário
-O fluxo é executado nas views (views.py); aqui ficam os formulários e suas validações.
+O fluxo é executado nas views (views.py);
+
+aqui ficam os formulários e suas validações.
 """
+
 from django import forms
 
 from .models import Categoria, Movimentacao, Produto
@@ -15,7 +18,6 @@ class CategoriaForm(forms.ModelForm):
         model = Categoria
         fields = ["nome", "descricao"]
         widgets = {"descricao": forms.Textarea(attrs={"rows": 3})}
-
 
 class ProdutoForm(forms.ModelForm):
     class Meta:
@@ -31,7 +33,7 @@ class ProdutoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Ao EDITAR, a quantidade não pode ser alterada direto no formulário:
+        # Ao EDITAR, a quantidade não pode ser alterada direto no formulário: RN
         # ela só muda por movimentações (garante histórico e consistência).
         if self.instance.pk:
             self.fields["quantidade"].disabled = True
@@ -45,6 +47,8 @@ class ProdutoForm(forms.ModelForm):
 
 
 class MovimentacaoForm(forms.ModelForm):
+
+    
     """
     Formulário de entrada/saída de estoque.
 
