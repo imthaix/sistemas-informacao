@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Django sem mistério · Guia de estudo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="hero">
+      <h1>Django sem mistério</h1>
+      <p>
+        Guia de estudo para Técnicas Avançadas de Programação Web: fluxo
+        animado, resumos, cola de prova e quiz. Tópicos 01 a 06.
+      </p>
+    </div>
+    <nav>
+      <a href="#fluxo">Fluxo</a><a href="#roteiro">Roteiro</a
+      ><a href="#resumos">Resumos</a><a href="#cola">Cola da prova</a
+      ><a href="#quiz">Quiz</a><a href="#cmd">Comandos</a>
+    </nav>
+    <main>
+      <section id="fluxo">
+        <h2>O caminho de uma requisição</h2>
+        <p class="sub">
+          Se você entende este desenho, já responde metade da prova. Clique em
+          uma etapa para pausar e ler.
+        </p>
+        <div class="flow" id="flow"></div>
+        <div class="panel" id="panel" aria-live="polite"></div>
+      </section>
+
+      <section id="roteiro">
+        <h2>Roteiro até a prova</h2>
+        <p class="sub">
+          Marque o que já dominou. Seu progresso fica salvo neste navegador.
+        </p>
+        <div class="bar"><i id="pbar"></i></div>
+        <ol class="road" id="road"></ol>
+      </section>
+
+      <section id="resumos">
+        <h2>Resumos por tópico</h2>
+        <p class="sub">
+          Cada card tem os pontos que mais caem, um exemplo de código e por que
+          importa em uma empresa.
+        </p>
+        <div id="cards"></div>
+      </section>
+
+      <section id="cola">
+        <h2>Cola da prova</h2>
+        <p class="sub">
+          Leu a palavra da esquerda no enunciado? A resposta costuma ser a da
+          direita. Pesquise para filtrar.
+        </p>
+        <input
+          class="search"
+          id="q"
+          placeholder="Pesquisar: ex. servidor, 404, CSRF, __init__"
+          aria-label="Pesquisar na cola"
+        />
+        <div class="grid" id="colas"></div>
+        <div class="tip">
+          <b>Como eliminar alternativas:</b>
+          <ul>
+            <li>
+              Cuidado com <i>sempre</i>, <i>nunca</i> e <i>apenas</i>: costumam
+              indicar alternativa errada.
+            </li>
+            <li>
+              Alternativa que descreve <b>outro arquivo ou outro comando</b> é
+              pegadinha. Pergunte: de quem é essa função?
+            </li>
+            <li>
+              Se a alternativa diz que o navegador executa Python, ou que o
+              banco escolhe o template, está errada.
+            </li>
+            <li>
+              A certa quase sempre descreve o <b>papel exato</b> do conceito,
+              com o nome técnico correto.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="quiz">
+        <h2>Quiz</h2>
+        <p class="sub">
+          20 questões com explicação imediata. Erre aqui, não na prova.
+        </p>
+        <div class="quiz" id="quizbox"></div>
+      </section>
+
+      <section id="cmd">
+        <h2>Comandos essenciais</h2>
+        <div class="scroll">
+          <table>
+            <tr>
+              <th>Comando</th>
+              <th>O que faz</th>
+            </tr>
+            <tr>
+              <td><code>pip install django</code></td>
+              <td>Instala o framework (use um venv)</td>
+            </tr>
+            <tr>
+              <td><code>django-admin startproject nome</code></td>
+              <td>Cria o projeto (estrutura base)</td>
+            </tr>
+            <tr>
+              <td><code>python manage.py startapp nome</code></td>
+              <td>Cria um app dentro do projeto</td>
+            </tr>
+            <tr>
+              <td><code>python manage.py runserver</code></td>
+              <td>Servidor de desenvolvimento</td>
+            </tr>
+            <tr>
+              <td><code>python manage.py makemigrations</code></td>
+              <td>Gera os arquivos de migração dos models</td>
+            </tr>
+            <tr>
+              <td><code>python manage.py migrate</code></td>
+              <td>Aplica as migrações no banco</td>
+            </tr>
+            <tr>
+              <td><code>python manage.py createsuperuser</code></td>
+              <td>Cria o administrador do Django Admin</td>
+            </tr>
+            <tr>
+              <td><code>python manage.py shell</code></td>
+              <td>Terminal Python com o projeto carregado</td>
+            </tr>
+            <tr>
+              <td><code>python manage.py collectstatic</code></td>
+              <td>Reúne arquivos estáticos para o deploy</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+    </main>
+    <footer>Feito para estudar. Boa prova!</footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
