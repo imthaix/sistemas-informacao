@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CyberEstudo · Segurança da Informação</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav><b>🔐 CyberEstudo</b><span class="menu" id="menu"></span></nav>
+    <main>
+      <section class="page" id="home">
+        <div class="hero">
+          <h1>Segurança da Informação</h1>
+          <p>
+            Estude de qualquer lugar: resumos, quiz, fluxograma e cola rápida
+            para tirar nota máxima.
+          </p>
+        </div>
+        <div class="grid" id="homeGrid"></div>
+      </section>
+      <section class="page" id="resumos" hidden>
+        <h1>📚 Resumos</h1>
+        <input
+          type="search"
+          id="q1"
+          placeholder="Buscar (ex.: DNS, VPN, WPA2)..."
+        />
+        <div class="grid" id="list"></div>
+      </section>
+      <section class="page" id="quiz" hidden>
+        <h1>🎯 Quiz</h1>
+        <div id="box"></div>
+      </section>
+      <section class="page" id="fluxo" hidden>
+        <h1>🗺️ Fluxograma de estudo</h1>
+        <p>
+          Clique no número para marcar como concluído (fica salvo no navegador).
+        </p>
+        <div class="road" id="road"></div>
+        <h2>🧭 Como identificar a resposta na prova</h2>
+        <div class="card" id="tree"></div>
+      </section>
+      <section class="page" id="cola" hidden>
+        <h1>⚡ Cola rápida</h1>
+        <p>Toque no card para ver a resposta.</p>
+        <input type="search" id="q2" placeholder="Buscar palavra-chave..." />
+        <div class="grid" id="fc"></div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
