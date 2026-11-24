@@ -16,7 +16,7 @@
 **Principais funcionalidades**
 
 - CRUD completo de **Produtos** e **Categorias** pela interface web.
-- Cadastro de **Fornecedores** (via Django Admin) e vínculo N:N com produtos.
+- Cadastro de **Fornecedores** (Django Admin) e vínculo N:N com produtos.
 - Registro de **movimentações** de entrada e saída, com histórico.
 - **Dashboard** com total de produtos, valor em estoque e lista de produtos em alerta.
 - Busca por nome/SKU, filtro por categoria e filtro de estoque baixo.
@@ -74,4 +74,4 @@ estoque/
 
 ## Tecnologias
 
-Python 3 e Django 5.2 (única dependência externa), SQLite.
+Python 3 e Django 5.2 e SQLite.
