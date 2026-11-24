@@ -3,53 +3,109 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Guia de estudos</title>
+    <title>Django sem mistério · Guia de estudo</title>
+    <meta name="theme-color" content="#1F6B4F" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="hero">
-      <h1>Django sem mistério</h1>
-      <p>
-        Guia de estudo para Técnicas Avançadas de Programação Web: fluxo
-        animado, resumos, cola de prova e quiz. Tópicos 01 a 06.
-      </p>
-    </div>
-    <nav>
-      <a href="#fluxo">Fluxo</a><a href="#roteiro">Roteiro</a
-      ><a href="#resumos">Resumos</a><a href="#cola">Cola da prova</a
-      ><a href="#quiz">Quiz</a><a href="#cmd">Comandos</a>
-    </nav>
-    <main>
-      <section id="fluxo">
-        <h2>O caminho de uma requisição</h2>
+    <header id="topbar"></header>
+    <main class="wrap">
+      <section class="sec" id="inicio">
+        <section class="hero">
+          <h1>Estude Django de qualquer lugar</h1>
+          <p>
+            Resumos, fluxo animado, cola de prova e quiz dos Tópicos 01 a 06 de
+            Técnicas Avançadas de Programação Web. Funciona no celular e até sem
+            internet depois do primeiro acesso.
+          </p>
+          <a class="btn" href="#resumos">Começar pelos resumos</a>
+        </section>
+        <div class="grid">
+          <a class="card link" href="#fluxo"
+            ><span class="ico">🔀</span>
+            <h3>Fluxo da requisição</h3>
+            <p>Veja animado o caminho do navegador até a resposta.</p></a
+          >
+          <a class="card link" href="#resumos"
+            ><span class="ico">📚</span>
+            <h3>Resumos</h3>
+            <p>Um card por conceito, com código e exemplo de empresa.</p></a
+          >
+          <a class="card link" href="#cola"
+            ><span class="ico">⚡</span>
+            <h3>Cola da prova</h3>
+            <p>Palavra do enunciado, resposta certa.</p></a
+          >
+          <a class="card link" href="#quiz"
+            ><span class="ico">🧠</span>
+            <h3>Quiz</h3>
+            <p>20 questões com explicação. <b id="best"></b></p
+          ></a>
+          <a class="card link" href="#comandos"
+            ><span class="ico">⌨️</span>
+            <h3>Comandos</h3>
+            <p>Todos os comandos e os erros mais comuns.</p></a
+          >
+        </div>
+        <h2>Seu roteiro até a prova</h2>
+        <p class="sub">
+          Marque o que já dominou. O progresso fica salvo neste aparelho.
+        </p>
+        <div class="bar"><i id="pbar"></i></div>
+        <ol class="road" id="road"></ol>
+      </section>
+      <section class="sec" id="fluxo">
+        <h2 class="st">O caminho de uma requisição</h2>
         <p class="sub">
           Se você entende este desenho, já responde metade da prova. Clique em
           uma etapa para pausar e ler.
         </p>
         <div class="flow" id="flow"></div>
         <div class="panel" id="panel" aria-live="polite"></div>
+        <button class="btn ghost" id="play">Reproduzir de novo</button>
+        <h2>Quem faz o quê</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>settings.py</h3>
+            <p><b>Configura</b> o projeto: INSTALLED_APPS, DATABASES, DEBUG.</p>
+          </div>
+          <div class="card">
+            <h3>urls.py</h3>
+            <p><b>Roteia</b> cada URL para uma view. Sem rota, dá 404.</p>
+          </div>
+          <div class="card">
+            <h3>views.py</h3>
+            <p><b>Processa</b>: decide o que buscar e qual template usar.</p>
+          </div>
+          <div class="card">
+            <h3>models.py</h3>
+            <p><b>Estrutura os dados</b> e conversa com o banco via ORM.</p>
+          </div>
+          <div class="card">
+            <h3>templates/</h3>
+            <p><b>Apresenta</b> o resultado em HTML.</p>
+          </div>
+          <div class="card">
+            <h3>manage.py</h3>
+            <p><b>Executa</b> comandos como runserver e migrate.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <b>Para lembrar:</b> o Model guarda, a View decide, o Template mostra.
+          A View do Django equivale ao Controller do MVC, e o Template equivale
+          à View do MVC.
+        </div>
       </section>
-
-      <section id="roteiro">
-        <h2>Roteiro até a prova</h2>
+      <section class="sec" id="resumos">
+        <h2 class="st">Resumos por tópico</h2>
         <p class="sub">
-          Marque o que já dominou. Seu progresso fica salvo neste navegador.
+          Escolha um tópico. Cada card traz um ponto que costuma cair na prova.
         </p>
-        <div class="bar"><i id="pbar"></i></div>
-        <ol class="road" id="road"></ol>
+        <div class="tabs" id="tabs" role="tablist"></div>
+        <div id="topic"></div>
       </section>
-
-      <section id="resumos">
-        <h2>Resumos por tópico</h2>
-        <p class="sub">
-          Cada card tem os pontos que mais caem, um exemplo de código e por que
-          importa em uma empresa.
-        </p>
-        <div id="cards"></div>
-      </section>
-
-      <section id="cola">
-        <h2>Cola da prova</h2>
+      <section class="sec" id="cola">
+        <h2 class="st">Cola da prova</h2>
         <p class="sub">
           Leu a palavra da esquerda no enunciado? A resposta costuma ser a da
           direita. Pesquise para filtrar.
@@ -57,24 +113,24 @@
         <input
           class="search"
           id="q"
-          placeholder="Pesquisar: ex. servidor, 404, CSRF, __init__"
+          placeholder="Pesquisar: servidor, 404, CSRF, __init__"
           aria-label="Pesquisar na cola"
         />
         <div class="grid" id="colas"></div>
         <div class="tip">
-          <b>Como eliminar alternativas :</b>
+          <b>Como eliminar alternativas:</b>
           <ul>
             <li>
               Cuidado com <i>sempre</i>, <i>nunca</i> e <i>apenas</i>: costumam
               indicar alternativa errada.
             </li>
             <li>
-              Alternativa que descreve <b>outro arquivo ou outro comando</b> é
+              Se a alternativa descreve <b>outro arquivo ou outro comando</b>, é
               pegadinha. Pergunte: de quem é essa função?
             </li>
             <li>
-              Se a alternativa diz que o navegador executa Python, ou que o
-              banco escolhe o template, está errada.
+              Navegador executando Python, ou banco escolhendo o template, está
+              sempre errado.
             </li>
             <li>
               A certa quase sempre descreve o <b>papel exato</b> do conceito,
@@ -83,17 +139,19 @@
           </ul>
         </div>
       </section>
-
-      <section id="quiz">
-        <h2>Quiz</h2>
+      <section class="sec" id="quiz">
+        <h2 class="st">Quiz</h2>
         <p class="sub">
           20 questões com explicação imediata. Erre aqui, não na prova.
         </p>
-        <div class="quiz" id="quizbox"></div>
+        <div class="quiz card" id="quizbox"></div>
       </section>
-
-      <section id="cmd">
-        <h2>Comandos essenciais</h2>
+      <section class="sec" id="comandos">
+        <h2 class="st">Comandos essenciais</h2>
+        <p class="sub">
+          Todos rodam no terminal, dentro da pasta do projeto (com o ambiente
+          virtual ativo).
+        </p>
         <div class="scroll">
           <table>
             <tr>
@@ -138,10 +196,48 @@
             </tr>
           </table>
         </div>
+        <h2>Erros comuns (e a causa)</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Models não viram tabelas</h3>
+            <p>
+              App fora de <code>INSTALLED_APPS</code> ou faltou
+              <code>makemigrations</code> + <code>migrate</code>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Template não é encontrado</h3>
+            <p>
+              App não registrado, ou arquivo fora da pasta
+              <code>templates/</code>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Erro 403 ao enviar formulário</h3>
+            <p>Faltou <code>{% csrf_token %}</code> dentro do form POST.</p>
+          </div>
+          <div class="card">
+            <h3>Erro 404</h3>
+            <p>Nenhuma rota do <code>urls.py</code> casou com a URL.</p>
+          </div>
+          <div class="card">
+            <h3>DoesNotExist ou MultipleObjectsReturned</h3>
+            <p>
+              <code>get()</code> exige exatamente um resultado. Use
+              <code>filter()</code> ou <code>get_object_or_404</code>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Erro 500</h3>
+            <p>
+              Exceção na view. Com <code>DEBUG=True</code> o Django mostra o
+              detalhe.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
-    <footer>Feito para estudar. Boa prova!</footer>
-
+    <footer>Feito para estudar de qualquer lugar. Boa prova!</footer>
     <script src="script.js"></script>
   </body>
 </html>
