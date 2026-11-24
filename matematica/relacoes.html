@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Relações</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Relações</h1>
+      <p class="lead">Propriedades, ordem e equivalência.</p>
+      <table>
+        <tr>
+          <th>Propriedade</th>
+          <th>Regra</th>
+        </tr>
+        <tr>
+          <td>Reflexiva</td>
+          <td>(a,a) ∈ R para todo a</td>
+        </tr>
+        <tr>
+          <td>Simétrica</td>
+          <td>(a,b) ⇒ (b,a)</td>
+        </tr>
+        <tr>
+          <td>Antissimétrica</td>
+          <td>(a,b) e (b,a) ⇒ a = b</td>
+        </tr>
+        <tr>
+          <td>Transitiva</td>
+          <td>(a,b) e (b,c) ⇒ (a,c)</td>
+        </tr>
+      </table>
+      <div class="grid">
+        <div class="card">
+          <b>Equivalência</b><br />reflexiva + simétrica + transitiva. Cria
+          classes que dividem o conjunto.
+        </div>
+        <div class="card">
+          <b>Ordem</b><br />reflexiva + antissimétrica + transitiva. Ex.: ≤, ⊂.
+        </div>
+      </div>
+      <details>
+        <summary>Testar se um par pertence à relação</summary>
+        <div class="ex">xRy ⇔ x = y+2. (4,2): 4 = 2+2 ✔. (4,4): 4 = 6? ✘.</div>
+      </details>
+      <details>
+        <summary>Fecho reflexivo</summary>
+        <div class="ex">
+          R = {(a,a),(a,b),(b,a),(c,b)} em {a,b,c}. Faltam (b,b) e (c,c).
+        </div>
+      </details>
+      <div class="tool">
+        <h3>Verificador de relação</h3>
+        <label>Elementos<input id="els" class="w" value="a,b,c" /></label
+        ><label
+          >Pares<textarea id="pairs" rows="2">
+(a,a) (a,b) (b,a) (c,b)</textarea
+          ></label
+        ><button id="rel-go">Verificar</button>
+        <div id="rel-out" class="out"></div>
+      </div>
+    </main>
+    <script src="js/quiz.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

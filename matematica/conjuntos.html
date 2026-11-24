@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Conjuntos</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Conjuntos</h1>
+      <p class="lead">
+        Noções básicas e operações. Passe o mouse sobre os círculos.
+      </p>
+      <h2>Hierarquia dos números</h2>
+      <div class="flow">
+        <span class="s">ℕ</span><span class="a">⊂</span><span class="s">ℤ</span
+        ><span class="a">⊂</span><span class="s">ℚ</span><span class="a">⊂</span
+        ><span class="s">ℝ</span><span class="a">⊂</span
+        ><span class="s">ℂ</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <b>Racional</b><br />p/q com p, q inteiros e q ≠ 0. Ex.: 1/2, −3,
+          0,25.
+        </div>
+        <div class="card">
+          <b>Irracional</b><br />Não vira fração. Ex.: √2, π. É o complementar
+          dos racionais em ℝ.
+        </div>
+      </div>
+      <div class="tip">
+        Soma de irracionais nem sempre é irracional: √2 + (−√2) = 0.
+      </div>
+      <h2>Pertence × contido</h2>
+      <table>
+        <tr>
+          <th>Símbolo</th>
+          <th>Liga</th>
+          <th>Exemplo com S = {0,2,4}</th>
+        </tr>
+        <tr>
+          <td>∈</td>
+          <td>elemento e conjunto</td>
+          <td>0 ∈ S verdadeiro; {0} ∈ S falso</td>
+        </tr>
+        <tr>
+          <td>⊂</td>
+          <td>conjunto e conjunto</td>
+          <td>{0} ⊂ S verdadeiro</td>
+        </tr>
+      </table>
+      <h2>Operações</h2>
+      <div class="sets" aria-label="Diagrama de Venn com três conjuntos">
+        <div class="s1">A</div>
+        <div class="s2">B</div>
+        <div class="s3">C</div>
+      </div>
+      <details>
+        <summary>União, interseção, diferença, complementar</summary>
+        <p>
+          A∪B: está em A ou B. A∩B: está nos dois. A−B: está em A e não em B.
+          Aᶜ: está no universo e fora de A.
+        </p>
+      </details>
+      <details>
+        <summary>Conjunto das partes</summary>
+        <p>Se |X| = n, então |P(X)| = 2ⁿ.</p>
+        <div class="ex">|X| = 6 ⇒ 2⁶ = 64 subconjuntos (incluindo ∅ e X).</div>
+      </details>
+      <details>
+        <summary>Inclusão-exclusão</summary>
+        <span class="f">n(A∪B∪C) = A+B+C − AB − AC − BC + ABC</span
+        ><span class="f">Só A = A − AB − AC + ABC</span>
+      </details>
+      <div class="tool">
+        <h3>Calculadora de três conjuntos</h3>
+        <label>A<input id="A" type="number" value="65" /></label
+        ><label>B<input id="B" type="number" value="45" /></label
+        ><label>C<input id="C" type="number" value="42" /></label
+        ><label>A∩B<input id="AB" type="number" value="20" /></label
+        ><label>A∩C<input id="AC" type="number" value="25" /></label
+        ><label>B∩C<input id="BC" type="number" value="15" /></label
+        ><label>A∩B∩C<input id="ABC" type="number" value="8" /></label>
+        <br /><button id="ie-go">Calcular</button>
+        <div id="ie-out" class="out"></div>
+      </div>
+    </main>
+    <script src="js/quiz.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contagem</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Contagem</h1>
+      <p class="lead">Decida primeiro: a ordem importa?</p>
+      <div class="flow">
+        <span class="s">Escolhas em etapas?</span><span class="a">→</span
+        ><span class="s">Multiplique</span>
+      </div>
+      <div class="flow">
+        <span class="s">Escolher grupo, ordem não importa?</span
+        ><span class="a">→</span><span class="s">C(n,p)</span>
+      </div>
+      <div class="flow">
+        <span class="s">Tem restrição "não pode"?</span><span class="a">→</span
+        ><span class="s">Total − proibidos</span>
+      </div>
+      <span class="f">C(n,p) = n! / (p! · (n−p)!)</span>
+      <details open>
+        <summary>Senhas e placas</summary>
+        <p>Cada posição multiplica: letra = 26, dígito = 10, com repetição.</p>
+        <div class="ex">
+          LLDDDD = 26² · 10⁴ = 6.760.000. Para ficar entre 1 milhão e 2 milhões,
+          LLLDD = 1.757.600.
+        </div>
+      </details>
+      <details>
+        <summary>Restrição "não ambos"</summary>
+        <div class="ex">
+          10 tenistas, 4 canhotos, dupla sem ser ambos canhotos: C(10,2) −
+          C(4,2) = 45 − 6 = 39.
+        </div>
+      </details>
+      <details>
+        <summary>Dividir em dias ou grupos rotulados</summary>
+        <div class="ex">
+          8 matérias, 4 por dia: C(8,4) = 70. Não divida por 2, pois "1º dia" e
+          "2º dia" são diferentes.
+        </div>
+      </details>
+      <details>
+        <summary>Casa dos pombos</summary>
+        <p>Se n+1 objetos vão para n caixas, alguma caixa tem 2 ou mais.</p>
+      </details>
+      <div class="tool">
+        <h3>Combinação</h3>
+        <label>n<input id="n" type="number" value="10" /></label
+        ><label>p<input id="k" type="number" value="2" /></label
+        ><button id="nc-go">Calcular</button>
+        <div id="nc-out" class="out"></div>
+      </div>
+      <div class="tool">
+        <h3>Formato de senha</h3>
+        <label>Use L e D<input id="pw" class="w" value="LLDDDD" /></label
+        ><button id="pw-go">Contar</button>
+        <div id="pw-out" class="out"></div>
+      </div>
+    </main>
+    <script src="js/quiz.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

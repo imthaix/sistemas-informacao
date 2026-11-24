@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Funções</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Funções</h1>
+      <p class="lead">Definição, composta, inversa e tipos.</p>
+      <div class="tip">
+        É função quando todo elemento do domínio tem exatamente uma imagem.
+      </div>
+      <h2>Como resolver</h2>
+      <details open>
+        <summary>Composta f(g(x))</summary>
+        <div class="flow">
+          <span class="s">x</span><span class="a">→</span
+          ><span class="s">g</span><span class="a">→</span
+          ><span class="s">g(x)</span><span class="a">→</span
+          ><span class="s">f</span><span class="a">→</span
+          ><span class="s">f(g(x))</span>
+        </div>
+      </details>
+      <details>
+        <summary>Inversa</summary>
+        <div class="flow">
+          <span class="s">y = f(x)</span><span class="a">→</span
+          ><span class="s">isole x</span><span class="a">→</span
+          ><span class="s">troque x↔y</span>
+        </div>
+        <div class="ex">f(x) = x/(1+x) ⇒ x = y/(1−y) ⇒ g(x) = x/(1−x).</div>
+      </details>
+      <details>
+        <summary>Imagem</summary>
+        <div class="ex">
+          f(x) = (2x−1)/(x+1). Isolando x = (1+y)/(2−y), então y ≠ 2: Im = ℝ −
+          {2}.
+        </div>
+      </details>
+      <details>
+        <summary>Gráficos</summary>
+        <p>
+          |f(x)|: a parte abaixo do eixo x sobe. f(x) − 1: o gráfico inteiro
+          desce 1. Raiz de f: onde corta o eixo x.
+        </p>
+      </details>
+      <h2>Tipos</h2>
+      <table>
+        <tr>
+          <th>Tipo</th>
+          <th>Ideia</th>
+          <th>Teste</th>
+        </tr>
+        <tr>
+          <td>Injetora</td>
+          <td>não repete imagem</td>
+          <td>f(x₁)=f(x₂) ⇒ x₁=x₂</td>
+        </tr>
+        <tr>
+          <td>Sobrejetora</td>
+          <td>Im = contradomínio</td>
+          <td>todo y é atingido</td>
+        </tr>
+        <tr>
+          <td>Bijetora</td>
+          <td>as duas</td>
+          <td>só ela tem inversa</td>
+        </tr>
+      </table>
+      <div class="tool">
+        <h3>Tabela de valores</h3>
+        <label>f(x)<input id="fx" class="w" value="x^2+1" /></label
+        ><button id="fx-go">Calcular</button>
+        <div id="fx-out" class="out"></div>
+      </div>
+      <div class="tool">
+        <h3>Tamanhos de A e B</h3>
+        <label>|A|<input id="sa" type="number" value="4" /></label
+        ><label>|B|<input id="sb" type="number" value="3" /></label
+        ><button id="sz-go">Analisar</button>
+        <div id="sz-out" class="out"></div>
+      </div>
+    </main>
+    <script src="js/quiz.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

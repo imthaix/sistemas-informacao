@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Provas</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Provas e indução</h1>
+      <div class="grid">
+        <div class="card">
+          <b>Direta</b><br />Da hipótese à tese por álgebra.
+        </div>
+        <div class="card"><b>Contraposição</b><br />Prove ¬Q ⇒ ¬P.</div>
+        <div class="card">
+          <b>Contradição</b><br />Suponha o contrário e ache um absurdo.
+        </div>
+        <div class="card">
+          <b>Exaustão</b><br />Teste todos os casos finitos.
+        </div>
+      </div>
+      <div class="ex">
+        Direta: n = 6q ⇒ 2n = 12q = 4(3q). Como 3q é inteiro, 2n é divisível por
+        4.
+      </div>
+      <div class="ex">
+        Contraposição: paridades diferentes ⇒ n+m = 2k+2p+1 é ímpar. Logo n+m
+        par ⇒ mesma paridade.
+      </div>
+      <h2>Indução, passo a passo</h2>
+      <p>Provar 1+2+…+n = n(n+1)/2.</p>
+      <div class="stepper tool">
+        <ol>
+          <li><b>Base:</b> n=1: 1 = 1·2/2 ✔</li>
+          <li><b>Hipótese:</b> suponha 1+…+k = k(k+1)/2.</li>
+          <li><b>Passo:</b> some (k+1): k(k+1)/2 + (k+1)</li>
+          <li><b>Álgebra:</b> = (k+1)(k+2)/2</li>
+          <li><b>Conclusão:</b> vale para k+1, logo para todo n ≥ 1.</li>
+        </ol>
+        <button>Próximo passo</button>
+      </div>
+    </main>
+    <script src="js/quiz.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
