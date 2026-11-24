@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Guia interativo de Engenharia de Software I e II"
+    />
+    <title>Engenharia de Software — Study Lab</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">ES</span>
+          <div>
+            <strong>Study Lab</strong><small>Engenharia de Software</small>
+          </div>
+        </div>
+        <nav id="nav">
+          <button class="nav-item active" data-page="home">
+            ⌂ <span>Visão geral</span></button
+          ><button class="nav-item" data-page="content">
+            ▤ <span>Resumos</span></button
+          ><button class="nav-item" data-page="diagrams">
+            ⌘ <span>Fluxogramas</span></button
+          ><button class="nav-item" data-page="quiz">✦ <span>Quiz</span></button
+          ><button class="nav-item" data-page="cards">
+            ▣ <span>Flashcards</span></button
+          ><button class="nav-item" data-page="rapid">
+            ⚡ <span>Revisão de prova</span>
+          </button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="progress-box">
+            <span>Seu progresso</span>
+            <div class="progress"><i id="progressbar"></i></div>
+            <b id="progresslabel">0% estudado</b>
+          </div>
+          <small
+            >Conteúdo baseado nos arquivos enviados + complementos
+            identificados.</small
+          >
+        </div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">PREPARAÇÃO PARA A PROVA</span>
+            <h1 id="pagetitle">Aprenda com clareza. Revise com estratégia.</h1>
+          </div>
+          <div class="top-actions">
+            <button id="themeBtn" class="icon-btn" title="Alternar tema">
+              ☼</button
+            ><button id="resetBtn" class="ghost-btn">
+              Reiniciar progresso
+            </button>
+          </div>
+        </header>
+        <div class="search-wrap">
+          <span>⌕</span
+          ><input
+            id="search"
+            placeholder="Buscar conceito, UML, requisito, camada…"
+          /><kbd>Enter</kbd>
+        </div>
+        <section id="page" class="page"></section>
+        <footer>
+          Study Lab · Engenharia de Software I + II · Seu conhecimento é salvo
+          neste navegador.
+        </footer>
+      </main>
+    </div>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
