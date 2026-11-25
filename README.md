@@ -25,8 +25,9 @@ O objetivo deste repositório é:
 
 As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exercícios, atividades, exemplos, códigos, referências e outros materiais, de acordo com o conteúdo estudado.
 
-| 1° PERIODO DO CURSO S.I                  |
-| ---------------------------------------- | ----- |
+| 1° PERIODO DO CURSO S.I |
+| ----------------------- |
+
 | Disciplina / área                        | Pasta |
 | ---------------------------------------- | ----- |
 | Introdução à Programação de Computadores | `#`   |
@@ -34,6 +35,8 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 | Estrutura de Computadores                | `#`   |
 | Fundamentos de Sistemas de Informação    | `#`   |
 | Introdução à Programação de Computadores | `#`   |
+
+</>
 
 | 2° PERIODO DO CURSO S.I |
 | ----------------------- |
@@ -46,83 +49,84 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 | Programação Web - Front End          | `#`                 |
 | Raciocínio Lógico                    | `#`                 |
 
+</>
+
 | 3° PERIODO DO CURSO S.I |
 | ----------------------- |
 
-| Disciplina / área       | Pasta                  |
-| ----------------------- | ---------------------- |
-| Arquitetura de Sistemas | `arquitetura-sistemas` |
-| Engenharia de Software  | `engenharia-software`  |
-| Estrutura de Dados      | `estutura-dados`       |
-| Fundamentos de Redes    | `fundamentos-redes`    |
-| Matemática              | `matematica`           |
-| Segurança da Informação | `seguranca-informacao` |
-| Web Avançada            | `web-avancada`         |
+| Disciplina / área                   | Pasta        |
+| ----------------------------------- | ------------ |
+| Arquitetura de Dados Relacionais II | `#`          |
+| Desenvolvimento Web - Back End      | `#`          |
+| Gestão de Pessoas                   | `#`          |
+| Inovação e Design Thinking          | `#`          |
+| Matemática para Computação          | `matematica` |
+
+</>
 
 | 4° PERIODO DO CURSO S.I |
 | ----------------------- |
 
-| Disciplina / área       | Pasta                  |
-| ----------------------- | ---------------------- |
-| Arquitetura de Sistemas | `arquitetura-sistemas` |
-| Engenharia de Software  | `engenharia-software`  |
-| Estrutura de Dados      | `estutura-dados`       |
-| Fundamentos de Redes    | `fundamentos-redes`    |
-| Matemática              | `matematica`           |
-| Segurança da Informação | `seguranca-informacao` |
-| Web Avançada            | `web-avancada`         |
+| Disciplina / área                     | Pasta                 |
+| ------------------------------------- | --------------------- |
+| Álgebra Linear e Geometria Analítica  | `#`                   |
+| Engenharia de Software                | `engenharia-software` |
+| Estrutura de Dados                    | `estutura-dados`      |
+| Gestão da Qualidade de Software       | `#`                   |
+| Técnicas Avançadas de Programação Web | `web-avancada`        |
+
+</>
 
 | 5° PERIODO DO CURSO S.I |
 | ----------------------- |
 
-| Disciplina / área       | Pasta                  |
-| ----------------------- | ---------------------- |
-| Arquitetura de Sistemas | `arquitetura-sistemas` |
-| Engenharia de Software  | `engenharia-software`  |
-| Estrutura de Dados      | `estutura-dados`       |
-| Fundamentos de Redes    | `fundamentos-redes`    |
-| Matemática              | `matematica`           |
-| Segurança da Informação | `seguranca-informacao` |
-| Web Avançada            | `web-avancada`         |
+| Disciplina / área                    | Pasta                  |
+| ------------------------------------ | ---------------------- |
+| Arquitetura de Sistemas              | `arquitetura-sistemas` |
+| Estatística Básica                   | `#`                    |
+| Programação para Dispositivos Móveis | `#`                    |
+| Sistemas Operacionais                | `#`                    |
+
+</>
 
 | 6° PERIODO DO CURSO S.I |
 | ----------------------- |
 
-| Disciplina / área       | Pasta                  |
-| ----------------------- | ---------------------- |
-| Arquitetura de Sistemas | `arquitetura-sistemas` |
-| Engenharia de Software  | `engenharia-software`  |
-| Estrutura de Dados      | `estutura-dados`       |
-| Fundamentos de Redes    | `fundamentos-redes`    |
-| Matemática              | `matematica`           |
-| Segurança da Informação | `seguranca-informacao` |
-| Web Avançada            | `web-avancada`         |
+| Disciplina / área                          | Pasta                  |
+| ------------------------------------------ | ---------------------- |
+| Cloud Computing                            | `#`                    |
+| Gestão de Projetos de Software             | `#`                    |
+| Inteligência Artificial e Análise de Dados | `#`                    |
+| Segurança da Informação                    | `seguranca-informacao` |
+| Testes de Software                         | `#`                    |
+
+</>
 
 | 7° PERIODO DO CURSO S.I |
 | ----------------------- |
 
-| Disciplina / área       | Pasta                  |
-| ----------------------- | ---------------------- |
-| Arquitetura de Sistemas | `arquitetura-sistemas` |
-| Engenharia de Software  | `engenharia-software`  |
-| Estrutura de Dados      | `estutura-dados`       |
-| Fundamentos de Redes    | `fundamentos-redes`    |
-| Matemática              | `matematica`           |
-| Segurança da Informação | `seguranca-informacao` |
-| Web Avançada            | `web-avancada`         |
+| Disciplina / área                                          | Pasta |
+| ---------------------------------------------------------- | ----- |
+| Arquitetura e Organização de Computadores                  | `#`   |
+| Atividades Complementares em Sistemas de Informação        | `#`   |
+| Governança de Tecnologia da Informação                     | `#`   |
+| Modelagem de Processos de Negócios                         | `#`   |
+| Trabalho de Conclusão de Curso em Sistemas de Informação I | `#`   |
+
+</>
 
 | 8° PERIODO DO CURSO S.I |
 | ----------------------- |
 
-| Disciplina / área       | Pasta                  |
-| ----------------------- | ---------------------- |
-| Arquitetura de Sistemas | `arquitetura-sistemas` |
-| Engenharia de Software  | `engenharia-software`  |
-| Estrutura de Dados      | `estutura-dados`       |
-| Fundamentos de Redes    | `fundamentos-redes`    |
-| Matemática              | `matematica`           |
-| Segurança da Informação | `seguranca-informacao` |
-| Web Avançada            | `web-avancada`         |
+| Disciplina / área                                          | Pasta |
+| ---------------------------------------------------------- | ----- |
+| Aspectos Legais da Tecnologia da Informação                | `#`   |
+| Empreendedorismo e Negócios                                | `#`   |
+| Optativa (1)                                               | `#`   |
+| Sistemas de Apoio à Tomada de Decisão                      | `#`   |
+| Trabalho de Conclusão de Curso em Sistemas de Informação I | `#`   |
+
+</> </> </>
 
 A estrutura e a lista de disciplinas podem mudar conforme o repositório cresce e novas matérias são adicionadas.
 
