@@ -4,7 +4,7 @@ Sou a Thais, estudante no 5° período do curso de Sistemas de Informação e es
 
 </ então vamos lá ! />
 
-# Sistemas de Informação 🎓💻
+# Sistemas de Informação 🎓
 
 Repositório pessoal de estudos da graduação em **Sistemas de Informação**. Aqui reúno materiais, revisões, atividades, exercícios e conteúdos complementares das disciplinas do curso, organizados e atualizados conforme avanço na faculdade.
 
@@ -201,4 +201,4 @@ Construindo conhecimento de forma contínua e compartilhando parte da minha jorn
 
 ---
 
-⭐
+🚀
