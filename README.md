@@ -25,29 +25,26 @@ O objetivo deste repositório é:
 
 As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exercícios, atividades, exemplos, códigos, referências e outros materiais, de acordo com o conteúdo estudado.
 
-| 1° PERIODO DO CURSO S.I |
-| ----------------------- |
-
-| Disciplina / área                        | Pasta               |
-| ---------------------------------------- | ------------------- |
-| Introdução à Programação de Computadores | `#`                 |
-| Experiência e Interface com o Usuário    | `#`                 |
-| Estrutura de Computadores                | `#`                 |
-| Fundamentos de Sistemas de Informação    | `fundamentos-redes` |
-| Introdução à Programação de Computadores | `#`                 |
+| 1° PERIODO DO CURSO S.I                  |
+| ---------------------------------------- | ----- |
+| Disciplina / área                        | Pasta |
+| ---------------------------------------- | ----- |
+| Introdução à Programação de Computadores | `#`   |
+| Experiência e Interface com o Usuário    | `#`   |
+| Estrutura de Computadores                | `#`   |
+| Fundamentos de Sistemas de Informação    | `#`   |
+| Introdução à Programação de Computadores | `#`   |
 
 | 2° PERIODO DO CURSO S.I |
 | ----------------------- |
 
-| Disciplina / área       | Pasta                  |
-| ----------------------- | ---------------------- |
-| Arquitetura de Sistemas | `arquitetura-sistemas` |
-| Engenharia de Software  | `engenharia-software`  |
-| Estrutura de Dados      | `estutura-dados`       |
-| Fundamentos de Redes    | `fundamentos-redes`    |
-| Matemática              | `matematica`           |
-| Segurança da Informação | `seguranca-informacao` |
-| Web Avançada            | `web-avancada`         |
+| Disciplina / área                    | Pasta               |
+| ------------------------------------ | ------------------- |
+| Arquitetura de Dados Relacionais I   | `#`                 |
+| Fundamentos de Redes de Computadores | `fundamentos-redes` |
+| Programação Orientada a Objetos      | `#`                 |
+| Programação Web - Front End          | `#`                 |
+| Raciocínio Lógico                    | `#`                 |
 
 | 3° PERIODO DO CURSO S.I |
 | ----------------------- |
