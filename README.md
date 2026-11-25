@@ -25,6 +25,8 @@ O objetivo deste repositório é:
 
 As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exercícios, atividades, exemplos, códigos, referências e outros materiais, de acordo com o conteúdo estudado.
 
+| 1° PERIODO              |
+| ----------------------- | ---------------------- |
 | Disciplina / área       | Pasta                  |
 | ----------------------- | ---------------------- |
 | Arquitetura de Sistemas | `arquitetura-sistemas` |
