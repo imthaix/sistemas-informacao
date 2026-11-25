@@ -25,8 +25,8 @@ O objetivo deste repositório é:
 
 As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exercícios, atividades, exemplos, códigos, referências e outros materiais, de acordo com o conteúdo estudado.
 
-| 1° PERIODO DO CURSO S.I |
-| ----------------------- |
+| 1° PERIODO |
+| ---------- |
 
 | Disciplina / área                        | Pasta |
 | ---------------------------------------- | ----- |
@@ -38,8 +38,8 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 
 </>
 
-| 2° PERIODO DO CURSO S.I |
-| ----------------------- |
+| 2° PERIODO |
+| ---------- |
 
 | Disciplina / área                    | Pasta               |
 | ------------------------------------ | ------------------- |
@@ -51,8 +51,8 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 
 </>
 
-| 3° PERIODO DO CURSO S.I |
-| ----------------------- |
+| 3° PERIODO |
+| ---------- |
 
 | Disciplina / área                   | Pasta        |
 | ----------------------------------- | ------------ |
@@ -64,8 +64,8 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 
 </>
 
-| 4° PERIODO DO CURSO S.I |
-| ----------------------- |
+| 4° PERIODO |
+| ---------- |
 
 | Disciplina / área                     | Pasta                 |
 | ------------------------------------- | --------------------- |
@@ -77,8 +77,8 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 
 </>
 
-| 5° PERIODO DO CURSO S.I |
-| ----------------------- |
+| 5° PERIODO |
+| ---------- |
 
 | Disciplina / área                    | Pasta                  |
 | ------------------------------------ | ---------------------- |
@@ -89,8 +89,8 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 
 </>
 
-| 6° PERIODO DO CURSO S.I |
-| ----------------------- |
+| 6° PERIODO |
+| ---------- |
 
 | Disciplina / área                          | Pasta                  |
 | ------------------------------------------ | ---------------------- |
@@ -102,8 +102,8 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 
 </>
 
-| 7° PERIODO DO CURSO S.I |
-| ----------------------- |
+| 7° PERIODO |
+| ---------- |
 
 | Disciplina / área                                          | Pasta |
 | ---------------------------------------------------------- | ----- |
@@ -115,8 +115,8 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 
 </>
 
-| 8° PERIODO DO CURSO S.I |
-| ----------------------- |
+| 8° PERIODO |
+| ---------- |
 
 | Disciplina / área                                          | Pasta |
 | ---------------------------------------------------------- | ----- |
@@ -132,8 +132,8 @@ A estrutura e a lista de disciplinas podem mudar conforme o repositório cresce 
 
 Eu também fiz metade do curso no presencial e mudei para o modelo EAD, o que fez alterar algumas coisas no curso, sendo retirado e colocado algumas materias que também estudei:
 
-| PERIODO DO CURSO S.I |
-| -------------------- |
+| PERIODO DE SISTEMAS DE INFORMAÇÃO PRESENCIAL |
+| -------------------------------------------- |
 
 | Disciplina / área                      | Pasta |
 | -------------------------------------- | ----- |
