@@ -130,6 +130,20 @@ As disciplinas estão organizadas em pastas. Cada uma pode conter resumos, exerc
 
 A estrutura e a lista de disciplinas podem mudar conforme o repositório cresce e novas matérias são adicionadas.
 
+Eu também fiz metade do curso no presencial e mudei para o modelo EAD, o que fez alterar algumas coisas no curso, sendo retirado e colocado algumas materias que também estudei:
+
+| PERIODO DO CURSO S.I |
+| -------------------- |
+
+| Disciplina / área                      | Pasta |
+| -------------------------------------- | ----- |
+| Gestão de processos                    | `#`   |
+| Desenvolvimento Pessoal e Profissional | `#`   |
+| Engenharia transformacional            | `#`   |
+| Marketing Digital                      | `#`   |
+| Inteligencia de Mercado                | `#`   |
+| Laboratório de Programação             | `#`   |
+
 ## 📝 Materiais de estudo
 
 Conforme o conteúdo de cada disciplina, os materiais podem incluir:
